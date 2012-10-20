@@ -1,7 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <rules>
-  <rule name="Rule1"></rule>
-  <rule name="Rule2"></rule>
-  <rule name="Rule3"></rule>
-  <rule name="Rule4"></rule>
+  <rule name="Rule1">
+	  <actions>
+		  <action name="Action1" />
+	  </actions>
+  </rule>
+  <rule name="Rule2">
+	  <actions>
+		  <action name="Action2" />
+		  <action name="Action3" />
+	  </actions>
+  </rule>
+  <rule name="Rule3">
+	  <actions>
+		  <action name="Action4" />
+		  <action name="Action5" />
+		  <action name="Action6" />
+	  </actions>
+  </rule>
+  <rule name="Rule4">
+	  <actions>
+		  <action name="Action7" />
+		  <action name="Action8" />
+		  <action name="Action9" />
+		  <action name="Action10" />
+	  </actions>
+  </rule>
 </rules>
