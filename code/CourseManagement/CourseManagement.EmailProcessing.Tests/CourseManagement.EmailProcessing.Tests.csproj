@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CourseManagement.EmailProcessing.Moles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Moles.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -63,8 +64,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Testables\TestableBaseRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EmailProcessorFixture.cs" />
+    <Compile Include="Rules\BaseRuleFixture.cs" />
     <Compile Include="Rules\ConfigurationRuleFinderFixture.cs" />
     <Compile Include="Rules\XmlRuleReaderFixture.cs" />
     <Compile Include="Rules\UnityRuleFactoryFixture.cs" />
@@ -77,6 +80,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Moles Include="CourseManagement.EmailProcessing.moles" />
     <None Include="packages.config" />
     <Moles Include="System.configuration.moles" />
   </ItemGroup>

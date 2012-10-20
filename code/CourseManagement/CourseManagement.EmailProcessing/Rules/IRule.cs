@@ -1,6 +1,9 @@
 ﻿namespace CourseManagement.EmailProcessing.Rules
 {
-    public interface IRule
+    internal interface IRule
     {
+        string Name { get; set; }
+        
+        void RetrieveActions();
     }
 }

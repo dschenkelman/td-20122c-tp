@@ -24,7 +24,7 @@
             // arrange
             EmailProcessor emailProcessor = this.CreateEmailProcessor();
 
-            this.ruleFactory.Setup(rf => rf.CreateRules()).Returns(new List<IRule>()).Verifiable();
+            this.ruleFactory.Setup(rf => rf.CreateRules()).Returns(new List<BaseRule>()).Verifiable();
 
             // act
             emailProcessor.Process();

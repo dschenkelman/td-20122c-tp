@@ -15,11 +15,17 @@
             this.ruleFinder = ruleFinder;
         }
 
-        public IEnumerable<IRule> CreateRules()
+        public IEnumerable<BaseRule> CreateRules()
         {
             IEnumerable<string> ruleNames = this.ruleFinder.FindNames();
 
-            return ruleNames.Select(r => this.container.Resolve<IRule>(r));
+            return ruleNames.Select(rn =>
+                {
+                    var rule = this.container.Resolve<BaseRule>(rn);
+                    rule.Name = rn;
+                    rule.RetrieveActions();
+                    return rule;
+                });
         }
     }
 }
