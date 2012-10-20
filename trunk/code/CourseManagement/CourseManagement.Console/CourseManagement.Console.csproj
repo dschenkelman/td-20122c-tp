@@ -2,20 +2,23 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0833B8AB-D6EE-49AF-B9D5-CD85BA15202B}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F32513B5-DCE5-46ED-A512-57527CECA731}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CourseManagement.EmailProcessing</RootNamespace>
-    <AssemblyName>CourseManagement.EmailProcessing</AssemblyName>
+    <RootNamespace>CourseManagement.Console</RootNamespace>
+    <AssemblyName>CourseManagement.Console</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +27,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -52,30 +56,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\IXmlActionReader.cs" />
-    <Compile Include="Actions\ConfigurationActionFinder.cs" />
-    <Compile Include="Actions\UnityActionFactory.cs" />
-    <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Actions\IActionFactory.cs" />
-    <Compile Include="Actions\IActionFinder.cs" />
-    <Compile Include="Actions\XmlActionReader.cs" />
-    <Compile Include="EmailProcessor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\BaseRule.cs" />
-    <Compile Include="Rules\ConfigurationRuleFinder.cs" />
-    <Compile Include="Rules\IRule.cs" />
-    <Compile Include="Rules\IRuleFactory.cs" />
-    <Compile Include="Rules\IRuleFinder.cs" />
-    <Compile Include="Rules\UnityRuleFactory.cs" />
-    <Compile Include="Rules\IXmlRuleReader.cs" />
-    <Compile Include="Rules\XmlRuleReader.cs" />
-    <Compile Include="Services\ConfigurationService.cs" />
-    <Compile Include="Services\IConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CourseManagement.EmailProcessing\CourseManagement.EmailProcessing.csproj">
+      <Project>{0833B8AB-D6EE-49AF-B9D5-CD85BA15202B}</Project>
+      <Name>CourseManagement.EmailProcessing</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

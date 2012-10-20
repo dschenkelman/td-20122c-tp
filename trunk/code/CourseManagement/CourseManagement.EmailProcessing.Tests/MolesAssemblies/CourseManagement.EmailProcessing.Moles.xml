@@ -51,6 +51,43 @@
             <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Rules.BaseRule.RetrieveActions"/>
             </summary>
         </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder">
+            <summary>Mole type of <see cref="T:CourseManagement.EmailProcessing.Actions.ConfigurationActionFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.#ctor(CourseManagement.EmailProcessing.Actions.ConfigurationActionFinder)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.Bind(CourseManagement.EmailProcessing.Actions.IActionFinder)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.ConstructorIConfigurationServiceIXmlActionReader">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.ConfigurationActionFinder.#ctor(CourseManagement.EmailProcessing.Services.IConfigurationService,CourseManagement.EmailProcessing.Actions.IXmlActionReader)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.FindNamesString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.ConfigurationActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MConfigurationActionFinder.AllInstances.FindNamesString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.ConfigurationActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.MConfigurationRuleFinder">
             <summary>Mole type of <see cref="T:CourseManagement.EmailProcessing.Rules.ConfigurationRuleFinder"/>
             .</summary>
@@ -304,6 +341,22 @@
             <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
         </member>
         <member name="P:CourseManagement.EmailProcessing.Rules.Moles.SBaseRule.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.SConfigurationActionFinder">
+            <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Actions.ConfigurationActionFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SConfigurationActionFinder.#ctor(CourseManagement.EmailProcessing.Services.IConfigurationService,CourseManagement.EmailProcessing.Actions.IXmlActionReader)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SConfigurationActionFinder.InitializeStub">
+            <summary>Initializes a new instance of type SConfigurationActionFinder</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.SConfigurationActionFinder.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.SConfigurationActionFinder.InstanceBehavior">
             <summary>Gets or sets the instance behavior.</summary>
         </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.SConfigurationRuleFinder">

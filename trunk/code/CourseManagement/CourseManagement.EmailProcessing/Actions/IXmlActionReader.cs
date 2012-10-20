@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace CourseManagement.EmailProcessing.Actions
+﻿namespace CourseManagement.EmailProcessing.Actions
 {
+    using System.Collections.Generic;
+
     public interface IXmlActionReader
     {
         IEnumerable<string> GetActionNames(string rulesConfigurationFilePath, string ruleName);

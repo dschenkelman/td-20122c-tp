@@ -1,17 +1,15 @@
-﻿using System;
-using System.Linq;
-using Microsoft.Practices.Unity;
-
-namespace CourseManagement.EmailProcessing.Actions
+﻿namespace CourseManagement.EmailProcessing.Actions
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.Practices.Unity;
 
     public class UnityActionFactory : IActionFactory
     {
         private IActionFinder actionFinder;
         private IUnityContainer container;
 
-        public UnityActionFactory(IUnityContainer container , IActionFinder actionFinder)
+        public UnityActionFactory(IUnityContainer container, IActionFinder actionFinder)
         {
             this.actionFinder = actionFinder;
             this.container = container;
