@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.EmailProcessing.Tests.Testables
+﻿using CourseManagement.EmailProcessing.Actions;
+
+namespace CourseManagement.EmailProcessing.Tests.Testables
 {
     using Actions;
     using EmailProcessing.Rules;
