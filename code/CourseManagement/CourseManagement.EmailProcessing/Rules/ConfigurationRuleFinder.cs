@@ -8,12 +8,12 @@
         private const string RulesConfigurationFilePathKey = "RulesConfigurationFilePath";
 
         private readonly IConfigurationService configurationService;
-        private readonly IRuleConfigurationService ruleConfigurationService;
+        private readonly IXmlRuleReader xmlRuleReader;
 
-        public ConfigurationRuleFinder(IConfigurationService configurationService, IRuleConfigurationService ruleConfigurationService)
+        public ConfigurationRuleFinder(IConfigurationService configurationService, IXmlRuleReader xmlRuleReader)
         {
             this.configurationService = configurationService;
-            this.ruleConfigurationService = ruleConfigurationService;
+            this.xmlRuleReader = xmlRuleReader;
         }
 
         public IEnumerable<string> FindNames()
@@ -21,7 +21,7 @@
             string rulesConfigurationFilePath = 
                 this.configurationService.GetValue(RulesConfigurationFilePathKey);
 
-            return this.ruleConfigurationService.GetRuleNames(rulesConfigurationFilePath);
+            return this.xmlRuleReader.GetRuleNames(rulesConfigurationFilePath);
         }
     }
 }

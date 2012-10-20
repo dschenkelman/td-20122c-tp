@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public interface IRuleConfigurationService
+    public interface IXmlRuleReader
     {
         IEnumerable<string> GetRuleNames(string rulesConfigurationFilePath);
     }

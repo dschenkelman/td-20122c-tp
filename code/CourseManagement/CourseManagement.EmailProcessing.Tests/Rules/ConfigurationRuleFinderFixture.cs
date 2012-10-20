@@ -10,14 +10,14 @@
     public class ConfigurationRuleFinderFixture
     {
         private MockRepository mockRepository;
-        private Mock<IRuleConfigurationService> ruleConfigurationService;
+        private Mock<IXmlRuleReader> ruleXmlReader;
         private Mock<IConfigurationService> configurationService;
 
         [TestInitialize]
         public void TestInitialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-            this.ruleConfigurationService = this.mockRepository.Create<IRuleConfigurationService>();
+            this.ruleXmlReader = this.mockRepository.Create<IXmlRuleReader>();
             this.configurationService = this.mockRepository.Create<IConfigurationService>();
         }
 
@@ -32,7 +32,7 @@
             this.configurationService.Setup(cs => cs.GetValue(RulesConfigurationFilePathKey))
                 .Returns(RulesConfigurationFilePathValue).Verifiable();
 
-            this.ruleConfigurationService
+            this.ruleXmlReader
                 .Setup(rcs => rcs.GetRuleNames(RulesConfigurationFilePathValue))
                 .Returns(new List<string>());
 
@@ -62,7 +62,7 @@
             this.configurationService.Setup(cs => cs.GetValue(RulesConfigurationFilePathKey))
                 .Returns(RulesConfigurationFilePathValue);
 
-            this.ruleConfigurationService
+            this.ruleXmlReader
                 .Setup(rcs => rcs.GetRuleNames(RulesConfigurationFilePathValue))
                 .Returns(retrievedRuleNames)
                 .Verifiable();
@@ -73,14 +73,14 @@
             IEnumerable<string> retrievedRules = configurationRuleFinder.FindNames();
 
             // assert
-            this.ruleConfigurationService.Verify(rcs => rcs.GetRuleNames(RulesConfigurationFilePathValue), Times.Once());
+            this.ruleXmlReader.Verify(rcs => rcs.GetRuleNames(RulesConfigurationFilePathValue), Times.Once());
             
             Assert.AreSame(retrievedRuleNames, retrievedRules);
         }
 
         private ConfigurationRuleFinder CreateConfigurationRuleFinder()
         {
-            return new ConfigurationRuleFinder(this.configurationService.Object, this.ruleConfigurationService.Object);
+            return new ConfigurationRuleFinder(this.configurationService.Object, this.ruleXmlReader.Object);
         }
     }
 }
