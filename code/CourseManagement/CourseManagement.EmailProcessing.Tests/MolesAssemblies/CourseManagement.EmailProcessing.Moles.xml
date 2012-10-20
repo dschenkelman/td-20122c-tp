@@ -436,6 +436,21 @@
             <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Rules.IRuleFinder.FindNames"/>
             </summary>
         </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.SIXmlActionReader">
+            <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Actions.IXmlActionReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SIXmlActionReader.#ctor">
+            <summary>Initializes a new instance of type SIXmlActionReader</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SIXmlActionReader.cmep::CourseManagement#EmailProcessing#Actions#IXmlActionReader#GetActionNames(System.String,System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IXmlActionReader.GetActionNames(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Actions.Moles.SIXmlActionReader.GetActionNamesStringString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IXmlActionReader.GetActionNames(System.String,System.String)"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.SIXmlRuleReader">
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Rules.IXmlRuleReader"/>
             .</summary>
