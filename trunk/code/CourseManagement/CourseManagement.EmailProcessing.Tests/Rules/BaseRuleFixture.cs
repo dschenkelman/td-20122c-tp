@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.EmailProcessing.Tests.Rules
+﻿using CourseManagement.EmailProcessing.Actions;
+
+namespace CourseManagement.EmailProcessing.Tests.Rules
 {
     using System.Collections.Generic;
     using Actions;

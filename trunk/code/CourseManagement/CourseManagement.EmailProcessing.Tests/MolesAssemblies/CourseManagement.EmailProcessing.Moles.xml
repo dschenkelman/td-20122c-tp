@@ -20,8 +20,8 @@
         <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.Behavior">
             <summary>Assigns the behavior for all methods of the moled type</summary>
         </member>
-        <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.Constructor">
-            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Rules.BaseRule.#ctor"/>
+        <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.ConstructorIActionFactory">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Rules.BaseRule.#ctor(CourseManagement.EmailProcessing.Actions.IActionFactory)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.NameGet">
@@ -159,6 +159,51 @@
             <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.EmailProcessor.Process"/>
             </summary>
         </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory">
+            <summary>Mole type of <see cref="T:CourseManagement.EmailProcessing.Actions.UnityActionFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.#ctor(CourseManagement.EmailProcessing.Actions.UnityActionFactory)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.Bind(CourseManagement.EmailProcessing.Actions.IActionFactory)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.ConstructorIUnityContainerIActionFinder">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.UnityActionFactory.#ctor(Microsoft.Practices.Unity.IUnityContainer,CourseManagement.EmailProcessing.Actions.IActionFinder)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.CreateActionsString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.UnityActionFactory.CreateActions(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory._CreateActionsb__0String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.UnityActionFactory.&lt;CreateActions&gt;b__0(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.AllInstances.CreateActionsString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.UnityActionFactory.CreateActions(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.MUnityActionFactory.AllInstances._CreateActionsb__0String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Actions.UnityActionFactory.&lt;CreateActions&gt;b__0(System.String)"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.MUnityRuleFactory">
             <summary>Mole type of <see cref="T:CourseManagement.EmailProcessing.Rules.UnityRuleFactory"/>
             .</summary>
@@ -249,7 +294,7 @@
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Rules.BaseRule"/>
             .</summary>
         </member>
-        <member name="M:CourseManagement.EmailProcessing.Rules.Moles.SBaseRule.#ctor">
+        <member name="M:CourseManagement.EmailProcessing.Rules.Moles.SBaseRule.#ctor(CourseManagement.EmailProcessing.Actions.IActionFactory)">
             <summary>Initializes a new instance</summary>
         </member>
         <member name="M:CourseManagement.EmailProcessing.Rules.Moles.SBaseRule.InitializeStub">
@@ -331,6 +376,21 @@
             <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IActionFactory.CreateActions(System.String)"/>
             </summary>
         </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.SIActionFinder">
+            <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Actions.IActionFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SIActionFinder.#ctor">
+            <summary>Initializes a new instance of type SIActionFinder</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SIActionFinder.cmep::CourseManagement#EmailProcessing#Actions#IActionFinder#FindNames(System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Actions.Moles.SIActionFinder.FindNamesString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.EmailProcessing.Services.Moles.SIConfigurationService">
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Services.IConfigurationService"/>
             .</summary>
@@ -390,6 +450,22 @@
         <member name="F:CourseManagement.EmailProcessing.Rules.Moles.SIXmlRuleReader.GetRuleNamesString">
             <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Rules.IXmlRuleReader.GetRuleNames(System.String)"/>
             </summary>
+        </member>
+        <member name="T:CourseManagement.EmailProcessing.Actions.Moles.SUnityActionFactory">
+            <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Actions.UnityActionFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SUnityActionFactory.#ctor(Microsoft.Practices.Unity.IUnityContainer,CourseManagement.EmailProcessing.Actions.IActionFinder)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SUnityActionFactory.InitializeStub">
+            <summary>Initializes a new instance of type SUnityActionFactory</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.SUnityActionFactory.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Actions.Moles.SUnityActionFactory.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
         </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.SUnityRuleFactory">
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Rules.UnityRuleFactory"/>
