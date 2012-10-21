@@ -144,7 +144,7 @@ namespace CourseManagement.EmailProcessing.Tests.Rules
             this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule3)).Returns(moleBaseRule3.Instance);
 
             // act
-            IEnumerable<IRule> rules = unityRuleFactory.CreateRules();
+            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();
 
             // using to list forces the yield  of the enumerable
             rules.ToList();
