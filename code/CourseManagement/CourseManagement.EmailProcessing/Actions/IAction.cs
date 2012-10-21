@@ -2,5 +2,6 @@
 {
     public interface IAction
     {
+        void Execute(IEmail email);
     }
 }

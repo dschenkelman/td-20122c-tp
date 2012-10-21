@@ -1,6 +1,6 @@
 ﻿namespace CourseManagement.Console
 {
-    using EmailProcessing.Actions;
+    using EmailProcessing;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
 
@@ -13,7 +13,7 @@
             // Initialize the container with the config file
             container.LoadConfiguration();
 
-            container.Resolve<IActionFactory>();
+            container.Resolve<EmailProcessor>();
         }
     }
 }

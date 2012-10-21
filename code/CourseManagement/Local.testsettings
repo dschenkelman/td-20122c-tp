@@ -26,6 +26,7 @@
             <CodeCoverage xmlns="">
               <Regular>
                 <CodeCoverageItem binaryFile="CourseManagement.EmailProcessing\bin\Debug\CourseManagement.EmailProcessing.dll" pdbFile="CourseManagement.EmailProcessing\bin\Debug\CourseManagement.EmailProcessing.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="CourseManagement.Utilities\bin\Debug\CourseManagement.Utilities.dll" pdbFile="CourseManagement.Utilities\bin\Debug\CourseManagement.Utilities.pdb" instrumentInPlace="true" />
               </Regular>
             </CodeCoverage>
           </Configuration>

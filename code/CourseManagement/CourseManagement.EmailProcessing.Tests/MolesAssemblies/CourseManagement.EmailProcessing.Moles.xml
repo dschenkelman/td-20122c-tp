@@ -32,6 +32,10 @@
             <summary>Sets the mole of <see cref="P:CourseManagement.EmailProcessing.Rules.BaseRule.Name"/>
             </summary>
         </member>
+        <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.ProcessIEmail">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Rules.BaseRule.Process(CourseManagement.EmailProcessing.IEmail)"/>
+            </summary>
+        </member>
         <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.RetrieveActions">
             <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Rules.BaseRule.RetrieveActions"/>
             </summary>
@@ -45,6 +49,10 @@
         </member>
         <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.AllInstances.NameSetString">
             <summary>Sets the mole of <see cref="P:CourseManagement.EmailProcessing.Rules.BaseRule.Name"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.AllInstances.ProcessIEmail">
+            <summary>Sets the mole of <see cref="M:CourseManagement.EmailProcessing.Rules.BaseRule.Process(CourseManagement.EmailProcessing.IEmail)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.EmailProcessing.Rules.Moles.MBaseRule.AllInstances.RetrieveActions">
@@ -414,6 +422,14 @@
         <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SIAction.#ctor">
             <summary>Initializes a new instance of type SIAction</summary>
         </member>
+        <member name="M:CourseManagement.EmailProcessing.Actions.Moles.SIAction.cmep::CourseManagement#EmailProcessing#Actions#IAction#Execute(CourseManagement.EmailProcessing.IEmail)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IAction.Execute(CourseManagement.EmailProcessing.IEmail)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Actions.Moles.SIAction.ExecuteIEmail">
+            <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Actions.IAction.Execute(CourseManagement.EmailProcessing.IEmail)"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.EmailProcessing.Actions.Moles.SIActionFactory">
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Actions.IActionFactory"/>
             .</summary>
@@ -458,6 +474,13 @@
         <member name="F:CourseManagement.EmailProcessing.Services.Moles.SIConfigurationService.GetValueString">
             <summary>Sets the stub of <see cref="M:CourseManagement.EmailProcessing.Services.IConfigurationService.GetValue(System.String)"/>
             </summary>
+        </member>
+        <member name="T:CourseManagement.EmailProcessing.Moles.SIEmail">
+            <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.IEmail"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.EmailProcessing.Moles.SIEmail.#ctor">
+            <summary>Initializes a new instance of type SIEmail</summary>
         </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.SIRuleFactory">
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Rules.IRuleFactory"/>
