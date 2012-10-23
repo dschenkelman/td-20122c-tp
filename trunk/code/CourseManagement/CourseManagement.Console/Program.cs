@@ -1,10 +1,13 @@
-﻿namespace CourseManagement.Console
+﻿using System.Linq;
+
+namespace CourseManagement.Console
 {
     using EmailProcessing;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
     using Model;
     using Persistence;
+    using Persistence.Repositories;
 
     class Program
     {
@@ -17,10 +20,12 @@
 
             container.Resolve<EmailProcessor>();
 
+            container.Resolve<ICourseManagementRepositories>();
+
             // creates the DB
             using (var db = new CourseManagementContext())
             {
-                db.Subjects.Add(new Subject { Code = 1 });
+                var s = db.Subjects.FirstOrDefault();
             }
         }
     }
