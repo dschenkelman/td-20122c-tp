@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace CourseManagement.Entities.Model
+namespace CourseManagement.Model
 {
-    using System.Collections.Generic;
-
     public class Subject
     {
         [Key]

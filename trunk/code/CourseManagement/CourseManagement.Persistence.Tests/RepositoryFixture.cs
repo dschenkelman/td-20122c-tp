@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace CourseManagement.Persistence.Tests
+﻿namespace CourseManagement.Persistence.Tests
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
-    using Entities.Model;
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model;
     using Moq;
+    using Repositories;
 
     [TestClass]
     public class RepositoryFixture

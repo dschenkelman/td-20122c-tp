@@ -1,4 +1,4 @@
-﻿namespace CourseManagement.Persistence
+﻿namespace CourseManagement.Persistence.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -10,17 +10,12 @@
     {
         private readonly ICourseManagementContext context;
 
-        private IDbSet<T> dbSet;
+        private readonly IDbSet<T> dbSet;
 
         public Repository(ICourseManagementContext context)
         {
             this.context = context;
             this.dbSet = this.context.Set<T>();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
@@ -44,14 +39,23 @@
             this.dbSet.Remove(t);
         }
 
-        public void Update(T t)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Save()
         {
             this.context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.context.Dispose();
+            }
         }
     }
 }

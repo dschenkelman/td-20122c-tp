@@ -1,8 +1,8 @@
-﻿namespace CourseManagement.Entities.Model
-{
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace CourseManagement.Model
+{
     [Table("Students")]
     public class Student : Person
     {

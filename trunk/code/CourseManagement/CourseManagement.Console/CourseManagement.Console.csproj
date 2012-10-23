@@ -73,9 +73,13 @@
       <Project>{0833B8AB-D6EE-49AF-B9D5-CD85BA15202B}</Project>
       <Name>CourseManagement.EmailProcessing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CourseManagement.Entities\CourseManagement.Entities.csproj">
+    <ProjectReference Include="..\CourseManagement.Entities\CourseManagement.Model.csproj">
       <Project>{499A1AB2-9498-4C75-B278-89113F43B69F}</Project>
-      <Name>CourseManagement.Entities</Name>
+      <Name>CourseManagement.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CourseManagement.Persistence\CourseManagement.Persistence.csproj">
+      <Project>{5D94790D-C723-4A0A-B99E-EE2554D8B437}</Project>
+      <Name>CourseManagement.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

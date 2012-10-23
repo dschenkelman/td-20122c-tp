@@ -1,9 +1,9 @@
-﻿namespace CourseManagement.Entities.Model
-{
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace CourseManagement.Model
+{
     public class Group
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

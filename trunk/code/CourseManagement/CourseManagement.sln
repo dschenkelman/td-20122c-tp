@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Utilities"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Utilities.Tests", "CourseManagement.Utilities.Tests\CourseManagement.Utilities.Tests.csproj", "{E14C73D1-0B5A-4753-AA35-2443AE275262}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Entities", "CourseManagement.Entities\CourseManagement.Entities.csproj", "{499A1AB2-9498-4C75-B278-89113F43B69F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Model", "CourseManagement.Entities\CourseManagement.Model.csproj", "{499A1AB2-9498-4C75-B278-89113F43B69F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Persistence", "CourseManagement.Persistence\CourseManagement.Persistence.csproj", "{5D94790D-C723-4A0A-B99E-EE2554D8B437}"
 EndProject

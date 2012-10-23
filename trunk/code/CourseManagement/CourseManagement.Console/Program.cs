@@ -1,9 +1,10 @@
 ﻿namespace CourseManagement.Console
 {
     using EmailProcessing;
-    using Entities;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
+    using Model;
+    using Persistence;
 
     class Program
     {
@@ -19,7 +20,7 @@
             // creates the DB
             using (var db = new CourseManagementContext())
             {
-                var a = db.Subjects;
+                db.Subjects.Add(new Subject { Code = 1 });
             }
         }
     }

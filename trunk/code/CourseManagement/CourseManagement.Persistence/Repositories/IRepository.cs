@@ -1,4 +1,4 @@
-﻿namespace CourseManagement.Persistence
+﻿namespace CourseManagement.Persistence.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -13,8 +13,6 @@
         void Insert(T t);
         
         void Delete(int id);
-        
-        void Update(T t);
 
         void Save();
     }
