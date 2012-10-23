@@ -1,0 +1,174 @@
+NewStudentInCourseRule (Alta alumno en Materia)
+Acción: Alta en base de datos y/o google spreadsheat del alumno.
+Acciones utilizadas:
+
+	AddStudentToCourseDatabaseEntryAction (NewDatabaseEntryAction):
+		Execute( email ){
+			Student student = getStudentFromEmail( email )
+			IRepository<Student> repStudent = new Repository<Student>( contextoDataBase )
+			if( repStuden.Find(  “* where padrón = student.Padron”  ).length == 0 ){
+				repStudent.add( student )
+			}	
+			Subject subject = getSubjectFromEmal( email )
+			IRepository<Subject> repSubject = new Repository<Subject>( contextoDataBase )
+			if( repSubject.Find(  “* where Code = subject.Code”  ).length == 0 ){
+				Exception( "no existe el curso" )
+			}
+			Date date = getDateFromEmail( email )
+			IRepository<Course> repCourse = new Repository<Course>( contextoDataBase )
+			if( repCourse.Find( "* where 
+					Padron = studen.Padron AND 
+					Code = subject.Code AND 
+					Year = date.Year
+					Semester = date.Semester()").length == 0 ){
+				
+				repCourse.add( new Course( student , subject , date ) )
+			}else{
+				Exception( "ya inscripto" )
+			}
+		}
+
+
+	AddStudentToCourseDatabaseEntryAction (NewGoogleSpreadsheatEntryAction)
+
+		Execute( email ){
+			Student student = getStudentFromEmail( email )
+			IRepository<Student> repStudent = new Repository<Student>( contextoGoogleSpreadSheat )
+			if( repStuden.Find(  “* where padrón = student.Padron”  ).length == 0 ){
+				repStudent.add( student )
+			}	
+			Subject subject = getSubjectFromEmal( email )
+			IRepository<Subject> repSubject = new Repository<Subject>( contextoGoogleSpreadSheat )
+			if( repSubject.Find(  “* where Code = subject.Code”  ).length == 0 ){
+				Exception( "no existe el curso" )
+			}
+			Date date = getDateFromEmail( email )
+			IRepository<Course> repCourse = new Repository<Course>( contextoGoogleSpreadSheat )
+			if( repCourse.Find( "* where 
+					Padron = studen.Padron AND 
+					Code = subject.Code AND 
+					Year = date.Year
+					Semester = date.Semester()").length == 0 ){
+				
+				repCourse.add( new Course( student , subject , date ) )
+			}else{
+				Exception( "ya inscripto" )
+			}
+		}
+		
+
+NewGroupDeliverableRule( entrega TP )
+Acción: se guarda en la base de datos o google spreadsheat los adjuntos del email
+Acciones utilizadas:
+
+	AddDerivableToGroupDatabaseEntryAction (NewDatabaseEntryAction)
+
+		Execute( email ){
+			IRepository<Student> repStudent = new Repository<Student>( contextoDataBase )
+			IQuery listaStudents = repStuden.Find(  “* where Email = email.address”  )
+			if( listaStudents.length == 0 ){
+				Exception( "E-mail no existente" )
+			}
+			Student student = listaStudent.getStudent( 0 )
+			Subject subject = getSubjectFromEmail( email )
+			Date date = getDateFromEmail( email )
+			IRepository<Course> repCourse = new Repository<Course>( contextoDataBase )
+			if( repCourse.Find( "* where 
+					Padron = student.Padron AND 
+					Code = subject.Code AND 
+					Year = date.Year
+					Semester = date.Semester()").length == 0 ){
+				
+				Exception( "Este alumno no cursa esta materia en " + date )
+			}
+			IRepository<Group> repGroup = new Repository<Group>( contextoDataBase )
+			IEnumerable subjectSemesterGroups = repGroup.Find( "* where 
+					Code = subject.Code AND
+					Year = date.Year
+					Semester = date.Semester()")
+			IRepository<Student_from_Group> repStudentFormGroup = new Repository<Student_from_Group>( contextoDataBase )
+			IEnumerable<Student_from_Group> studentGroups = repStudentFormGroup.Find( "* where 
+					Padron = student.Padron").length == 0 )
+			
+			//ver si hay un grupo del alumno que este en la lista de grupos del cuatrimestre
+			
+			Group group = //poner ese grupo aca
+			
+			Deliverable deliverable = new Deliverable( email , grupo )
+			IRepository<Deliverable> repDeliverable = new Repository<Deliverable>( contextoDataBase )
+			repDeliverable.add( deliverable )
+			IRepository<Attachment> repAttachment = new Repository<Attachment>( contextoDataBase )
+			IEnumerable<File> files = deliverable.Files
+			foreach( File file in files ){
+				repAttachment.add( file )
+			}
+		}
+		
+	DownloadAttachmentAction
+	
+		Execute( email ){
+			foreach( File file in email.Attachments ){
+				copyFileToLocation( file , getLocationFromEmail( email ) )
+			}
+		}
+	
+
+PrivateNewTicketRule(Consulta Tema)
+	
+		AddTicketToDatabaseAction
+
+		Execute( email ){
+			//verificamos que no exista el asunto
+			Student student = getStudentFromEmail( email )
+			Ticket ticket = createTicketFromEmail( email , student )
+			ticket.setPrivate()
+			IRepository<Ticket> repTicket = new Repository<Ticket>( contextoDataBase )
+			repTicket.add( ticket )
+		}
+		
+		TicketCreatedReplyEmailAction
+		
+		Execute( email ){
+			sendEmail( email.From , "Respuesta automatica de " + email.To , "El tema: " + email.Subject + " fue creado" )
+		}
+	
+	
+PublicNewTicketRule(Consulta Tema)
+	
+		AddTicketToDatabaseAction
+		
+		CopyEmailToConfiguredListAction
+		
+		Execute( email ){
+			//no tenemos en claro esto
+		}
+		
+		TicketCreatedReplyEmailAction
+		
+
+		
+NewGroupInCourseRule (Alta grupo)
+Acción: se agregan alumnos a un grupo nuevo.
+Acciones utilizadas:
+
+	AddGroupToCourseDatabaseEntryAction (NewDatabaseEntryAction)
+	
+		Execute( email ){	
+			File groupAttachmentFile = email.Attachment
+			IEnumerable students = getStudentsFromFile( groupAttachmentFile )
+			Subject subject = getSubjectFromEmail( email )
+			Date date = getDateFormEmail( email )
+			if( students.All( cursando( subject , date ) ) == false ){
+				Exception( "Algun alumno no esta inscripto" )
+			}
+			if( students.All( noPertenecenAGrupoDeCuatrimestre( subject , date) ) == false ){
+				Exception( "Algun alumno ya tiene grupo" )
+			}
+			IRepository<Group> repGroup = new Repository<Group>( contextoDataBase )
+			Group group = new Group( subject , date )
+			repGroup.add( group )
+			IRepository<Student_from_Group> repStudentFormGroup = new Repository<Student_from_Group>( contextoDataBase )
+			for( Student student in students ){
+				repStudentFormGroup.add( new Student_from_Group( student , group ) )
+			}
+		}
