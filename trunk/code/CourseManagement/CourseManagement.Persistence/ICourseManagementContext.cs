@@ -5,26 +5,26 @@
 
     public interface ICourseManagementContext
     {
-        DbSet<Attachment> Attachments { get; set; }
+        IDbSet<Attachment> Attachments { get; }
 
-        DbSet<Course> Courses { get; set; }
+        IDbSet<Course> Courses { get; }
 
-        DbSet<Deliverable> Deliverables { get; set; }
+        IDbSet<Deliverable> Deliverables { get; }
 
-        DbSet<Group> Groups { get; set; }
+        IDbSet<Group> Groups { get; }
 
-        DbSet<Reply> Replies { get; set; }
+        IDbSet<Reply> Replies { get; }
 
-        DbSet<Subject> Subjects { get; set; }
+        IDbSet<Subject> Subjects { get; }
 
-        DbSet<Student> Students { get; set; }
+        IDbSet<Student> Students { get; }
 
-        DbSet<Teacher> Teachers { get; set; }
+        IDbSet<Teacher> Teachers { get; }
 
-        DbSet<Ticket> Tickets { get; set; }
+        IDbSet<Ticket> Tickets { get; }
 
         int SaveChanges();
 
-        DbSet<TEntity> Set<TEntity>() where TEntity : class;
+        IDbSet<TEntity> Set<TEntity>() where TEntity : class;
     }
 }
