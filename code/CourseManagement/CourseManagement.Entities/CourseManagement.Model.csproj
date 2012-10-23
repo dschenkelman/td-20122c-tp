@@ -8,8 +8,8 @@
     <ProjectGuid>{499A1AB2-9498-4C75-B278-89113F43B69F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CourseManagement.Entities</RootNamespace>
-    <AssemblyName>CourseManagement.Entities</AssemblyName>
+    <RootNamespace>CourseManagement.Model</RootNamespace>
+    <AssemblyName>CourseManagement.Model</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -47,19 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseManagementContext.cs" />
-    <Compile Include="Model\Attachment.cs" />
-    <Compile Include="Model\Course.cs" />
-    <Compile Include="Model\Deliverable.cs" />
-    <Compile Include="Model\Group.cs" />
-    <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\Reply.cs" />
-    <Compile Include="Model\Teacher.cs" />
-    <Compile Include="Model\Ticket.cs" />
-    <Compile Include="Model\TicketState.cs" />
+    <Compile Include="Attachment.cs" />
+    <Compile Include="Course.cs" />
+    <Compile Include="Deliverable.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Reply.cs" />
+    <Compile Include="Teacher.cs" />
+    <Compile Include="Ticket.cs" />
+    <Compile Include="TicketState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Student.cs" />
-    <Compile Include="Model\Subject.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="Subject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

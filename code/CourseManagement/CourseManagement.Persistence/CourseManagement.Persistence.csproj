@@ -49,18 +49,20 @@
   <ItemGroup>
     <Compile Include="CourseManagementContext.cs" />
     <Compile Include="ICourseManagementContext.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="Repositories\CourseManagementRepositories.cs" />
+    <Compile Include="Repositories\ICourseManagementRepositories.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CourseManagement.Entities\CourseManagement.Entities.csproj">
+    <ProjectReference Include="..\CourseManagement.Entities\CourseManagement.Model.csproj">
       <Project>{499A1AB2-9498-4C75-B278-89113F43B69F}</Project>
-      <Name>CourseManagement.Entities</Name>
+      <Name>CourseManagement.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

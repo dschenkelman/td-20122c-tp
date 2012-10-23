@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseManagement.Entities.Model
+namespace CourseManagement.Model
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     public class Ticket
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

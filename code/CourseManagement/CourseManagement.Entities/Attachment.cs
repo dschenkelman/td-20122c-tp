@@ -1,8 +1,8 @@
-﻿namespace CourseManagement.Entities.Model
-{
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace CourseManagement.Model
+{
     public class Attachment
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

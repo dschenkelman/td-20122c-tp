@@ -1,9 +1,10 @@
 ﻿namespace CourseManagement.Persistence
 {
+    using System;
     using System.Data.Entity;
-    using Entities.Model;
+    using Model;
 
-    public interface ICourseManagementContext
+    public interface ICourseManagementContext : IDisposable
     {
         IDbSet<Attachment> Attachments { get; }
 

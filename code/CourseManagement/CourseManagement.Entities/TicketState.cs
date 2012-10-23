@@ -1,4 +1,4 @@
-﻿namespace CourseManagement.Entities.Model
+﻿namespace CourseManagement.Model
 {
     public enum TicketState
     {
