@@ -1,6 +1,8 @@
 ﻿namespace CourseManagement.Console
 {
     using EmailProcessing;
+    using Entities;
+    using Entities.Model;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
 
@@ -14,6 +16,11 @@
             container.LoadConfiguration();
 
             container.Resolve<EmailProcessor>();
+
+            // creates the DB
+            //using (var db = new CourseManagementContext())
+            //{
+            //}
         }
     }
 }
