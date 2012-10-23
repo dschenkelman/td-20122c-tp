@@ -22,5 +22,55 @@
         public DbSet<Teacher> Teachers { get; set; }
 
         public DbSet<Ticket> Tickets { get; set; }
+        
+        IDbSet<TEntity> ICourseManagementContext.Set<TEntity>()
+        {
+            return this.Set<TEntity>();
+        }
+
+        IDbSet<Attachment> ICourseManagementContext.Attachments
+        {
+            get { return this.Attachments; }
+        }
+
+        IDbSet<Course> ICourseManagementContext.Courses
+        {
+            get { return this.Courses; }
+        }
+
+        IDbSet<Deliverable> ICourseManagementContext.Deliverables
+        {
+            get { return this.Deliverables; }
+        }
+
+        IDbSet<Group> ICourseManagementContext.Groups
+        {
+            get { return this.Groups; }
+        }
+
+        IDbSet<Reply> ICourseManagementContext.Replies
+        {
+            get { return this.Replies; }
+        }
+
+        IDbSet<Subject> ICourseManagementContext.Subjects
+        {
+            get { return this.Subjects; }
+        }
+
+        IDbSet<Student> ICourseManagementContext.Students
+        {
+            get { return this.Students; }
+        }
+
+        IDbSet<Teacher> ICourseManagementContext.Teachers
+        {
+            get { return this.Teachers; }
+        }
+
+        IDbSet<Ticket> ICourseManagementContext.Tickets
+        {
+            get { return this.Tickets; }
+        }
     }
 }

@@ -6,7 +6,7 @@
 
     public interface IRepository<T> : IDisposable
     {
-        IEnumerable<T> Get(Expression<Func<T>> filter);
+        IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
         
         T GetById(int id);
         

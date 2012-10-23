@@ -2,7 +2,6 @@
 {
     using EmailProcessing;
     using Entities;
-    using Entities.Model;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
 
@@ -18,9 +17,10 @@
             container.Resolve<EmailProcessor>();
 
             // creates the DB
-            //using (var db = new CourseManagementContext())
-            //{
-            //}
+            using (var db = new CourseManagementContext())
+            {
+                var a = db.Subjects;
+            }
         }
     }
 }
