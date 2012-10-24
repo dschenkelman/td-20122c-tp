@@ -56,21 +56,27 @@ namespace CourseManagement.EmailProcessing.Actions
 
         private Student CreateStudentFromEmail(IEmail email)
         {
-            return new Student(91363, "Matias Servetto", "matias.servetto@gmail.com");
+            string parsedName = email.EmailSubject.Substring(email.EmailSubject.IndexOf("] ") + 2);
+            parsedName = parsedName.Substring(parsedName.IndexOf("-")+1);
+
+            return new Student(ParseStudentIdFromEmail(email), parsedName, email.Address);
         }
 
         private int ParseSemesterFromEmail(IEmail email)
         {
+            // TODO implement
             return 2;
         }
 
         private int ParseYearFromEmail(IEmail email)
         {
+            // TODO implement
             return 2012;
         }
 
         private int ParseSubjectCodeFromEmail(IEmail email)
         {
+            // TODO implement
             return 7510;
         }
 
