@@ -482,6 +482,21 @@
         <member name="M:CourseManagement.EmailProcessing.Moles.SIEmail.#ctor">
             <summary>Initializes a new instance of type SIEmail</summary>
         </member>
+        <member name="M:CourseManagement.EmailProcessing.Moles.SIEmail.AttachBackingFieldToEmailSubject">
+            <summary>Attaches delegates to emulate SIEmail.EmailSubject as a property with a backing field</summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Moles.SIEmail.EmailSubjectGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.EmailSubject"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Moles.SIEmail.EmailSubjectSetString">
+            <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.EmailSubject"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Moles.SIEmail.cmep::CourseManagement#EmailProcessing#IEmail#EmailSubject">
+            <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.EmailSubject"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.EmailProcessing.Rules.Moles.SIRuleFactory">
             <summary>Stub type of <see cref="T:CourseManagement.EmailProcessing.Rules.IRuleFactory"/>
             .</summary>
