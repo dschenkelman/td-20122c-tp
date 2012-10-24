@@ -64,6 +64,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\AddGroupToCourseDatabaseEntryActionFixture.cs" />
     <Compile Include="Actions\ConfigurationActionFinderFixture.cs" />
     <Compile Include="Actions\NewStudentToCourseDatabaseEntryActionFixture.cs" />
     <Compile Include="Actions\UnityActionFactoryFixture.cs" />
