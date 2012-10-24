@@ -1,6 +1,9 @@
-﻿namespace CourseManagement.EmailProcessing
+﻿using CourseManagement.Model;
+
+namespace CourseManagement.EmailProcessing
 {
     public interface IEmail
     {
+
     }
 }
