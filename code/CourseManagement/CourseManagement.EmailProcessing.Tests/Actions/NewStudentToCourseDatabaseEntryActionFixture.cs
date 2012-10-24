@@ -32,18 +32,23 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         {
             // arrange
             Course course = new Course(2, 2012, 7510);
-            var student = new Student(91363, "Matias Servetto", "servetto.matias@gimail.com");
+            const string Name = "Sebastian Rodriguez";
+            const string EmailAddress = "sebas312@hotmail.com";
+            const int StudentId = 90202;
+            var student = new Student(StudentId, Name, EmailAddress);
             List<Course> courses = new List<Course> { course };
 
-            this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses);
+            this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses).Verifiable();
             this.courseRepository.Setup(cr => cr.Save()).Verifiable();
-            this.studentRepository.Setup(sr => sr.GetById(It.IsAny<int>())).Returns(student);
+            this.studentRepository.Setup(sr => sr.GetById(It.IsAny<int>())).Returns(student).Verifiable();
 
             this.courseManagementRepositories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
             this.courseManagementRepositories.Setup(cmr => cmr.Courses).Returns(this.courseRepository.Object);
             NewStudentToCourseDatabaseEntryAction action = this.CreateNewStudentToCourseDatabaseEntryAction();
 
             Mock<IEmail> email = mockRepository.Create<IEmail>();
+            email.Setup(e => e.EmailSubject).Returns("[ALTA-MATERIA-CODIGO] " + StudentId + "-" + Name);
+            email.Setup(e => e.Address).Returns(EmailAddress);
 
             // act
             action.Execute(email.Object);
@@ -53,6 +58,9 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             
             // using linq method ElementAt because ICollection does not have a simpler way to index
             Assert.AreSame(student, course.Students.ElementAt(0));
+            this.courseRepository.Verify(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>()), Times.Once());
+            this.studentRepository.Verify(sr => sr.GetById(It.IsAny<int>()), Times.Once());
+
             this.courseRepository.Verify(cr => cr.Save(), Times.Once());
             this.studentRepository.Verify(sr => sr.Save(), Times.Never());
         }
@@ -76,13 +84,19 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             NewStudentToCourseDatabaseEntryAction action = this.CreateNewStudentToCourseDatabaseEntryAction();
 
             Mock<IEmail> email = mockRepository.Create<IEmail>();
-            email.Setup(e => e.EmailSubject).Returns("[ALTA-MATERIA-CODIGO] 91363-NOMBRE");
+            const string Name = "Matias";
+            const string EmailAddress = "servetto.matias@gmail.com";
+            email.Setup(e => e.EmailSubject).Returns("[ALTA-MATERIA-CODIGO] 91363-" + Name);
+            email.Setup(e => e.Address).Returns(EmailAddress);
 
             // act
             action.Execute(email.Object);
 
             // assert
             Assert.AreEqual(1, course.Students.Count);
+            Assert.AreEqual(91363, course.Students.ElementAt(0).Id);
+            Assert.AreEqual(Name, course.Students.ElementAt(0).Name);
+            Assert.AreEqual(EmailAddress, course.Students.ElementAt(0).EmailAdress);
 
             this.courseRepository.Verify(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>()), Times.Once());
             this.courseRepository.Verify(cr => cr.Save(), Times.Once());
@@ -97,10 +111,13 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         {
             // arrange
 
-            Course course1 = new Course(2, 2012, 7510);
-            Student student = new Student(91363, "Matias Servetto", "servetto.matias@gmail.com");
-            course1.Students.Add( student );
-            List<Course> courses = new List<Course> { course1 };
+            Course course = new Course(2, 2012, 7510);
+            const string Name = "Damian Schenkelman";
+            const string EmailAddress = "schen.damian@yahoo.com";
+            const int StudentId = 90728;
+            var student = new Student(StudentId, Name, EmailAddress);
+            course.Students.Add( student );
+            List<Course> courses = new List<Course> { course };
 
             this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses);
             this.courseRepository.Setup(cr => cr.Save()).Verifiable();
@@ -113,6 +130,8 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             NewStudentToCourseDatabaseEntryAction action = this.CreateNewStudentToCourseDatabaseEntryAction();
 
             Mock<IEmail> email = mockRepository.Create<IEmail>();
+            email.Setup(e => e.EmailSubject).Returns("[ALTA-MATERIA-CODIGO] " + StudentId + "-" + Name);
+            email.Setup(e => e.Address).Returns(EmailAddress);
 
             // act
 
