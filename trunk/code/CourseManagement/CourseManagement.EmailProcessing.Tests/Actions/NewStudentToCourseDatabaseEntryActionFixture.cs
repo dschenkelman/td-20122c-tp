@@ -31,7 +31,7 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         public void ShouldAddExistingStudentToDictatedCourse()
         {
             // arrange
-            Course course = new Course(1, 2, 2012, 7510);
+            Course course = new Course(2, 2012, 7510);
             var student = new Student(91363, "Matias Servetto", "servetto.matias@gimail.com");
             List<Course> courses = new List<Course> { course };
 
@@ -61,14 +61,14 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         public void ShouldAddNoExistingStudentToDictatedCourse()
         {
             // arrange
+            Course course = new Course(2, 2012, 7510);
+            List<Course> courses = new List<Course> { course };
 
-            Course course1 = new Course(1, 2, 2012, 7510);
-            List<Course> courses = new List<Course> { course1 };
-
-            this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses);
+            this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses).Verifiable();
             this.courseRepository.Setup(cr => cr.Save()).Verifiable();
-            this.studentRepository.Setup(sr => sr.GetById(It.IsAny<int>())).Returns((Student)null);
-            this.studentRepository.Setup(sr => sr.Insert(It.IsAny<Student>()));
+            this.studentRepository.Setup(sr => sr.GetById(91363)).Returns((Student)null).Verifiable();
+            // TODO me pide que mockee este metodo si pongo: It.Is<Student>(s => (s.Id == 91363) && (s.Name == "Matias Serveto"))
+            this.studentRepository.Setup(sr => sr.Insert(It.IsAny<Student>())).Verifiable();
             this.studentRepository.Setup(sr => sr.Save()).Verifiable();
 
             this.courseManagementRepositories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
@@ -76,13 +76,18 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             NewStudentToCourseDatabaseEntryAction action = this.CreateNewStudentToCourseDatabaseEntryAction();
 
             Mock<IEmail> email = mockRepository.Create<IEmail>();
+            email.Setup(e => e.EmailSubject).Returns("[ALTA-MATERIA-CODIGO] 91363-NOMBRE");
 
             // act
-
             action.Execute(email.Object);
 
             // assert
+            Assert.AreEqual(1, course.Students.Count);
+
+            this.courseRepository.Verify(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>()), Times.Once());
             this.courseRepository.Verify(cr => cr.Save(), Times.Once());
+            this.studentRepository.Verify(sr => sr.GetById(91363), Times.Once());
+            this.studentRepository.Verify(sr => sr.Insert(It.IsAny<Student>()), Times.Once());
             this.studentRepository.Verify(sr => sr.Save(), Times.Once());
         }
 
@@ -92,7 +97,7 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         {
             // arrange
 
-            Course course1 = new Course(1, 2, 2012, 7510);
+            Course course1 = new Course(2, 2012, 7510);
             Student student = new Student(91363, "Matias Servetto", "servetto.matias@gmail.com");
             course1.Students.Add( student );
             List<Course> courses = new List<Course> { course1 };

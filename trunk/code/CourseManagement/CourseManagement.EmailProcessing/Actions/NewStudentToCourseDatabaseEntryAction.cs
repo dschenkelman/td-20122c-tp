@@ -76,7 +76,9 @@ namespace CourseManagement.EmailProcessing.Actions
 
         private int ParseStudentIdFromEmail(IEmail email)
         {
-            return 91363;
+            string parsedString = email.EmailSubject.Substring(email.EmailSubject.IndexOf("] ") + 2);
+            parsedString = parsedString.Substring(0, parsedString.IndexOf("-"));
+            return Convert.ToInt32(parsedString);
         }
     }
 }
