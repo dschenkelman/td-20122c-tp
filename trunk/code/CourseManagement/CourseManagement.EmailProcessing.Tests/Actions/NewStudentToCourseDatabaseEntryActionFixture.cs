@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using CourseManagement.EmailProcessing.Actions;
@@ -30,15 +31,13 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         public void ShouldAddExistingStudentToDictatedCourse()
         {
             // arrange
-
-            Course course1 = new Course(1, 2, 2012, 7510);
-            List<Course> courses = new List<Course> { course1 };
+            Course course = new Course(1, 2, 2012, 7510);
+            var student = new Student(91363, "Matias Servetto", "servetto.matias@gimail.com");
+            List<Course> courses = new List<Course> { course };
 
             this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses);
             this.courseRepository.Setup(cr => cr.Save()).Verifiable();
-            this.studentRepository.Setup(sr => sr.GetById(It.IsAny<int>())).Returns(new Student(91363, "Matias Servetto", "servetto.matias@gimail.com"));
-            this.studentRepository.Setup(sr => sr.Insert(It.IsAny<Student>()));
-            this.studentRepository.Setup(sr => sr.Save()).Verifiable();
+            this.studentRepository.Setup(sr => sr.GetById(It.IsAny<int>())).Returns(student);
 
             this.courseManagementRepositories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
             this.courseManagementRepositories.Setup(cmr => cmr.Courses).Returns(this.courseRepository.Object);
@@ -47,10 +46,13 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             Mock<IEmail> email = mockRepository.Create<IEmail>();
 
             // act
-
             action.Execute(email.Object);
 
             // assert
+            Assert.AreEqual(1, course.Students.Count);
+            
+            // using linq method ElementAt because ICollection does not have a simpler way to index
+            Assert.AreSame(student, course.Students.ElementAt(0));
             this.courseRepository.Verify(cr => cr.Save(), Times.Once());
             this.studentRepository.Verify(sr => sr.Save(), Times.Never());
         }
