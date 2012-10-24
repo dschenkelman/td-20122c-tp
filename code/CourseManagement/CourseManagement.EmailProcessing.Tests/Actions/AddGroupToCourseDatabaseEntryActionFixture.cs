@@ -48,12 +48,13 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
 
             var falseGroupWrongSemester = new Group(correctYear, incorrectSemester);
 
-            //TODO Habria que hacer lo mismo que con el insert
-            this.groupRepository.Setup(gr => gr.Get(It.IsAny<Expression<Func<Group, bool>>>())).Returns(new List<Group>()).Verifiable();
-
-            //TODO Fijarse porque no funciona.
-            //this.groupRepository.Setup(gr => gr.Insert(It.Is<Expression<Func<Group, bool>>>(f => f.Compile().Invoke(trueGroup)))).Verifiable();)
-            this.groupRepository.Setup(gr => gr.Insert(It.IsAny<Group>())).Verifiable();
+            this.groupRepository.Setup(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
+                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))))
+                                        .Returns(new List<Group>())
+                                        .Verifiable();
+            
+            this.groupRepository.Setup(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)));
 
             this.groupRepository.Setup(gr => gr.Save()).Verifiable();
 
@@ -67,9 +68,12 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
 
             // assert
 
-            this.groupRepository.Verify(gr => gr.Get(It.IsAny<Expression<Func<Group, bool>>>()), Times.Once());
-            //TODO Cambiar el insert con It.IsAny por el de It.Is cuando se resuelva
-            this.groupRepository.Verify(gr => gr.Insert(It.IsAny<Group>()), Times.Once());
+            this.groupRepository.Verify(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
+                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))), Times.Once());
+
+            this.groupRepository.Verify(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)), Times.Once());
+
             this.groupRepository.Verify(gr => gr.Save(), Times.Once());
 
         }
@@ -85,8 +89,28 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
 
             var groups = new List<Group> {group};
 
-            this.groupRepository.Setup(gr => gr.Get(It.IsAny<Expression<Func<Group,bool>>>())).Returns(groups).Verifiable();
-            this.groupRepository.Setup(gr => gr.Insert(It.IsAny<Group>())).Verifiable();
+            const int correctYear = 2012;
+            const int incorrectYear = 2000;
+
+            const int correctSemester = 2;
+            const int incorrectSemester = 1;
+
+            var trueGroup = new Group(correctYear, correctSemester);
+
+            var falseGroupWrongYearAndSemester = new Group(incorrectYear, incorrectSemester);
+
+            var falseGroupWrongYear = new Group(incorrectYear, correctSemester);
+
+            var falseGroupWrongSemester = new Group(correctYear, incorrectSemester);
+
+            this.groupRepository.Setup(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
+                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))))
+                                        .Returns(groups)
+                                        .Verifiable();
+
+            this.groupRepository.Setup(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)));
+            
             this.groupRepository.Setup(gr => gr.Save()).Verifiable();
   
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
@@ -97,7 +121,13 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             action.Execute(email.Object);
 
             // assert
-            this.groupRepository.Verify(gr => gr.Insert(It.IsAny<Group>()), Times.Never());
+
+            this.groupRepository.Verify(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
+                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))), Times.Once());
+
+            this.groupRepository.Verify(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)), Times.Never());
+
             this.groupRepository.Verify(gr => gr.Save(), Times.Never());
 
         }
