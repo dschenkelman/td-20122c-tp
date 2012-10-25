@@ -64,20 +64,21 @@ namespace CourseManagement.EmailProcessing.Actions
 
         private int ParseSemesterFromEmail(IEmail email)
         {
-            // TODO implement
+            if( ( 1 <= email.Date.Month ) && ( email.Date.Month <= 6 ) )
+                return 1;
             return 2;
         }
 
         private int ParseYearFromEmail(IEmail email)
         {
-            // TODO implement
-            return 2012;
+            return email.Date.Year;
         }
 
         private int ParseSubjectCodeFromEmail(IEmail email)
         {
-            // TODO implement
-            return 7510;
+            string parsedCourse = email.EmailSubject.Substring(0, email.EmailSubject.IndexOf("] "));
+            parsedCourse = parsedCourse.Substring(parsedCourse.LastIndexOf("-") + 1);
+            return Convert.ToInt32(parsedCourse);
         }
 
         private int ParseStudentIdFromEmail(IEmail email)

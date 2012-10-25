@@ -493,8 +493,19 @@
         <member name="M:CourseManagement.EmailProcessing.Moles.SIEmail.AttachBackingFieldToAddress">
             <summary>Attaches delegates to emulate SIEmail.Address as a property with a backing field</summary>
         </member>
+        <member name="M:CourseManagement.EmailProcessing.Moles.SIEmail.AttachBackingFieldToDate">
+            <summary>Attaches delegates to emulate SIEmail.Date as a property with a backing field</summary>
+        </member>
         <member name="M:CourseManagement.EmailProcessing.Moles.SIEmail.AttachBackingFieldToEmailSubject">
             <summary>Attaches delegates to emulate SIEmail.EmailSubject as a property with a backing field</summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Moles.SIEmail.DateGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.Date"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.EmailProcessing.Moles.SIEmail.DateSetDateTime">
+            <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.Date"/>
+            </summary>
         </member>
         <member name="F:CourseManagement.EmailProcessing.Moles.SIEmail.EmailSubjectGet">
             <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.EmailSubject"/>
@@ -506,6 +517,10 @@
         </member>
         <member name="P:CourseManagement.EmailProcessing.Moles.SIEmail.cmep::CourseManagement#EmailProcessing#IEmail#Address">
             <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.Address"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.EmailProcessing.Moles.SIEmail.cmep::CourseManagement#EmailProcessing#IEmail#Date">
+            <summary>Sets the stub of <see cref="P:CourseManagement.EmailProcessing.IEmail.Date"/>
             </summary>
         </member>
         <member name="P:CourseManagement.EmailProcessing.Moles.SIEmail.cmep::CourseManagement#EmailProcessing#IEmail#EmailSubject">

@@ -1,4 +1,4 @@
-﻿using CourseManagement.Model;
+﻿using System;
 
 namespace CourseManagement.EmailProcessing
 {
@@ -6,5 +6,6 @@ namespace CourseManagement.EmailProcessing
     {
         string EmailSubject { get; set; }
         string Address { get; set; }
+        DateTime Date { get; set; }
     }
 }
