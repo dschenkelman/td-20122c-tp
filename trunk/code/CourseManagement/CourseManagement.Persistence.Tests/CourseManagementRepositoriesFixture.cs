@@ -26,6 +26,10 @@ namespace CourseManagement.Persistence.Tests
         private Mock<IRepository<Ticket>> tickets;
 
         private Mock<IRepository<Group>> groups;
+
+        private Mock<IRepository<Account>> accounts;
+
+        private Mock<IRepository<Configuration>> configurations;
         
         private MockRepository mockRepository;
 
@@ -33,7 +37,9 @@ namespace CourseManagement.Persistence.Tests
         public void Initialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
+            this.accounts = this.mockRepository.Create<IRepository<Account>>();
             this.attachments = this.mockRepository.Create<IRepository<Attachment>>();
+            this.configurations = this.mockRepository.Create<IRepository<Configuration>>();
             this.courses = this.mockRepository.Create<IRepository<Course>>();
             this.deliverables = this.mockRepository.Create<IRepository<Deliverable>>();
             this.groups = this.mockRepository.Create<IRepository<Group>>();
@@ -42,13 +48,16 @@ namespace CourseManagement.Persistence.Tests
             this.subjects = this.mockRepository.Create<IRepository<Subject>>();
             this.teachers = this.mockRepository.Create<IRepository<Teacher>>();
             this.tickets = this.mockRepository.Create<IRepository<Ticket>>();
+            
         }
 
         [TestMethod]
         public void ShouldBeAbleToRetrieveRepositoriesPassedThroughConstructor()
         {
             var repositories = this.CreateRepositories();
+            Assert.AreSame(repositories.Accounts, this.accounts.Object);
             Assert.AreSame(repositories.Attachments, this.attachments.Object);
+            Assert.AreSame(repositories.Configurations, this.configurations.Object);
             Assert.AreSame(repositories.Courses, this.courses.Object);
             Assert.AreSame(repositories.Deliverables, this.deliverables.Object);
             Assert.AreSame(repositories.Groups, this.groups.Object);
@@ -62,7 +71,9 @@ namespace CourseManagement.Persistence.Tests
         private CourseManagementRepositories CreateRepositories()
         {
             return new CourseManagementRepositories(
+                this.accounts.Object,
                 this.attachments.Object,
+                this.configurations.Object,
                 this.courses.Object,
                 this.deliverables.Object,
                 this.groups.Object,
