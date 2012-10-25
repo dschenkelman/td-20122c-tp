@@ -18,9 +18,9 @@ namespace CourseManagement.Model
 
         public bool UseSsl { get; set; }
 
-        [ForeignKey("AccountUser")]
+        [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
 
-        public int AccountUser { get; set; }
+        public int AccountId { get; set; }
     }
 }

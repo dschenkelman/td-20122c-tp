@@ -6,7 +6,11 @@
     {
         IRepository<Attachment> Attachments { get; }
 
+        IRepository<Account> Accounts { get; }
+
         IRepository<Course> Courses { get; }
+
+        IRepository<Configuration> Configurations { get; }
 
         IRepository<Group> Groups { get; }
 

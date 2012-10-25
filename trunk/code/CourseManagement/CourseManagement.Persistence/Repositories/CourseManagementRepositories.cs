@@ -5,6 +5,8 @@
     public class CourseManagementRepositories : ICourseManagementRepositories
     {
         private readonly IRepository<Attachment> attachments;
+        private readonly IRepository<Account> accounts;
+        private readonly IRepository<Configuration> configurations;
         private readonly IRepository<Course> courses;
         private readonly IRepository<Deliverable> deliverables;
         private readonly IRepository<Group> groups;
@@ -13,8 +15,7 @@
         private readonly IRepository<Subject> subjects;
         private readonly IRepository<Teacher> teachers;
         private readonly IRepository<Ticket> tickets;
-        private readonly IRepository<Account> accounts;
-        private readonly IRepository<Configuration> configurations;
+        
 
         public CourseManagementRepositories(IRepository<Account> accounts,
             IRepository<Attachment> attachments,
@@ -41,9 +42,19 @@
             this.configurations = configurations;
         }
 
+        public IRepository<Account> Accounts
+        {
+            get { return this.accounts; }
+        }
+        
         public IRepository<Attachment> Attachments
         {
             get { return this.attachments; }
+        }
+
+        public IRepository<Configuration> Configurations
+        {
+            get { return this.configurations; }
         }
 
         public IRepository<Course> Courses
@@ -84,16 +95,6 @@
         public IRepository<Group> Groups
         {
             get { return this.groups; }
-        }
-
-        public IRepository<Account> Accounts
-        {
-            get { return this.accounts; }
-        }
-
-        public IRepository<Configuration> Configurations
-        {
-            get { return this.configurations; }
         }
     }
 }
