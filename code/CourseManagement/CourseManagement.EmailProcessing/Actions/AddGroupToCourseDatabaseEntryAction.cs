@@ -20,22 +20,13 @@ namespace CourseManagement.EmailProcessing.Actions
         {
 
             // Add group
-            int year = ParseYearFromEmail(email);
-            int semester = ParseSemesterFromEmail(email);
-
             //TODO bajar los attachments
 
-            Group group = new Group(year, semester);
+            var group = new Group();
 
             //verify existing group
-            var groupsInRepository = this.courseManagementRepositories.Groups.Get(g => (g.Semester == group.Semester) &&
-                                                                                       (g.Year == group.Year) &&
-                                                                                      (g.Id == group.Id) ).ToList();
-            if ( groupsInRepository == null)
-            {
-                Console.WriteLine("Es null");
-                Console.ReadLine();
-            }
+            var groupsInRepository = this.courseManagementRepositories.Groups.Get(g => g.Id == group.Id ).ToList();
+            
             if ( groupsInRepository.Count != 0)
             {
                 throw new Exception("Trying to add to database an already existing group ");
@@ -47,19 +38,5 @@ namespace CourseManagement.EmailProcessing.Actions
 
         }
 
-        private int ParseSemesterFromEmail(IEmail email)
-        {
-            return 2;
-        }
-
-        private int ParseYearFromEmail(IEmail email)
-        {
-            return 2012;
-        }
-
-        private int ParseSubjectCodeFromEmail(IEmail email)
-        {
-            return 7510;
-        }
     }
 }

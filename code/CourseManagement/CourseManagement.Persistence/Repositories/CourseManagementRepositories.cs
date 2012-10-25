@@ -1,6 +1,5 @@
 ﻿namespace CourseManagement.Persistence.Repositories
 {
-    using System;
     using Model;
 
     public class CourseManagementRepositories : ICourseManagementRepositories
@@ -14,8 +13,12 @@
         private readonly IRepository<Subject> subjects;
         private readonly IRepository<Teacher> teachers;
         private readonly IRepository<Ticket> tickets;
+        private readonly IRepository<Account> accounts;
+        private readonly IRepository<Configuration> configurations;
 
-        public CourseManagementRepositories(IRepository<Attachment> attachments, 
+        public CourseManagementRepositories(IRepository<Account> accounts,
+            IRepository<Attachment> attachments,
+            IRepository<Configuration> configurations,
             IRepository<Course> courses, 
             IRepository<Deliverable> deliverables,
             IRepository<Group> groups, 
@@ -34,6 +37,8 @@
             this.subjects = subjects;
             this.teachers = teachers;
             this.tickets = tickets;
+            this.accounts = accounts;
+            this.configurations = configurations;
         }
 
         public IRepository<Attachment> Attachments
@@ -79,6 +84,16 @@
         public IRepository<Group> Groups
         {
             get { return this.groups; }
+        }
+
+        public IRepository<Account> Accounts
+        {
+            get { return this.accounts; }
+        }
+
+        public IRepository<Configuration> Configurations
+        {
+            get { return this.configurations; }
         }
     }
 }

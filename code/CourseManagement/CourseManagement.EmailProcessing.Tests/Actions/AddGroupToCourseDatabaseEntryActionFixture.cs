@@ -34,27 +34,18 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         public void ShouldAddNewGroupWhenUsingExecute()
         {
             // arrange
-            const int correctYear = 2012;
-            const int incorrectYear = 2000;
+            const int wrongId = 2;
 
-            const int correctSemester = 2;
-            const int incorrectSemester = 1;
-
-            var trueGroup = new Group(correctYear,correctSemester);
-
-            var falseGroupWrongYearAndSemester = new Group(incorrectYear, incorrectSemester);
-
-            var falseGroupWrongYear = new Group(incorrectYear, correctSemester);
-
-            var falseGroupWrongSemester = new Group(correctYear, incorrectSemester);
+            var trueGroup = new Group();
+            var falseGroup = new Group { Id = wrongId };
+            var groups = new List<Group> ();
 
             this.groupRepository.Setup(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
-                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
-                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))))
-                                        .Returns(new List<Group>())
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroup)))))
+                                        .Returns(groups)
                                         .Verifiable();
-            
-            this.groupRepository.Setup(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)));
+
+            this.groupRepository.Setup(gr => gr.Insert(It.Is<Group>(g => g.Id == trueGroup.Id))).Verifiable();
 
             this.groupRepository.Setup(gr => gr.Save()).Verifiable();
 
@@ -69,10 +60,9 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             // assert
 
             this.groupRepository.Verify(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
-                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
-                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))), Times.Once());
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroup)))), Times.Once());
 
-            this.groupRepository.Verify(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)), Times.Once());
+            this.groupRepository.Verify(gr => gr.Insert(It.Is<Group>(g => g.Id == trueGroup.Id)), Times.Once());
 
             this.groupRepository.Verify(gr => gr.Save(), Times.Once());
 
@@ -83,33 +73,19 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
         public void ShouldNotAddAlreadyExistingGroupToCourseDatabaseWhenUsingExecute()
         {
             // arrange
-            const int year = 2012;
-            const int semester = 2;
-            var group = new Group(year, semester);
 
-            var groups = new List<Group> {group};
-
-            const int correctYear = 2012;
-            const int incorrectYear = 2000;
-
-            const int correctSemester = 2;
-            const int incorrectSemester = 1;
-
-            var trueGroup = new Group(correctYear, correctSemester);
-
-            var falseGroupWrongYearAndSemester = new Group(incorrectYear, incorrectSemester);
-
-            var falseGroupWrongYear = new Group(incorrectYear, correctSemester);
-
-            var falseGroupWrongSemester = new Group(correctYear, incorrectSemester);
+            const int wrongId = 2;
+            
+            var trueGroup = new Group();
+            var falseGroup = new Group { Id = wrongId };
+            var groups = new List<Group> { trueGroup };
 
             this.groupRepository.Setup(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
-                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
-                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))))
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroup)))))
                                         .Returns(groups)
                                         .Verifiable();
 
-            this.groupRepository.Setup(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)));
+            this.groupRepository.Setup(gr => gr.Insert(It.Is<Group>(g => g.Id == trueGroup.Id))).Verifiable();
             
             this.groupRepository.Setup(gr => gr.Save()).Verifiable();
   
@@ -123,10 +99,9 @@ namespace CourseManagement.EmailProcessing.Tests.Actions
             // assert
 
             this.groupRepository.Verify(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>
-                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroupWrongYear))
-                                        && (!f.Compile().Invoke(falseGroupWrongSemester)) && (!f.Compile().Invoke(falseGroupWrongYearAndSemester)))), Times.Once());
+                                        (f => (f.Compile().Invoke(trueGroup)) && (!f.Compile().Invoke(falseGroup)))), Times.Once());
 
-            this.groupRepository.Verify(gr => gr.Insert(It.Is<Group>(g => g.Year == correctYear && g.Semester == correctSemester && g.Id == trueGroup.Id)), Times.Never());
+            this.groupRepository.Verify(gr => gr.Insert(It.Is<Group>(g => g.Id == trueGroup.Id)), Times.Never());
 
             this.groupRepository.Verify(gr => gr.Save(), Times.Never());
 
