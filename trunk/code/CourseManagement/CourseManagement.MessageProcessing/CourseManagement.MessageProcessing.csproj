@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\AddDerivableToGroupDatabaseEntryAction.cs" />
     <Compile Include="Actions\AddGroupToCourseDatabaseEntryAction.cs" />
     <Compile Include="Actions\IXmlActionReader.cs" />
     <Compile Include="Actions\ConfigurationActionFinder.cs" />

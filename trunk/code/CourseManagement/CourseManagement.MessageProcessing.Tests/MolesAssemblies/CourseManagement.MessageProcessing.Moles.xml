@@ -672,6 +672,9 @@
         <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToDate">
             <summary>Attaches delegates to emulate SIMessage.Date as a property with a backing field</summary>
         </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToDestinationAddress">
+            <summary>Attaches delegates to emulate SIMessage.DestinationAddress as a property with a backing field</summary>
+        </member>
         <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToSubject">
             <summary>Attaches delegates to emulate SIMessage.Subject as a property with a backing field</summary>
         </member>
@@ -681,6 +684,14 @@
         </member>
         <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DateSetDateTime">
             <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DestinationAddressGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.DestinationAddress"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DestinationAddressSetString">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.DestinationAddress"/>
             </summary>
         </member>
         <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.SubjectGet">
@@ -697,6 +708,10 @@
         </member>
         <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Date">
             <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#DestinationAddress">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.DestinationAddress"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Subject">

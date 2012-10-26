@@ -6,6 +6,11 @@ namespace CourseManagement.Model
 {
     public class Deliverable
     {
+        public Deliverable(DateTime receptionDate)
+        {
+            this.ReceptionDate = receptionDate;
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 

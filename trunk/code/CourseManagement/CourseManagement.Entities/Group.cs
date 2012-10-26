@@ -7,7 +7,7 @@ namespace CourseManagement.Model
 {
     public class Group
     {
-
+        
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -17,5 +17,7 @@ namespace CourseManagement.Model
         public virtual Course Course { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
+
+        public virtual ICollection<Deliverable> Deliverables { get; set; }
     }
 }
