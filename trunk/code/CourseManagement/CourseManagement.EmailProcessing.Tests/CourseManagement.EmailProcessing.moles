@@ -1,8 +1,0 @@
-<Moles xmlns="http://schemas.microsoft.com/moles/2010/">
-  <Assembly Name="CourseManagement.EmailProcessing" />
-  <MoleGeneration>
-    <Types>
-      <Add FullName="CourseManagement.EmailProcessing.Rules.BaseRule"/>
-    </Types>
-  </MoleGeneration>
-</Moles>

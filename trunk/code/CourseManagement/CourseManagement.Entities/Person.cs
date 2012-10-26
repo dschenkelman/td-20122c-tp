@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CourseManagement.Model
+﻿namespace CourseManagement.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public abstract class Person
     {
-        protected Person(int id, string name, string email)
+        protected Person(int id, string name, string messagingSystemId)
         {
             this.Id = id;
             this.Name = name;
-            this.EmailAdress = email;
+            this.MessagingSystemId = messagingSystemId;
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,7 +19,7 @@ namespace CourseManagement.Model
 
         public string Name { get; set; }
 
-        public string EmailAdress { get; set; }
+        public string MessagingSystemId { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }
     }

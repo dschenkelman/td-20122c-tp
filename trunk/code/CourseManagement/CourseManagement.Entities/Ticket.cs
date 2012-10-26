@@ -11,10 +11,10 @@ namespace CourseManagement.Model
         public int Id { get; set; }
 
         [Required]
-        public string EmailSubject { get; set; }
+        public string MessageSubject { get; set; }
         
         [Required]
-        public string EmailBody { get; set; }
+        public string MessageBody { get; set; }
 
         [Required]
         public bool IsPrivate { get; set; }

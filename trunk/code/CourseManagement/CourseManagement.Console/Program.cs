@@ -1,14 +1,14 @@
-﻿using System.Linq;
-
-namespace CourseManagement.Console
+﻿namespace CourseManagement.Console
 {
-    using EmailProcessing;
+    using System.Linq;
+    using MessageProcessing;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
+
     using Model;
     using Persistence;
     using Persistence.Repositories;
-
+    
     class Program
     {
         static void Main(string[] args)
@@ -18,7 +18,7 @@ namespace CourseManagement.Console
             // Initialize the container with the config file
             container.LoadConfiguration();
 
-            container.Resolve<EmailProcessor>();
+            container.Resolve<MessageProcessor>();
 
             container.Resolve<ICourseManagementRepositories>();
 
