@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CourseManagement.Model
+﻿namespace CourseManagement.Model
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     [Table("Students")]
     public class Student : Person
     {

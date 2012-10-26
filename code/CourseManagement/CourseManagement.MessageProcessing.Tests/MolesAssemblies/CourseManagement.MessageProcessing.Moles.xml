@@ -1,0 +1,863 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CourseManagement.MessageProcessing.Moles</name>
+    </assembly>
+    <members>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.#ctor(CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ConstructorICourseManagementRepositories">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.#ctor(CourseManagement.Persistence.Repositories.ICourseManagementRepositories)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ExecuteIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.GetCourseFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetCourseFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.GetSemesterFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.ExecuteIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.GetCourseFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetCourseFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.GetSemesterFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.ParseSubjectCodeFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Rules.BaseRule"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.#ctor(CourseManagement.MessageProcessing.Rules.BaseRule)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.ConstructorIActionFactory">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.#ctor(CourseManagement.MessageProcessing.Actions.IActionFactory)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.NameGet">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Rules.BaseRule.Name"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.NameSetString">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Rules.BaseRule.Name"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.ProcessIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.Process(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.RetrieveActions">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.RetrieveActions"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances.NameGet">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Rules.BaseRule.Name"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances.NameSetString">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Rules.BaseRule.Name"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances.ProcessIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.Process(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances.RetrieveActions">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.RetrieveActions"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Actions.ConfigurationActionFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.#ctor(CourseManagement.MessageProcessing.Actions.ConfigurationActionFinder)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.Bind(CourseManagement.MessageProcessing.Actions.IActionFinder)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.ConstructorIConfigurationServiceIXmlActionReader">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.ConfigurationActionFinder.#ctor(CourseManagement.MessageProcessing.Services.IConfigurationService,CourseManagement.MessageProcessing.Actions.IXmlActionReader)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.FindNamesString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.ConfigurationActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MConfigurationActionFinder.AllInstances.FindNamesString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.ConfigurationActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Rules.ConfigurationRuleFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.#ctor(CourseManagement.MessageProcessing.Rules.ConfigurationRuleFinder)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.Bind(CourseManagement.MessageProcessing.Rules.IRuleFinder)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.ConstructorIConfigurationServiceIXmlRuleReader">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.ConfigurationRuleFinder.#ctor(CourseManagement.MessageProcessing.Services.IConfigurationService,CourseManagement.MessageProcessing.Rules.IXmlRuleReader)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.FindNames">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.ConfigurationRuleFinder.FindNames"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MConfigurationRuleFinder.AllInstances.FindNames">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.ConfigurationRuleFinder.FindNames"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Services.ConfigurationService"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.#ctor(CourseManagement.MessageProcessing.Services.ConfigurationService)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.Bind(CourseManagement.MessageProcessing.Services.IConfigurationService)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.Constructor">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Services.ConfigurationService.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.GetValueString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Services.ConfigurationService.GetValue(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.AllInstances.GetValueString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Services.ConfigurationService.GetValue(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Moles.MMessageProcessor">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.MessageProcessor"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.MMessageProcessor.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.MMessageProcessor.#ctor(CourseManagement.MessageProcessing.MessageProcessor)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.MMessageProcessor.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.MMessageProcessor.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.MMessageProcessor.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.MMessageProcessor.ConstructorIRuleFactory">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.MessageProcessor.#ctor(CourseManagement.MessageProcessing.Rules.IRuleFactory)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.MMessageProcessor.Process">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.MessageProcessor.Process"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Moles.MMessageProcessor.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.MMessageProcessor.AllInstances.Process">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.MessageProcessor.Process"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.#ctor(CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.Bind(CourseManagement.MessageProcessing.Actions.IAction)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ConstructorICourseManagementRepositories">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.#ctor(CourseManagement.Persistence.Repositories.ICourseManagementRepositories)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.CreateStudentFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.CreateStudentFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ExecuteIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.GetSemesterFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.GetYearFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetYearFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.CreateStudentFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.CreateStudentFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.ExecuteIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.GetSemesterFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.GetYearFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetYearFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.ParseStudentIdFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.ParseSubjectCodeFromMessageIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Actions.UnityActionFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.#ctor(CourseManagement.MessageProcessing.Actions.UnityActionFactory)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.Bind(CourseManagement.MessageProcessing.Actions.IActionFactory)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.ConstructorIUnityContainerIActionFinder">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.UnityActionFactory.#ctor(Microsoft.Practices.Unity.IUnityContainer,CourseManagement.MessageProcessing.Actions.IActionFinder)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.CreateActionsString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.UnityActionFactory.CreateActions(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory._CreateActionsb__0String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.UnityActionFactory.&lt;CreateActions&gt;b__0(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.AllInstances.CreateActionsString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.UnityActionFactory.CreateActions(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory.AllInstances._CreateActionsb__0String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.UnityActionFactory.&lt;CreateActions&gt;b__0(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Rules.UnityRuleFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.#ctor(CourseManagement.MessageProcessing.Rules.UnityRuleFactory)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.Bind(CourseManagement.MessageProcessing.Rules.IRuleFactory)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.ConstructorIUnityContainerIRuleFinder">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.UnityRuleFactory.#ctor(Microsoft.Practices.Unity.IUnityContainer,CourseManagement.MessageProcessing.Rules.IRuleFinder)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.CreateRules">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.UnityRuleFactory.CreateRules"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory._CreateRulesb__0String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.UnityRuleFactory.&lt;CreateRules&gt;b__0(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.AllInstances.CreateRules">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.UnityRuleFactory.CreateRules"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MUnityRuleFactory.AllInstances._CreateRulesb__0String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.UnityRuleFactory.&lt;CreateRules&gt;b__0(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Actions.XmlActionReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.#ctor(CourseManagement.MessageProcessing.Actions.XmlActionReader)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.Bind(CourseManagement.MessageProcessing.Actions.IXmlActionReader)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.Constructor">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.XmlActionReader.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.GetActionNamesStringString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.XmlActionReader.GetActionNames(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader._GetActionNamesb__1XElement">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.XmlActionReader.&lt;GetActionNames&gt;b__1(System.Xml.Linq.XElement)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MXmlActionReader.AllInstances.GetActionNamesStringString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.XmlActionReader.GetActionNames(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader">
+            <summary>Mole type of <see cref="T:CourseManagement.MessageProcessing.Rules.XmlRuleReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.#ctor(CourseManagement.MessageProcessing.Rules.XmlRuleReader)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.Bind(CourseManagement.MessageProcessing.Rules.IXmlRuleReader)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.Constructor">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.XmlRuleReader.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.GetRuleNamesString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.XmlRuleReader.GetRuleNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader._GetRuleNamesb__0XElement">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.XmlRuleReader.&lt;GetRuleNames&gt;b__0(System.Xml.Linq.XElement)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MXmlRuleReader.AllInstances.GetRuleNamesString">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.XmlRuleReader.GetRuleNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SAddGroupToCourseDatabaseEntryAction">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SAddGroupToCourseDatabaseEntryAction.#ctor(CourseManagement.Persistence.Repositories.ICourseManagementRepositories)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SAddGroupToCourseDatabaseEntryAction.InitializeStub">
+            <summary>Initializes a new instance of type SAddGroupToCourseDatabaseEntryAction</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SAddGroupToCourseDatabaseEntryAction.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SAddGroupToCourseDatabaseEntryAction.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SBaseRule">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.BaseRule"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SBaseRule.#ctor(CourseManagement.MessageProcessing.Actions.IActionFactory)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SBaseRule.InitializeStub">
+            <summary>Initializes a new instance of type SBaseRule</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SBaseRule.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SBaseRule.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SConfigurationActionFinder">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.ConfigurationActionFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SConfigurationActionFinder.#ctor(CourseManagement.MessageProcessing.Services.IConfigurationService,CourseManagement.MessageProcessing.Actions.IXmlActionReader)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SConfigurationActionFinder.InitializeStub">
+            <summary>Initializes a new instance of type SConfigurationActionFinder</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SConfigurationActionFinder.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SConfigurationActionFinder.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SConfigurationRuleFinder">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.ConfigurationRuleFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SConfigurationRuleFinder.#ctor(CourseManagement.MessageProcessing.Services.IConfigurationService,CourseManagement.MessageProcessing.Rules.IXmlRuleReader)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SConfigurationRuleFinder.InitializeStub">
+            <summary>Initializes a new instance of type SConfigurationRuleFinder</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SConfigurationRuleFinder.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SConfigurationRuleFinder.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Services.Moles.SConfigurationService">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Services.ConfigurationService"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.SConfigurationService.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.SConfigurationService.InitializeStub">
+            <summary>Initializes a new instance of type SConfigurationService</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.SConfigurationService.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.SConfigurationService.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SIAction">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.IAction"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIAction.#ctor">
+            <summary>Initializes a new instance of type SIAction</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIAction.cmmp::CourseManagement#MessageProcessing#Actions#IAction#Execute(CourseManagement.MessageProcessing.IMessage)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Actions.Moles.SIAction.ExecuteIMessage">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SIActionFactory">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.IActionFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIActionFactory.#ctor">
+            <summary>Initializes a new instance of type SIActionFactory</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIActionFactory.cmmp::CourseManagement#MessageProcessing#Actions#IActionFactory#CreateActions(System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IActionFactory.CreateActions(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Actions.Moles.SIActionFactory.CreateActionsString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IActionFactory.CreateActions(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SIActionFinder">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.IActionFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIActionFinder.#ctor">
+            <summary>Initializes a new instance of type SIActionFinder</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIActionFinder.cmmp::CourseManagement#MessageProcessing#Actions#IActionFinder#FindNames(System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Actions.Moles.SIActionFinder.FindNamesString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IActionFinder.FindNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Services.IConfigurationService"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.#ctor">
+            <summary>Initializes a new instance of type SIConfigurationService</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.cmmp::CourseManagement#MessageProcessing#Services#IConfigurationService#GetValue(System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Services.IConfigurationService.GetValue(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.GetValueString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Services.IConfigurationService.GetValue(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Moles.SIMessage">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.IMessage"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.#ctor">
+            <summary>Initializes a new instance of type SIMessage</summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AddressGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AddressSetString">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
+            </summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToAddress">
+            <summary>Attaches delegates to emulate SIMessage.Address as a property with a backing field</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToDate">
+            <summary>Attaches delegates to emulate SIMessage.Date as a property with a backing field</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToSubject">
+            <summary>Attaches delegates to emulate SIMessage.Subject as a property with a backing field</summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DateGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DateSetDateTime">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.SubjectGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Subject"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.SubjectSetString">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Subject"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Address">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Date">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Subject">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Subject"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFactory">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.IRuleFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFactory.#ctor">
+            <summary>Initializes a new instance of type SIRuleFactory</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFactory.cmmp::CourseManagement#MessageProcessing#Rules#IRuleFactory#CreateRules">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Rules.IRuleFactory.CreateRules"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFactory.CreateRules">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Rules.IRuleFactory.CreateRules"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFinder">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.IRuleFinder"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFinder.#ctor">
+            <summary>Initializes a new instance of type SIRuleFinder</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFinder.cmmp::CourseManagement#MessageProcessing#Rules#IRuleFinder#FindNames">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Rules.IRuleFinder.FindNames"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFinder.FindNames">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Rules.IRuleFinder.FindNames"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SIXmlActionReader">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.IXmlActionReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIXmlActionReader.#ctor">
+            <summary>Initializes a new instance of type SIXmlActionReader</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIXmlActionReader.cmmp::CourseManagement#MessageProcessing#Actions#IXmlActionReader#GetActionNames(System.String,System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IXmlActionReader.GetActionNames(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Actions.Moles.SIXmlActionReader.GetActionNamesStringString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IXmlActionReader.GetActionNames(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SIXmlRuleReader">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.IXmlRuleReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SIXmlRuleReader.#ctor">
+            <summary>Initializes a new instance of type SIXmlRuleReader</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SIXmlRuleReader.cmmp::CourseManagement#MessageProcessing#Rules#IXmlRuleReader#GetRuleNames(System.String)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Rules.IXmlRuleReader.GetRuleNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Rules.Moles.SIXmlRuleReader.GetRuleNamesString">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Rules.IXmlRuleReader.GetRuleNames(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Moles.SMessageProcessor">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.MessageProcessor"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SMessageProcessor.#ctor(CourseManagement.MessageProcessing.Rules.IRuleFactory)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SMessageProcessor.InitializeStub">
+            <summary>Initializes a new instance of type SMessageProcessor</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SMessageProcessor.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SMessageProcessor.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SNewStudentToCourseDatabaseEntryAction">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SNewStudentToCourseDatabaseEntryAction.#ctor(CourseManagement.Persistence.Repositories.ICourseManagementRepositories)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SNewStudentToCourseDatabaseEntryAction.InitializeStub">
+            <summary>Initializes a new instance of type SNewStudentToCourseDatabaseEntryAction</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SNewStudentToCourseDatabaseEntryAction.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SNewStudentToCourseDatabaseEntryAction.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SUnityActionFactory">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.UnityActionFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SUnityActionFactory.#ctor(Microsoft.Practices.Unity.IUnityContainer,CourseManagement.MessageProcessing.Actions.IActionFinder)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SUnityActionFactory.InitializeStub">
+            <summary>Initializes a new instance of type SUnityActionFactory</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SUnityActionFactory.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SUnityActionFactory.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SUnityRuleFactory">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.UnityRuleFactory"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SUnityRuleFactory.#ctor(Microsoft.Practices.Unity.IUnityContainer,CourseManagement.MessageProcessing.Rules.IRuleFinder)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SUnityRuleFactory.InitializeStub">
+            <summary>Initializes a new instance of type SUnityRuleFactory</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SUnityRuleFactory.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SUnityRuleFactory.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SXmlActionReader">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Actions.XmlActionReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SXmlActionReader.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SXmlActionReader.InitializeStub">
+            <summary>Initializes a new instance of type SXmlActionReader</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SXmlActionReader.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.SXmlActionReader.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SXmlRuleReader">
+            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.Rules.XmlRuleReader"/>
+            .</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SXmlRuleReader.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:CourseManagement.MessageProcessing.Rules.Moles.SXmlRuleReader.InitializeStub">
+            <summary>Initializes a new instance of type SXmlRuleReader</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SXmlRuleReader.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Rules.Moles.SXmlRuleReader.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+    </members>
+</doc>

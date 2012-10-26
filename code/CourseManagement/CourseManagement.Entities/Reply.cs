@@ -14,9 +14,9 @@ namespace CourseManagement.Model
         [ForeignKey("RelatedTicketId")]
         public virtual Ticket RelatedTicket { get; set; }
 
-        public string EmailSubject { get; set; }
+        public string MessageSubject { get; set; }
 
-        public string EmailBody { get; set; }
+        public string MessageBody { get; set; }
 
         public DateTime DateCreated { get; set; }
     }
