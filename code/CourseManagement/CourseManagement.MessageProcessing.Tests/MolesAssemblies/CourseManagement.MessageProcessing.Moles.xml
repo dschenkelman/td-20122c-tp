@@ -669,6 +669,9 @@
         <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToAddress">
             <summary>Attaches delegates to emulate SIMessage.Address as a property with a backing field</summary>
         </member>
+        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToAttachmentPaths">
+            <summary>Attaches delegates to emulate SIMessage.AttachmentPaths as a property with a backing field</summary>
+        </member>
         <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToDate">
             <summary>Attaches delegates to emulate SIMessage.Date as a property with a backing field</summary>
         </member>
@@ -677,6 +680,14 @@
         </member>
         <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToSubject">
             <summary>Attaches delegates to emulate SIMessage.Subject as a property with a backing field</summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AttachmentPathsGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.AttachmentPaths"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AttachmentPathsSetIEnumerableOfString">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.AttachmentPaths"/>
+            </summary>
         </member>
         <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DateGet">
             <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
@@ -704,6 +715,10 @@
         </member>
         <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Address">
             <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#AttachmentPaths">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.AttachmentPaths"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Date">

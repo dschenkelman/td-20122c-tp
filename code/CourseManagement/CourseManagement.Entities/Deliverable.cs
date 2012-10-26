@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +7,8 @@ namespace CourseManagement.Model
 {
     public class Deliverable
     {
+        
+
         public Deliverable(DateTime receptionDate)
         {
             this.ReceptionDate = receptionDate;
@@ -20,5 +23,7 @@ namespace CourseManagement.Model
         public virtual Group Group { get; set; }
 
         public int GroupId { get; set; }
+
+        public List<Attachment> Attachments { get; set; }
     }
 }
