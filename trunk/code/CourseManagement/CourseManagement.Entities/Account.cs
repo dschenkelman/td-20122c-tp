@@ -13,11 +13,11 @@ namespace CourseManagement.Model
 
         public string Password { get; set; }
 
-        [ForeignKey("SubjectCode")]
-        public virtual Subject Subject { get; set; }
+        [ForeignKey("CourseCode")]
+        public virtual Course Course { get; set; }
 
-        public int SubjectCode { get; set; }
+        public int CourseCode { get; set; }
 
-        public virtual ICollection<Configuration> Courses { get; set; }
+        public virtual ICollection<Configuration> Configurations { get; set; }
     }
 }

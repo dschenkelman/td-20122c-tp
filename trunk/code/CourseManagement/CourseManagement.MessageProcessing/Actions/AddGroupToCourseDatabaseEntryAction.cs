@@ -57,7 +57,7 @@
             string userAccount = message.Address;
             
             var accounts = this.courseManagementRepositories.Accounts.Get(a => a.User == userAccount).ToList();
-            int subjectCode = accounts.ElementAt(0).SubjectCode;
+            int subjectCode = accounts.ElementAt(0).CourseCode;
 
 
             return subjectCode;

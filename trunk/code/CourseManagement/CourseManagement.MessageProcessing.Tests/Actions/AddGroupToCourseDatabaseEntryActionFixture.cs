@@ -55,7 +55,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             const string MessageAddress = "sebas@gmail.com";
 
-            var account = new Account {User = MessageAddress,SubjectCode = SubjectId};
+            var account = new Account {User = MessageAddress,CourseCode = SubjectId};
             var accounts = new List<Account> {account};
 
             var trueCourse = new Course(Semester,Year,SubjectId);
@@ -150,7 +150,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             const string MessageAddress = "sebas@gmail.com";
 
-            var account = new Account { User = MessageAddress, SubjectCode = SubjectId };
+            var account = new Account { User = MessageAddress, CourseCode = SubjectId };
             var accounts = new List<Account> { account };
 
             var trueCourse = new Course(Semester, Year, SubjectId);
