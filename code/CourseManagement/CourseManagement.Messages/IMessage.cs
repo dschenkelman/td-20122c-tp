@@ -7,9 +7,11 @@
     {
         string Subject { get; }
 
+        string Body { get; }
+
         string From { get; }
 
-        string To { get; }
+        ICollection<string> To { get; }
 
         DateTime Date { get; }
 

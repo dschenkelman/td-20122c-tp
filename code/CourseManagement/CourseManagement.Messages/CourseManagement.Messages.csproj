@@ -45,10 +45,16 @@
     <Compile Include="IMessage.cs" />
     <Compile Include="IMessageAttachment.cs" />
     <Compile Include="IMessageReceiver.cs" />
+    <Compile Include="IMessageSender.cs" />
+    <Compile Include="SmtpMessageSender.cs" />
     <Compile Include="PopMessageReceiver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CourseManagement.Utilities\CourseManagement.Utilities.csproj">
+      <Project>{527DC86D-2D4E-467C-95B1-8CDEB99345D0}</Project>
+      <Name>CourseManagement.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pop3MimeClient\Pop3MimeClient.csproj">
       <Project>{8C5FFB1A-483C-4E63-9DE4-5DA52BC2A864}</Project>
       <Name>Pop3MimeClient</Name>

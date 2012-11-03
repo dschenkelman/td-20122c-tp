@@ -40,9 +40,9 @@
                 yield return new EmailMessage(
                                                 message.Subject,
                                                 message.From.Address,
-                                                message.DeliveredTo.Address,
                                                 message.DeliveryDate,
-                                                message.Attachments.Select(a => new EmailAttachment(a.Name, () => a.ContentStream)));
+                                                message.Attachments.Select(a => new EmailAttachment(a.Name, () => a.ContentStream)), 
+                                                message.DeliveredTo.Address);
             }
         }
 

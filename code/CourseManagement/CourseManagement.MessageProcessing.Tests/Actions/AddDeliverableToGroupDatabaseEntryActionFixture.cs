@@ -101,7 +101,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             Mock<IMessage> message = mockRepository.Create<IMessage>();
             message.Setup(e => e.Subject).Returns(subject);
             message.Setup(e => e.From).Returns(sourceAddress);
-            message.Setup(e => e.To).Returns(DestinationAddress);
+            message.Setup(e => e.To).Returns(new List<string> {DestinationAddress});
             message.Setup(e => e.Date).Returns(receptionDate);
             message.Setup(e => e.Attachments).Returns(new List<IMessageAttachment> { messageAttachment.Object });
 
@@ -215,7 +215,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             Mock<IMessage> message = mockRepository.Create<IMessage>();
             message.Setup(e => e.Subject).Returns(subject);
             message.Setup(e => e.From).Returns(sourceAddress);
-            message.Setup(e => e.To).Returns(DestinationAddress);
+            message.Setup(e => e.To).Returns(new List<string>() {DestinationAddress});
             message.Setup(e => e.Date).Returns(receptionDate);
 
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
@@ -278,7 +278,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             Mock<IMessage> message = mockRepository.Create<IMessage>();
             message.Setup(e => e.Subject).Returns(subject);
             message.Setup(e => e.From).Returns(sourceAddress);
-            message.Setup(e => e.To).Returns(DestinationAddress);
+            message.Setup(e => e.To).Returns(new List<string> { DestinationAddress });
             message.Setup(e => e.Date).Returns(receptionDate);
 
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
@@ -346,7 +346,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             Mock<IMessage> message = mockRepository.Create<IMessage>();
             message.Setup(e => e.Subject).Returns(subject);
             message.Setup(e => e.From).Returns(sourceAddress);
-            message.Setup(e => e.To).Returns(DestinationAddress);
+            message.Setup(e => e.To).Returns(new List<string>{DestinationAddress});
             message.Setup(e => e.Date).Returns(receptionDate);
 
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
