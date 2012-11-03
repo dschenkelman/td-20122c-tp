@@ -1,4 +1,5 @@
-﻿using CourseManagement.Messages;
+﻿using System;
+using CourseManagement.Messages;
 
 namespace CourseManagement.MessageProcessing.Rules
 {
@@ -25,7 +26,12 @@ namespace CourseManagement.MessageProcessing.Rules
 
         public void Process(IMessage message)
         {
-            this.actions.ForEach(a => a.Execute(message));
+            if (IsMatch(message))
+            {
+                this.actions.ForEach(a => a.Execute(message));
+            }
         }
+
+        public abstract bool IsMatch(IMessage message);
     }
 }

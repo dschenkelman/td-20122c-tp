@@ -68,6 +68,7 @@
     <Compile Include="Rules\ConfigurationRuleFinder.cs" />
     <Compile Include="Rules\IRuleFactory.cs" />
     <Compile Include="Rules\IRuleFinder.cs" />
+    <Compile Include="Rules\NewStudentInCourseRule.cs" />
     <Compile Include="Rules\UnityRuleFactory.cs" />
     <Compile Include="Rules\IXmlRuleReader.cs" />
     <Compile Include="Rules\XmlRuleReader.cs" />
