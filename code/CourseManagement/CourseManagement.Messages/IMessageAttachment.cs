@@ -8,6 +8,6 @@
 
         void Download(string path);
 
-        bool TryRetrieveContent(out ICollection<string> lines);
+        IEnumerable<string> RetrieveLines();
     }
 }
