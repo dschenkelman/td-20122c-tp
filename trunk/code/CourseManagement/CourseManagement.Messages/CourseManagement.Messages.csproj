@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailAttachment.cs" />
     <Compile Include="EmailMessage.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IMessageAttachment.cs" />
