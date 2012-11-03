@@ -136,8 +136,15 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         {
             //arrange
             var account = new Account { User = this.messageAddress };
-            trueCourse.Account = account;
+            
+            trueCourse.Account = new Account { User = this.messageAddress };
+            falseCourse.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSemester.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSubjectId.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongYear.Account = new Account { User = "anotherMessageAddres" };
+
             var accounts = new List<Account> { account };
+            
             const int correctId = 90202;
             var studentIds = new List<int> { correctId };
 
@@ -194,8 +201,12 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var studentIds = new List<int> { correctId };
 
             var coursesOfStudent = new List<Course> {falseCourse, falseCourseWrongSemester};
-            falseCourse.Account = new Account() {User = "some1"};
-            falseCourseWrongSemester.Account = new Account() { User = "some2" };
+
+            trueCourse.Account = new Account { User = this.messageAddress };
+            falseCourse.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSemester.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSubjectId.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongYear.Account = new Account { User = "anotherMessageAddres" };
 
 
             var studentA = new Student(correctId, "Sebastian", "asd@gmail.com");
@@ -251,7 +262,12 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var studentIds = new List<int> { correctId };
             
             var coursesOfStudent = new List<Course> { trueCourse };
-            trueCourse.Account = account;
+
+            trueCourse.Account = new Account { User = this.messageAddress };
+            falseCourse.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSemester.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSubjectId.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongYear.Account = new Account { User = "anotherMessageAddres" };
 
             var studentA = new Student(correctId, "Sebastian", "asd@gmail.com");
             studentA.Courses = coursesOfStudent;
@@ -328,8 +344,12 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var studentIds = new List<int> { correctId1 };
 
             var coursesOfStudent = new List<Course> { trueCourse , falseCourse };
-            trueCourse.Account = account;
-            falseCourse.Account = new Account(){User = "some"};
+
+            trueCourse.Account = new Account { User = this.messageAddress };
+            falseCourse.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSemester.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongSubjectId.Account = new Account { User = "anotherMessageAddres" };
+            falseCourseWrongYear.Account = new Account { User = "anotherMessageAddres" };
 
             var studentA = new Student(correctId1, "Sebastian", "asd@gmail.com");
 
@@ -384,7 +404,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // assert
 
-            this.message.Verify(e => e.To, Times.Once());
+            this.message.Verify(e => e.To, Times.Exactly(5));
 
             this.message.Verify(e => e.Date, Times.Exactly(2));
 
