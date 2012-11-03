@@ -1,4 +1,5 @@
 ﻿using CourseManagement.MessageProcessing.Actions;
+using CourseManagement.Messages;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -97,7 +98,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                                                           (!f.Compile().Invoke(falseCourseWrongSubjectId))
                                                           && (!f.Compile().Invoke(falseCourse))))).Returns(courses).Verifiable();
 
-            this.message.Setup(e => e.Address).Returns(MessageAddress).Verifiable();
+            this.message.Setup(e => e.From).Returns(MessageAddress).Verifiable();
 
             this.message.Setup(e => e.Date).Returns(correctDate).Verifiable();
 
@@ -110,7 +111,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // assert
 
-            this.message.Verify(e => e.Address , Times.Once());
+            this.message.Verify(e => e.From , Times.Once());
 
             this.message.Verify(e => e.Date , Times.Exactly(2));
 
@@ -194,7 +195,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                                         .Returns(courses)
                                         .Verifiable();
 
-            this.message.Setup(e => e.Address)
+            this.message.Setup(e => e.From)
                         .Returns(MessageAddress)
                         .Verifiable();
 
@@ -211,7 +212,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // assert
 
-            this.message.Verify(e => e.Address, Times.Once());
+            this.message.Verify(e => e.From, Times.Once());
 
             this.message.Verify(e => e.Date, Times.Exactly(2));
 

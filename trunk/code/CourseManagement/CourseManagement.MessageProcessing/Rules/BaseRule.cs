@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Rules
+﻿using CourseManagement.Messages;
+
+namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Collections.Generic;
     using Actions;

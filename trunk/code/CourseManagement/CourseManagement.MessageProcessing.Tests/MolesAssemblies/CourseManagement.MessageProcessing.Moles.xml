@@ -28,38 +28,38 @@
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ExecuteIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.Execute(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.GetCourseFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetCourseFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetCourseFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.GetSemesterFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.ExecuteIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.Execute(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.GetCourseFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetCourseFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetCourseFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.GetSemesterFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances.ParseSubjectCodeFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule">
@@ -91,7 +91,7 @@
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.ProcessIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.Process(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.Process(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.RetrieveActions">
@@ -110,7 +110,7 @@
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances.ProcessIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.Process(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Rules.BaseRule.Process(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Rules.Moles.MBaseRule.AllInstances.RetrieveActions">
@@ -289,54 +289,54 @@
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.CreateStudentFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.CreateStudentFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.CreateStudentFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ExecuteIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.Execute(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.GetSemesterFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.GetYearFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetYearFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetYearFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.CreateStudentFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.CreateStudentFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.CreateStudentFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.ExecuteIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.Execute(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.GetSemesterFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.GetYearFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetYearFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.GetYearFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.ParseStudentIdFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseStudentIdFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MNewStudentToCourseDatabaseEntryAction.AllInstances.ParseSubjectCodeFromMessageIMessage">
-            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.NewStudentToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MUnityActionFactory">
@@ -598,12 +598,12 @@
         <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIAction.#ctor">
             <summary>Initializes a new instance of type SIAction</summary>
         </member>
-        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIAction.cmmp::CourseManagement#MessageProcessing#Actions#IAction#Execute(CourseManagement.MessageProcessing.IMessage)">
-            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+        <member name="M:CourseManagement.MessageProcessing.Actions.Moles.SIAction.cmmp::CourseManagement#MessageProcessing#Actions#IAction#Execute(CourseManagement.Messages.IMessage)">
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IAction.Execute(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="F:CourseManagement.MessageProcessing.Actions.Moles.SIAction.ExecuteIMessage">
-            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IAction.Execute(CourseManagement.MessageProcessing.IMessage)"/>
+            <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Actions.IAction.Execute(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Actions.Moles.SIActionFactory">
@@ -649,88 +649,6 @@
         </member>
         <member name="F:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.GetValueString">
             <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Services.IConfigurationService.GetValue(System.String)"/>
-            </summary>
-        </member>
-        <member name="T:CourseManagement.MessageProcessing.Moles.SIMessage">
-            <summary>Stub type of <see cref="T:CourseManagement.MessageProcessing.IMessage"/>
-            .</summary>
-        </member>
-        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.#ctor">
-            <summary>Initializes a new instance of type SIMessage</summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AddressGet">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AddressSetString">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
-            </summary>
-        </member>
-        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToAddress">
-            <summary>Attaches delegates to emulate SIMessage.Address as a property with a backing field</summary>
-        </member>
-        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToAttachmentPaths">
-            <summary>Attaches delegates to emulate SIMessage.AttachmentPaths as a property with a backing field</summary>
-        </member>
-        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToDate">
-            <summary>Attaches delegates to emulate SIMessage.Date as a property with a backing field</summary>
-        </member>
-        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToDestinationAddress">
-            <summary>Attaches delegates to emulate SIMessage.DestinationAddress as a property with a backing field</summary>
-        </member>
-        <member name="M:CourseManagement.MessageProcessing.Moles.SIMessage.AttachBackingFieldToSubject">
-            <summary>Attaches delegates to emulate SIMessage.Subject as a property with a backing field</summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AttachmentPathsGet">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.AttachmentPaths"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.AttachmentPathsSetIEnumerableOfString">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.AttachmentPaths"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DateGet">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DateSetDateTime">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DestinationAddressGet">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.DestinationAddress"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.DestinationAddressSetString">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.DestinationAddress"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.SubjectGet">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Subject"/>
-            </summary>
-        </member>
-        <member name="F:CourseManagement.MessageProcessing.Moles.SIMessage.SubjectSetString">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Subject"/>
-            </summary>
-        </member>
-        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Address">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Address"/>
-            </summary>
-        </member>
-        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#AttachmentPaths">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.AttachmentPaths"/>
-            </summary>
-        </member>
-        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Date">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Date"/>
-            </summary>
-        </member>
-        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#DestinationAddress">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.DestinationAddress"/>
-            </summary>
-        </member>
-        <member name="P:CourseManagement.MessageProcessing.Moles.SIMessage.cmmp::CourseManagement#MessageProcessing#IMessage#Subject">
-            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.IMessage.Subject"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFactory">
