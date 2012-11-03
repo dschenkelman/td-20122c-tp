@@ -32,6 +32,11 @@
 
         public void Send(IMessage message)
         {
+            if (this.currentClient == null)
+            {
+                throw new InvalidOperationException("Cannot send e-mail if it is not connected.");
+            }
+
             MailMessage emailMessage = new MailMessage();
             emailMessage.From = new MailAddress(message.From);
             message.To.Select(a => new MailAddress(a)).ForEach(emailMessage.To.Add);
