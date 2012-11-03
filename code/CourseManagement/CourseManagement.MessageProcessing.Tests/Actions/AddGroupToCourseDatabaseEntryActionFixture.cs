@@ -97,7 +97,10 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             //arrange
             var courses = new List<Course> {trueCourse};
 
-            var account = new Account { User = this.messageAddress, CourseCode = this.subjectId };
+            trueCourse.Account = new Account{User = "otro"};
+            falseCourseWrongYear.Account = new Account { User = this.messageAddress };
+
+            var account = new Account { User = this.messageAddress };
             var accounts = new List<Account> { account };
 
             this.courseRepository.Setup(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(f =>
@@ -132,8 +135,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         public void ShouldThrowNoExistingStudentInDatabaseExceptionWhenUsingExecute()
         {
             //arrange
-
-            var account = new Account { User = this.messageAddress, CourseCode = this.subjectId };
+            var account = new Account { User = this.messageAddress };
+            trueCourse.Account = account;
             var accounts = new List<Account> { account };
             const int correctId = 90202;
             var studentIds = new List<int> { correctId };
@@ -184,12 +187,16 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         {
             //arrange
 
-            var account = new Account { User = this.messageAddress, CourseCode = this.subjectId };
+            var account = new Account { User = this.messageAddress };
+            
             var accounts = new List<Account> { account };
             const int correctId = 90202;
             var studentIds = new List<int> { correctId };
 
             var coursesOfStudent = new List<Course> {falseCourse, falseCourseWrongSemester};
+            falseCourse.Account = new Account() {User = "some1"};
+            falseCourseWrongSemester.Account = new Account() { User = "some2" };
+
 
             var studentA = new Student(correctId, "Sebastian", "asd@gmail.com");
             studentA.Courses = coursesOfStudent;
@@ -238,12 +245,13 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         {
             //arrange
 
-            var account = new Account { User = this.messageAddress, CourseCode = this.subjectId };
+            var account = new Account { User = this.messageAddress};
             var accounts = new List<Account> { account };
             const int correctId = 90202;
             var studentIds = new List<int> { correctId };
             
             var coursesOfStudent = new List<Course> { trueCourse };
+            trueCourse.Account = account;
 
             var studentA = new Student(correctId, "Sebastian", "asd@gmail.com");
             studentA.Courses = coursesOfStudent;
@@ -313,13 +321,15 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         {
             //arrange
 
-            var account = new Account { User = this.messageAddress, CourseCode = this.subjectId };
+            var account = new Account { User = this.messageAddress };
             var accounts = new List<Account> { account };
             const int correctId1 = 90202;
             
             var studentIds = new List<int> { correctId1 };
 
             var coursesOfStudent = new List<Course> { trueCourse , falseCourse };
+            trueCourse.Account = account;
+            falseCourse.Account = new Account(){User = "some"};
 
             var studentA = new Student(correctId1, "Sebastian", "asd@gmail.com");
 

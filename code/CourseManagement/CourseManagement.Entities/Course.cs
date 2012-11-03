@@ -33,5 +33,10 @@ namespace CourseManagement.Model
         public virtual ICollection<Student> Students { get; set; }
 
         public virtual ICollection<Teacher> Teachers { get; set; }
+
+        [ForeignKey("AccountId")]
+        public Account Account { get; set; }
+
+        public int AccountId { get; set; }
     }
 }

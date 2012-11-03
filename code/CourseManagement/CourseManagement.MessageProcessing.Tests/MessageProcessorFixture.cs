@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Tests
+﻿using CourseManagement.Persistence.Repositories;
+
+namespace CourseManagement.MessageProcessing.Tests
 {
     using System.Collections.Generic;
     using MessageProcessing.Rules;
@@ -10,12 +12,14 @@
     {
         private MockRepository mockRepository;
         private Mock<IRuleFactory> ruleFactory;
+        private Mock<ICourseManagementRepositories> courseManagementRepositories;
 
         [TestInitialize]
         public void TestInitialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.ruleFactory = this.mockRepository.Create<IRuleFactory>();
+            this.courseManagementRepositories = this.mockRepository.Create<ICourseManagementRepositories>();
         }
 
         [TestMethod]
@@ -35,7 +39,7 @@
 
         private MessageProcessor CreateMessageProcessor()
         {
-            return new MessageProcessor(this.ruleFactory.Object);
+            return new MessageProcessor(this.ruleFactory.Object, this.courseManagementRepositories.Object);
         }
     }
 }
