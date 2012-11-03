@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Microsoft.Moles.Framework;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -11,8 +11,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("CourseManagement.Messages.Tests")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("}")]
 [assembly: AssemblyCulture("")]
+
+[assembly: MoledType(typeof(System.IO.File))]
+[assembly: MoledType(typeof(System.IO.StreamReader))]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
