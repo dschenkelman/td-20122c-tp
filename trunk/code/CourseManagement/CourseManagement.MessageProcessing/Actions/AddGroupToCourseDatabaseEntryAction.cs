@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using CourseManagement.Messages;
-using System.Collections;
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using Messages;
     using Model;
     using Persistence.Repositories;
 
@@ -111,7 +110,7 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private int ParseSubjectCodeFromMessage(IMessage message)
         {
-            string userAccount = message.To;
+            string userAccount = message.To.First();
             
             var accounts = this.courseManagementRepositories.Accounts.Get(a => a.User == userAccount).ToList();
             int subjectCode = accounts.ElementAt(0).CourseCode;
