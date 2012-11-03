@@ -39,8 +39,16 @@
             <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.GetSemesterFromMessage(CourseManagement.Messages.IMessage)"/>
             </summary>
         </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ObtainIdsFromFileIMessage">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ObtainIdsFromFile(CourseManagement.Messages.IMessage)"/>
+            </summary>
+        </member>
         <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessageIMessage">
             <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.ParseSubjectCodeFromMessage(CourseManagement.Messages.IMessage)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction._ObtainIdsFromFileb__8String">
+            <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Actions.AddGroupToCourseDatabaseEntryAction.&lt;ObtainIdsFromFile&gt;b__8(System.String)"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Actions.Moles.MAddGroupToCourseDatabaseEntryAction.AllInstances">
