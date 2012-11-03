@@ -1,11 +1,11 @@
-﻿namespace CourseManagement.Console
+﻿using CourseManagement.Messages;
+
+namespace CourseManagement.Console
 {
     using System.Linq;
     using MessageProcessing;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
-
-    using Model;
     using Persistence;
     using Persistence.Repositories;
     
@@ -22,7 +22,9 @@
 
             container.Resolve<ICourseManagementRepositories>();
 
-            // creates the DB
+            container.Resolve<IMessageReceiver>();
+
+            // creates the DB)
             using (var db = new CourseManagementContext())
             {
                 var s = db.Subjects.FirstOrDefault();

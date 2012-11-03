@@ -77,6 +77,10 @@
       <Project>{499A1AB2-9498-4C75-B278-89113F43B69F}</Project>
       <Name>CourseManagement.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CourseManagement.Messages\CourseManagement.Messages.csproj">
+      <Project>{B0D4B85E-1CE7-4F1E-9EDF-571DDA9D0F8A}</Project>
+      <Name>CourseManagement.Messages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CourseManagement.Persistence\CourseManagement.Persistence.csproj">
       <Project>{5D94790D-C723-4A0A-B99E-EE2554D8B437}</Project>
       <Name>CourseManagement.Persistence</Name>
