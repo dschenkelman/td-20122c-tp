@@ -90,7 +90,7 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private int GetSubjectIdFromMessage(IMessage message)
         {
-            List<Account> accounts = courseManagmentRepositories.Accounts.Get(a => a.User == message.To).ToList();
+            List<Account> accounts = courseManagmentRepositories.Accounts.Get(a => a.User == message.To.First()).ToList();
             if( accounts.Count() == 0 )
             {
                 throw new InvalidOperationException( "You can not add deliverable. The account: " + message.To + " is not a valid." );
