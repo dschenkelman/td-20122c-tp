@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.MessageProcessing.Services;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-
-namespace CourseManagement.MessageProcessing
+﻿namespace CourseManagement.MessageProcessing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Model;
+    using Persistence.Repositories;
     using Rules;
+    using Services;
 
     public class MessageProcessor
     {

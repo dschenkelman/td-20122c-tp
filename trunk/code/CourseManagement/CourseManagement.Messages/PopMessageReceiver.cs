@@ -11,6 +11,14 @@
 
         private const int TimeoutInMilliseconds = 60000;
 
+        ~PopMessageReceiver()
+        {
+            if (this.currentClient != null)
+            {
+                this.Disconnect();
+            }
+        }
+
         public void Connect(string serverEndpoint, int port, bool useSsl, string user, string password)
         {
             if (this.currentClient != null)
@@ -27,6 +35,11 @@
 
         public IEnumerable<IMessage> FetchMessages()
         {
+            if (this.currentClient == null)
+            {
+                throw new InvalidOperationException("Cannot fetch messages without a connection. Connect first.");
+            }
+
             int inboxEmails;
             int mailboxSize;
             this.currentClient.GetMailboxStats(out inboxEmails, out mailboxSize);
