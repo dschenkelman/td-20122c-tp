@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Messages;
+    using Model;
+    using Persistence.Repositories;
+
     class AddDeliverableToGroupDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
@@ -18,34 +18,36 @@ namespace CourseManagement.MessageProcessing.Actions
 
         public void Execute(IMessage message)
         {
-            var students = courseManagmentRepositories.Students.Get( s => s.MessagingSystemId == message.Address );
-            if( students.Count() == 0 )
+            var students = this.courseManagmentRepositories.Students.Get(s => s.MessagingSystemId == message.From);
+            if (students.Count() == 0)
             {
-                throw new Exception("There is no student registered with: " + message.Address);
+                throw new Exception("There is no student registered with: " + message.From);
             }
-            var studentGroups = students.ElementAt(0).Groups.Where(
-                g => g.CourseId == ParseCourseFromMessage(message).Id);
-            if( studentGroups.Count() == 0 )
+
+            var studentGroups = students.ElementAt(0).Groups.Where(g => g.CourseId == this.ParseCourseFromMessage(message).Id);
+            if (studentGroups.Count() == 0)
             {
                 throw new Exception("The student has not been assigned to a group for the course");
             }
+
             Deliverable deliverable = new Deliverable(message.Date);
             deliverable.Attachments = new List<Attachment>();
             studentGroups.ElementAt(0).Deliverables.Add(deliverable);
-            foreach( string attachmentPath in message.AttachmentPaths )
-            {
-                Attachment attachment = new Attachment();
-                attachment.FileName = attachmentPath.Substring(attachmentPath.LastIndexOf("\\") + 1);
-                attachment.Location = attachmentPath.Substring(0, attachmentPath.LastIndexOf("\\"));
-                deliverable.Attachments.Add(attachment);
+            //foreach( string attachmentPath in message.AttachmentPaths )
+            //{
+            //    Attachment attachment = new Attachment();
+            //    attachment.FileName = attachmentPath.Substring(attachmentPath.LastIndexOf("\\") + 1);
+            //    attachment.Location = attachmentPath.Substring(0, attachmentPath.LastIndexOf("\\"));
+            //    deliverable.Attachments.Add(attachment);
 
-                courseManagmentRepositories.Attachments.Insert(attachment);
-            }
-            courseManagmentRepositories.Deliverables.Insert(deliverable);
+            //    courseManagmentRepositories.Attachments.Insert(attachment);
+            //}
+            
+            this.courseManagmentRepositories.Deliverables.Insert(deliverable);
 
-            courseManagmentRepositories.Deliverables.Save();
-            courseManagmentRepositories.Groups.Save();
-            courseManagmentRepositories.Students.Save();
+            this.courseManagmentRepositories.Deliverables.Save();
+            this.courseManagmentRepositories.Groups.Save();
+            this.courseManagmentRepositories.Students.Save();
         }
 
         private Course ParseCourseFromMessage(IMessage message)
@@ -64,10 +66,10 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private int GetSubjectIdFromMessage(IMessage message)
         {
-            List<Account> accounts = courseManagmentRepositories.Accounts.Get(a => a.User == message.DestinationAddress).ToList();
+            List<Account> accounts = courseManagmentRepositories.Accounts.Get(a => a.User == message.To).ToList();
             if( accounts.Count() == 0 )
             {
-                throw new Exception( "The account: " + message.DestinationAddress + " is not a valid." );
+                throw new Exception( "The account: " + message.To + " is not a valid." );
             }
             return accounts.ElementAt(0).Course.SubjectId;
         }

@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Linq;
 using CourseManagement.MessageProcessing.Actions;
+using CourseManagement.Messages;
 using CourseManagement.Model;
 using CourseManagement.Persistence.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -86,15 +87,15 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             const string DestinationAddress = "ayudantes-7510@gmail.com";
             string sourceAddress = student1CorrectGroup.MessagingSystemId;
-            const int NumeroTp = 1;
-            string Subject = "[ENTREGA-TP-" + NumeroTp + "]";
+            const int tpNumber = 1;
+            string subject = "[ENTREGA-TP-" + tpNumber + "]";
             DateTime receptionDate = new DateTime(2012, 2, 1);
             Mock<IMessage> message = mockRepository.Create<IMessage>();
-            message.Setup(e => e.Subject).Returns(Subject);
-            message.Setup(e => e.Address).Returns(sourceAddress);
-            message.Setup(e => e.DestinationAddress).Returns(DestinationAddress);
+            message.Setup(e => e.Subject).Returns(subject);
+            message.Setup(e => e.From).Returns(sourceAddress);
+            message.Setup(e => e.To).Returns(DestinationAddress);
             message.Setup(e => e.Date).Returns(receptionDate);
-            message.Setup(e => e.AttachmentPaths).Returns(new List<string> { "C:\\Users\\docs.txt" });
+            message.Setup(e => e.Attachments).Returns(new List<IMessageAttachment> { });
 
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 

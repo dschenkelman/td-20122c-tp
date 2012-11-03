@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Messages;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -59,7 +61,7 @@
             string parsedName = message.Subject.Substring(message.Subject.IndexOf("] ") + 2);
             parsedName = parsedName.Substring(parsedName.IndexOf("-") + 1);
 
-            return new Student(this.ParseStudentIdFromMessage(message), parsedName, message.Address);
+            return new Student(this.ParseStudentIdFromMessage(message), parsedName, message.From);
         }
 
         private int GetSemesterFromMessage(IMessage message)

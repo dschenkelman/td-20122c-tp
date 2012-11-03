@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Messages;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Linq;
@@ -54,7 +56,7 @@
 
         private int ParseSubjectCodeFromMessage(IMessage message)
         {
-            string userAccount = message.Address;
+            string userAccount = message.From;
             
             var accounts = this.courseManagementRepositories.Accounts.Get(a => a.User == userAccount).ToList();
             int subjectCode = accounts.ElementAt(0).CourseCode;

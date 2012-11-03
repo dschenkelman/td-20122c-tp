@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿using CourseManagement.Messages;
+
+namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using System.Collections.Generic;
     using System.Linq;

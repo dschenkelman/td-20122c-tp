@@ -1,4 +1,5 @@
 ﻿using CourseManagement.MessageProcessing.Actions;
+using CourseManagement.Messages;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -55,7 +56,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             Mock<IMessage> email = mockRepository.Create<IMessage>();
             email.Setup(e => e.Subject).Returns("[ALTA-MATERIA-" + CourseCode + "] " + StudentId + "-" + Name);
-            email.Setup(e => e.Address).Returns(MessageAddress);
+            email.Setup(e => e.From).Returns(MessageAddress);
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 9, 5));
 
             // act
@@ -98,7 +99,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             Mock<IMessage> email = this.mockRepository.Create<IMessage>();
             const string MessageAddress = "servetto.matias@gmail.com";
             email.Setup(e => e.Subject).Returns("[ALTA-MATERIA-" + CourseCode + "] " + StudentId + "-" + Name);
-            email.Setup(e => e.Address).Returns(MessageAddress);
+            email.Setup(e => e.From).Returns(MessageAddress);
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 3, 14));
 
             // act
@@ -139,7 +140,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             Mock<IMessage> email = mockRepository.Create<IMessage>();
             email.Setup(e => e.Subject).Returns("[ALTA-MATERIA-" + CourseCode + "] " + StudentId + "-" + Name);
-            email.Setup(e => e.Address).Returns(MessageAddress);
+            email.Setup(e => e.From).Returns(MessageAddress);
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 11, 19));
 
             // act
@@ -162,7 +163,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             const int CourseCode = 7508;
             email.Setup(e => e.Subject).Returns("[ALTA-MATERIA-" + CourseCode + "] " + StudentId + "-" + Name);
             const string MessageAddress = "schen.damian@yahoo.com";
-            email.Setup(e => e.Address).Returns(MessageAddress);
+            email.Setup(e => e.From).Returns(MessageAddress);
             email.Setup(e => e.Date).Returns(new DateTime(2010, 11, 19));
 
             // act
