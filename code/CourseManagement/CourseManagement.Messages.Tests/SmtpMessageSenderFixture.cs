@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net.Mail;
-using Moq;
-
-namespace CourseManagement.Messages.Tests
+﻿namespace CourseManagement.Messages.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
+    using System.Net.Mail;
     using System.Net.Mail.Moles;
     using System.Net.Moles;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
 
     [TestClass]
     public class SmtpMessageSenderFixture
