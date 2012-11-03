@@ -4,5 +4,6 @@
     {
         string GetValue(string rulesConfigurationFilePathKey);
         string RootPath { get; set; }
+        int MonitoringCourseSubjectId { get; set; }
     }
 }

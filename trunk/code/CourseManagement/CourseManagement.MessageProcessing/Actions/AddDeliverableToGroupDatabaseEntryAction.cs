@@ -27,8 +27,9 @@ namespace CourseManagement.MessageProcessing.Actions
             {
                 throw new InvalidOperationException("You can not add deliverable to group when student: " + message.From + " is not registered");
             }
+            Course course = ParseCourseFromMessage(message);
             var studentGroups = students.ElementAt(0).Groups.Where(
-                g => g.CourseId == ParseCourseFromMessage(message).Id);
+                g => g.CourseId == course.Id);
             if( studentGroups.Count() == 0 )
             {
                 throw new InvalidOperationException("You can not add deliverable to inexistent student's group.");
@@ -76,26 +77,17 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private Course ParseCourseFromMessage(IMessage message)
         {
-            int subjectId = GetSubjectIdFromMessage(message);
-            int semester = GetSemesterFromMessage(message);
-            List<Course> courses = courseManagmentRepositories.Courses.Get(
-                c =>
-                c.Semester == semester && c.Year == message.Date.Year && c.SubjectId == subjectId).ToList();
-            if( courses.Count() == 0 )
-            {
-                throw new InvalidOperationException("You can not add deliverable. Can not find the specific course.");
-            }
-            return courses.ElementAt(0);
-        }
+            List<Course> courses =
+                courseManagmentRepositories.Courses.Get(
+                    c =>
+                    message.To.Contains(c.Account.User) && c.Semester == GetSemesterFromMessage(message) && c.Year == message.Date.Year 
+                   ).ToList();
 
-        private int GetSubjectIdFromMessage(IMessage message)
-        {
-            List<Account> accounts = courseManagmentRepositories.Accounts.Get(a => a.User == message.To.First()).ToList();
-            if( accounts.Count() == 0 )
+            if (courses.Count() == 0)
             {
-                throw new InvalidOperationException( "You can not add deliverable. The account: " + message.To + " is not a valid." );
+                throw new InvalidOperationException("You can not add deliverable. The account: " + message.To + " is not a valid.");
             }
-            return accounts.ElementAt(0).Course.SubjectId;
+            return courses.First();
         }
 
         private int GetSemesterFromMessage(IMessage message)

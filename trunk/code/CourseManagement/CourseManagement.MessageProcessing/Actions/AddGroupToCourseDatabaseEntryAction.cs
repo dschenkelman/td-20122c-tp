@@ -93,12 +93,10 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private Course GetCourseFromMessage(IMessage message)
         {
-            int subjectCode = this.ParseSubjectCodeFromMessage(message);
-
             int year = message.Date.Year;
             int semester = this.GetSemesterFromMessage(message);
 
-            var courses = this.courseManagementRepositories.Courses.Get(c => (c.SubjectId == subjectCode)
+            var courses = this.courseManagementRepositories.Courses.Get(c => (c.Account.User == message.To.First())
                                             && (c.Year == year) && (c.Semester == semester));
             if ( courses == null )
             {
@@ -106,17 +104,6 @@ namespace CourseManagement.MessageProcessing.Actions
             }
 
             return courses.First();
-        }
-
-        private int ParseSubjectCodeFromMessage(IMessage message)
-        {
-            string userAccount = message.To.First();
-            
-            var accounts = this.courseManagementRepositories.Accounts.Get(a => a.User == userAccount).ToList();
-            int subjectCode = accounts.ElementAt(0).CourseCode;
-
-
-            return subjectCode;
         }
 
         public int GetSemesterFromMessage(IMessage message)
