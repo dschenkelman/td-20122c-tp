@@ -31,18 +31,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             NewStudentInCourseRule rule = CreateRule();
 
-            Mock<IAction> action = mockRepository.Create<IAction>();
-            action.Setup(a => a.Execute(message.Object)).Verifiable();
-            this.actionFactory.Setup(af => af.CreateActions(rule.Name)).Returns(new List<IAction> {action.Object});
-
             // act
-            rule.RetrieveActions();
-            if (rule.IsMatch(message.Object))
-                rule.Process(message.Object);
+            bool resultado = rule.IsMatch(message.Object);
 
             // validate
-            this.actionFactory.Verify(af => af.CreateActions(rule.Name), Times.Once());
-            action.Verify(a => a.Execute(message.Object), Times.Once());
+            Assert.IsTrue(resultado);
         }
 
         [TestMethod]
@@ -55,18 +48,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             NewStudentInCourseRule rule = CreateRule();
 
-            Mock<IAction> action = mockRepository.Create<IAction>();
-            action.Setup(a => a.Execute(message.Object)).Verifiable();
-            this.actionFactory.Setup(af => af.CreateActions(rule.Name)).Returns(new List<IAction> { action.Object });
-
             // act
-            rule.RetrieveActions();
-            if( rule.IsMatch(message.Object))
-                rule.Process(message.Object);
+            bool resultado = rule.IsMatch(message.Object);
 
             // validate
-            this.actionFactory.Verify(af => af.CreateActions(rule.Name), Times.Once());
-            action.Verify(a => a.Execute(message.Object), Times.Never());
+            Assert.IsFalse(resultado);
         }
 
         private NewStudentInCourseRule CreateRule()

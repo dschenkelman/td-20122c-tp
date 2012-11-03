@@ -64,6 +64,7 @@
     <Compile Include="Actions\XmlActionReader.cs" />
     <Compile Include="MessageProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\AddDeliverableToGroupDatabaseEntryRule.cs" />
     <Compile Include="Rules\BaseRule.cs" />
     <Compile Include="Rules\ConfigurationRuleFinder.cs" />
     <Compile Include="Rules\IRuleFactory.cs" />
