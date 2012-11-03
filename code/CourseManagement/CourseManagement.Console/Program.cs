@@ -1,4 +1,5 @@
-﻿using CourseManagement.Messages;
+﻿using CourseManagement.MessageProcessing.Actions;
+using CourseManagement.Messages;
 
 namespace CourseManagement.Console
 {
@@ -27,6 +28,9 @@ namespace CourseManagement.Console
             container.Resolve<IMessageSender>();
 
             // creates the DB)
+            container.Resolve<IGroupFileParser>();
+
+            // creates the DB))
             using (var db = new CourseManagementContext())
             {
                 var s = db.Subjects.FirstOrDefault();

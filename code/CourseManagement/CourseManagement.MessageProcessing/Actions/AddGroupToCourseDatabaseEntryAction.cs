@@ -1,4 +1,8 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using CourseManagement.Messages;
+using System.Collections;
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +15,12 @@
     {
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
-        public AddGroupToCourseDatabaseEntryAction(ICourseManagementRepositories courseManagementRepositories)
+        private readonly IGroupFileParser groupFileParser;
+
+        public AddGroupToCourseDatabaseEntryAction(ICourseManagementRepositories courseManagementRepositories , IGroupFileParser groupFileParser)
         {
             this.courseManagementRepositories = courseManagementRepositories;
+            this.groupFileParser = groupFileParser;
         }
 
         public void Execute(IMessage message)
@@ -22,7 +29,7 @@
             var courseForApplyingGroup = this.GetCourseFromMessage(message);
 
             //verify existing students
-            var studentsIds = ObtainIdsFromFile(message);
+            var studentsIds = this.groupFileParser.ObtainIdsFromMessage(message);
             
             var studentsInCourse = studentsIds.Select(studentId =>
                                                           {
@@ -41,7 +48,7 @@
                                                               }
 
                                                               return student;
-                                                          });
+                                                          }).ToList();
 
             // verify existing group
 
@@ -51,16 +58,17 @@
 
             studentsInCourse.Select(student =>
                                         {
-                                            if (groupsInCourse.Any(groupInCourse => groupInCourse.Students.Contains(student)))
+                                            if (groupsInCourse.Any(groupInCourse => (groupInCourse.Students!=null)&&(groupInCourse.Students.Contains(student))))
                                             {
                                                 throw new Exception(
                                                     "A Student has been already assigned for an existing Group in the Course");
                                             }
-
                                             return student;
-                                        });
+                                        }).ToList();
 
             //Non-existing group. Proceed to add
+            
+            newGroup.Students = new List<Student>();
 
             foreach (var studentToAdd in studentsInCourse)
             {
@@ -73,22 +81,14 @@
             
             foreach (var studentAddGroup in studentsInCourse)
             {
+                if ( studentAddGroup.Groups == null)
+                {
+                    studentAddGroup.Groups = new List<Group>();
+                }
                 studentAddGroup.Groups.Add(newGroup);
             }
             this.courseManagementRepositories.Students.Save();
 
-        }
-
-        private static IEnumerable<int> ObtainIdsFromFile(IMessage message)
-        {
-            if (message.Attachments.Count() !=1 )
-            {
-                throw new Exception("Message for Rule AddGroup doesn't have the unique attachment requirement");
-            }
-
-            var lines = message.Attachments.First().RetrieveLines();
-            
-            return lines.Select(line => Convert.ToInt32(line)).ToList();
         }
 
         private Course GetCourseFromMessage(IMessage message)
