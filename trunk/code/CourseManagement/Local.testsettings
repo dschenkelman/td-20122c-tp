@@ -25,9 +25,10 @@
           <Configuration>
             <CodeCoverage xmlns="">
               <Regular>
-                <CodeCoverageItem binaryFile="CourseManagement.EmailProcessing\bin\Debug\CourseManagement.MessageProcessing.dll" pdbFile="CourseManagement.EmailProcessing\bin\Debug\CourseManagement.MessageProcessing.pdb" instrumentInPlace="true" />
                 <CodeCoverageItem binaryFile="CourseManagement.Utilities\bin\Debug\CourseManagement.Utilities.dll" pdbFile="CourseManagement.Utilities\bin\Debug\CourseManagement.Utilities.pdb" instrumentInPlace="true" />
                 <CodeCoverageItem binaryFile="CourseManagement.Persistence\bin\Debug\CourseManagement.Persistence.dll" pdbFile="CourseManagement.Persistence\bin\Debug\CourseManagement.Persistence.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="CourseManagement.MessageProcessing\bin\Debug\CourseManagement.MessageProcessing.dll" pdbFile="CourseManagement.MessageProcessing\bin\Debug\CourseManagement.MessageProcessing.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="CourseManagement.Messages\bin\Debug\CourseManagement.Messages.dll" pdbFile="CourseManagement.Messages\bin\Debug\CourseManagement.Messages.pdb" instrumentInPlace="true" />
               </Regular>
             </CodeCoverage>
           </Configuration>

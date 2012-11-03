@@ -24,6 +24,8 @@ namespace CourseManagement.Console
 
             container.Resolve<IMessageReceiver>();
 
+            container.Resolve<IMessageSender>();
+
             // creates the DB)
             using (var db = new CourseManagementContext())
             {

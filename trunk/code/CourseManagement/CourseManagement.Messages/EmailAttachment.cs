@@ -31,7 +31,10 @@
         {
             using (StreamReader streamReader = new StreamReader(this.getAttachmentStream()))
             {
-                yield return streamReader.ReadLine();
+                while (!streamReader.EndOfStream)
+                {
+                    yield return streamReader.ReadLine();
+                }
             }
         }
     }

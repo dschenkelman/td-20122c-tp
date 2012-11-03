@@ -10,6 +10,7 @@
             this.Subject = subject;
             this.From = from;
             this.To = new List<string>();
+            Array.ForEach(to, this.To.Add);
             this.Date = date;
             this.Attachments = attachments;
         }
