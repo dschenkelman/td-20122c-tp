@@ -63,8 +63,8 @@ namespace CourseManagement.Messages.Tests
             lines.Enqueue("Line 3");
 
             MStreamReader.ConstructorStream = (reader, stream) => { Assert.AreSame(streamStub, stream); };
-            MStreamReader.AllInstances.ReadLine = (reader) => { return lines.Dequeue(); };
-            MStreamReader.AllInstances.EndOfStreamGet = (reader) => { return lines.Count == 0; };
+            MStreamReader.AllInstances.ReadLine = reader => { return lines.Dequeue(); };
+            MStreamReader.AllInstances.EndOfStreamGet = reader => { return lines.Count == 0; };
 
             const string AttachmentName = "Attachment";
             EmailAttachment attachment = new EmailAttachment(AttachmentName, () => streamStub);

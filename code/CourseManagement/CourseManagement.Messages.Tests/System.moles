@@ -1,0 +1,13 @@
+<Moles xmlns="http://schemas.microsoft.com/moles/2010/">
+  <Assembly Name="System" ExportedTypes="true" ReflectionOnly="true"/>
+  <StubGeneration>
+    <Types>
+      <Add Namespace="System.Net.Mail"/>
+    </Types>
+  </StubGeneration>
+  <MoleGeneration>
+    <Types>
+      <Add Namespace="System.Net.Mail"/>
+    </Types>
+  </MoleGeneration>
+</Moles>

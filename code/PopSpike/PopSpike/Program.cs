@@ -11,7 +11,7 @@ namespace PopSpike
             bool isSSL = true;
             int port = 995;
             string username = "coursemanagement2012@gmail.com";
-            string password = "AABBCCDDEE";
+            string password = string.Empty;
             string host = "pop.gmail.com";
 
             Pop3MimeClient popClient = new Pop3MimeClient(host, port, isSSL, username, password);
