@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace CourseManagement.MessageProcessing.Services
 {
@@ -7,6 +8,12 @@ namespace CourseManagement.MessageProcessing.Services
         public string GetValue(string rulesConfigurationFilePathKey)
         {
             return ConfigurationManager.AppSettings[rulesConfigurationFilePathKey];
+        }
+
+        public string RootPath
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
     }
 }
