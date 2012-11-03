@@ -99,7 +99,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.accountRepository.Setup(ar => ar.Get(It.Is<Expression<Func<Account, bool>>>(f => f.Compile().Invoke(account)))).Returns(accounts).Verifiable();
 
-            this.message.Setup(e => e.To).Returns(this.messageAddress).Verifiable();
+            this.message.Setup(e => e.To).Returns(new List<string>{this.messageAddress}).Verifiable();
 
             this.message.Setup(e => e.Date).Returns(incorrectDateWrongYear).Verifiable();
 
