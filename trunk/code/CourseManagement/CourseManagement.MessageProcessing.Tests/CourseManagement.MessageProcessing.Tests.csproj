@@ -71,6 +71,7 @@
     <Compile Include="Actions\NewStudentToCourseDatabaseEntryActionFixture.cs" />
     <Compile Include="Actions\UnityActionFactoryFixture.cs" />
     <Compile Include="Actions\XmlActionReaderFixture.cs" />
+    <Compile Include="Rules\NewStudentInCourseRuleFixture.cs" />
     <Compile Include="Testables\TestableBaseRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MessageProcessorFixture.cs" />
