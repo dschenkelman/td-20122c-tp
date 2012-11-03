@@ -1,7 +1,7 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
-{
-    using Messages;
+﻿using CourseManagement.Messages;
 
+namespace CourseManagement.MessageProcessing.Actions
+{
     public interface IAction
     {
         void Execute(IMessage message);

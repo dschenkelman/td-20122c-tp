@@ -221,11 +221,27 @@
             <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Services.ConfigurationService.GetValue(System.String)"/>
             </summary>
         </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.RootPathGet">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Services.ConfigurationService.RootPath"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.RootPathSetString">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Services.ConfigurationService.RootPath"/>
+            </summary>
+        </member>
         <member name="T:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
         <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.AllInstances.GetValueString">
             <summary>Sets the mole of <see cref="M:CourseManagement.MessageProcessing.Services.ConfigurationService.GetValue(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.AllInstances.RootPathGet">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Services.ConfigurationService.RootPath"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.MConfigurationService.AllInstances.RootPathSetString">
+            <summary>Sets the mole of <see cref="P:CourseManagement.MessageProcessing.Services.ConfigurationService.RootPath"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Moles.MMessageProcessor">
@@ -643,12 +659,27 @@
         <member name="M:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.#ctor">
             <summary>Initializes a new instance of type SIConfigurationService</summary>
         </member>
+        <member name="M:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.AttachBackingFieldToRootPath">
+            <summary>Attaches delegates to emulate SIConfigurationService.RootPath as a property with a backing field</summary>
+        </member>
         <member name="M:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.cmmp::CourseManagement#MessageProcessing#Services#IConfigurationService#GetValue(System.String)">
             <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Services.IConfigurationService.GetValue(System.String)"/>
             </summary>
         </member>
         <member name="F:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.GetValueString">
             <summary>Sets the stub of <see cref="M:CourseManagement.MessageProcessing.Services.IConfigurationService.GetValue(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.RootPathGet">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.Services.IConfigurationService.RootPath"/>
+            </summary>
+        </member>
+        <member name="F:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.RootPathSetString">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.Services.IConfigurationService.RootPath"/>
+            </summary>
+        </member>
+        <member name="P:CourseManagement.MessageProcessing.Services.Moles.SIConfigurationService.cmmp::CourseManagement#MessageProcessing#Services#IConfigurationService#RootPath">
+            <summary>Sets the stub of <see cref="P:CourseManagement.MessageProcessing.Services.IConfigurationService.RootPath"/>
             </summary>
         </member>
         <member name="T:CourseManagement.MessageProcessing.Rules.Moles.SIRuleFactory">
