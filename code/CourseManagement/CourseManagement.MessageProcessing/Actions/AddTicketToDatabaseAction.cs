@@ -69,6 +69,7 @@ namespace CourseManagement.MessageProcessing.Actions
                            IsPrivate = this.isPrivate,
                            LastUpdated = message.Date,
                            MessageBody = message.Body,
+                           State = TicketState.Unassigned,
                            MessageSubject = message.Subject,
                            Replies = new List<Reply>()
                        };
