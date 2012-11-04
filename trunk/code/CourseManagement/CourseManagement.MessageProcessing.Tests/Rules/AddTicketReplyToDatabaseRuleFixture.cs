@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿using CourseManagement.MessageProcessing.Rules;
+
+namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using MessageProcessing.Actions;
     using Messages;

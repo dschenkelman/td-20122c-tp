@@ -15,6 +15,10 @@
       <action name="AddDeliverable"/>
     </actions>
   </rule>
+  <rule name="TicketReply">
+    <actions>
+    </actions>
+  </rule>
   <rule name="Fallback">
     <actions>
     </actions>
