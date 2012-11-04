@@ -64,14 +64,14 @@ namespace CourseManagement.MessageProcessing.Actions
                                             return student;
                                         }).ToList();
 
-            //Non-existing group. Proceed to add
-            
+            // Non-existing group. Proceed to add
             newGroup.Students = new List<Student>();
 
             foreach (var studentToAdd in studentsInCourse)
             {
                 newGroup.Students.Add(studentToAdd);
             }
+
             this.courseManagementRepositories.Groups.Insert(newGroup);
 
             this.courseManagementRepositories.Groups.Save();
@@ -82,11 +82,11 @@ namespace CourseManagement.MessageProcessing.Actions
                 {
                     studentAddGroup.Groups = new List<Group>();
                 }
+
                 studentAddGroup.Groups.Add(newGroup);
             }
 
             this.courseManagementRepositories.Students.Save();
-
         }
 
         private Course GetCourseFromMessage(IMessage message)
