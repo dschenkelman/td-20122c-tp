@@ -55,6 +55,7 @@
                                                 message.From.Address,
                                                 message.DeliveryDate,
                                                 message.Attachments.Select(a => new EmailAttachment(a.Name, () => a.ContentStream)), 
+                                                message.Body,
                                                 message.DeliveredTo.Address);
             }
         }
