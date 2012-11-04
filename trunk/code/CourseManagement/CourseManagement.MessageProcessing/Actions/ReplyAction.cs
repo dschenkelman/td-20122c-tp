@@ -14,11 +14,12 @@ namespace CourseManagement.MessageProcessing.Actions
     class ReplyAction : IAction
     {
         private readonly IMessageSender messageSender;
-        private readonly ICourseManagementRepositories courseManagementRepositories;
+        protected readonly ICourseManagementRepositories courseManagementRepositories;
         private readonly IConfigurationService configurationService;
         private bool isPublic;
         private string topicRegex;
         private string body;
+        private string subject;
 
         public ReplyAction(IMessageSender messageSender, ICourseManagementRepositories courseManagementRepositories, IConfigurationService configurationService)
         {
@@ -38,6 +39,7 @@ namespace CourseManagement.MessageProcessing.Actions
                 this.topicRegex = @"^\[CONSULTA-PRIVADA\][\ ]*(?<topic>.*)$";
             }
             this.body = actionEntry.AdditionalData["body"];
+            this.subject = actionEntry.AdditionalData["subject"];
         }
 
         public void Execute(IMessage message)
@@ -88,10 +90,14 @@ namespace CourseManagement.MessageProcessing.Actions
         private EmailMessage CreateMessage(IMessage receivedMessage, Course course)
         {
             EmailMessage email =
-                new EmailMessage(
-                    "[CONSULTA-" + Regex.Match(topicRegex, receivedMessage.Subject).Groups["topic"].Value + "] Creada",
+                new EmailMessage(GenerateSubject(receivedMessage) ,
                     course.Account.User, DateTime.Now, new List<EmailAttachment>(), this.body);
             return email;
+        }
+
+        protected virtual string GenerateSubject(IMessage receivedMessage)
+        {
+            return this.subject;
         }
     }
 }
