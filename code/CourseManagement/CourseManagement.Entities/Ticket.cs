@@ -7,6 +7,8 @@ namespace CourseManagement.Model
 {
     public class Ticket
     {
+        public ICollection<Attachment> Attachments { get; set; }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 

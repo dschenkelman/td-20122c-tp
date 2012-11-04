@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Actions\AddDeliverableToGroupDatabaseEntryAction.cs" />
     <Compile Include="Actions\AddGroupToCourseDatabaseEntryAction.cs" />
+    <Compile Include="Actions\AddTicketToDatabaseAction.cs" />
     <Compile Include="Actions\GroupFileParser.cs" />
     <Compile Include="Actions\IGroupFileParser.cs" />
     <Compile Include="Actions\IXmlActionReader.cs" />
