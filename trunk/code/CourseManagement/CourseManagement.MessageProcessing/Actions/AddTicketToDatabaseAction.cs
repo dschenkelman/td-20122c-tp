@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
-    class AddTicketToDatabaseAction : IAction
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using Messages;
+    using Model;
+    using Persistence.Repositories;
+
+    internal class AddTicketToDatabaseAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
 
@@ -19,8 +17,11 @@ namespace CourseManagement.MessageProcessing.Actions
         public AddTicketToDatabaseAction(ICourseManagementRepositories courseManagmentRepositories)
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
-            //TODO incialize
             this.isPrivate = false;
+        }
+
+        public void Initialize(ActionEntry actionEntry)
+        {
         }
 
         public void Execute(IMessage message)

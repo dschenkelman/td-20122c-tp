@@ -2,7 +2,7 @@
 <rules>
   <rule name="Rule1">
 	  <actions>
-		  <action name="Action1" />
+		  <action name="Action1" body="Body1" isPublic="false" />
 	  </actions>
   </rule>
   <rule name="Rule2">
@@ -13,7 +13,7 @@
   </rule>
   <rule name="Rule3">
 	  <actions>
-		  <action name="Action4" />
+		  <action name="Action4" body="Body4" isPublic="true"/>
 		  <action name="Action5" />
 		  <action name="Action6" />
 	  </actions>

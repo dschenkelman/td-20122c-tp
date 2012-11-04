@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Xml.Linq;
+    using Utilities.Extensions;
 
     public class XmlActionReader : IXmlActionReader
     {
@@ -18,7 +19,14 @@
                 names = document.Descendants("rule")
                     .Where(e => e.Attribute("name").Value.Equals(ruleName))
                     .Descendants("action")
-                    .Select(e => new ActionEntry(e.Attribute("name").Value));
+                    .Select(e => 
+                    {
+                        var actionEntry = new ActionEntry(e.Attribute("name").Value);
+                        e.Attributes().Where(a => a.Name != "name").ForEach(
+                            a => actionEntry.AdditionalData.Add(a.Name.LocalName, a.Value));
+
+                        return actionEntry;
+                    });
             }
 
             return names;

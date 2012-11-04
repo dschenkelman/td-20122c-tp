@@ -8,13 +8,17 @@
     using Persistence.Repositories;
     using Utilities.Extensions;
 
-    public class NewStudentToCourseDatabaseEntryAction : IAction
+    internal class NewStudentToCourseDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
 
         public NewStudentToCourseDatabaseEntryAction(ICourseManagementRepositories courseManagmentRepositories)
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
+        }
+
+        public void Initialize(ActionEntry actionEntry)
+        {
         }
 
         public void Execute(IMessage message)
