@@ -30,7 +30,7 @@
 
         public void Insert(T t)
         {
-            this.dbSet.Add(t);
+            T a = this.dbSet.Add(t);
         }
 
         public void Delete(int id)
