@@ -11,7 +11,7 @@
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            return true;
+            return !previouslyMatched;
         }
     }
 }
