@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Utilities.Extensions;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -74,15 +76,15 @@
 
             this.courseManagementRepositories.Groups.Save();
 
-            
             foreach (var studentAddGroup in studentsInCourse)
             {
-                if ( studentAddGroup.Groups == null)
+                if (studentAddGroup.Groups == null)
                 {
                     studentAddGroup.Groups = new List<Group>();
                 }
                 studentAddGroup.Groups.Add(newGroup);
             }
+
             this.courseManagementRepositories.Students.Save();
 
         }
@@ -94,7 +96,7 @@
 
             var courses = this.courseManagementRepositories.Courses.Get(c => (c.Account.User == message.To.First())
                                             && (c.Year == year) && (c.Semester == semester));
-            if ( courses == null )
+            if (courses == null)
             {
                 throw new Exception("Course obtained from message doesn't exists");
             }
@@ -104,7 +106,7 @@
 
         public int GetSemesterFromMessage(IMessage message)
         {
-            return message.Date.Month <= 1 && message.Date.Month <= 6 ? 1 : 2;
+            return message.Date.Semester();
         }
     }
 }

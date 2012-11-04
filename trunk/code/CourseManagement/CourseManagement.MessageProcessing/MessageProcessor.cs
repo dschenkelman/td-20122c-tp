@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.MessageProcessing.Services;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
+﻿using CourseManagement.Utilities.Extensions;
 
 namespace CourseManagement.MessageProcessing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Messages;
+    using Model;
+    using Persistence.Repositories;
     using Rules;
+    using Services;
 
     public class MessageProcessor
     {
@@ -27,28 +28,33 @@ namespace CourseManagement.MessageProcessing
 
         public void Process()
         {
-            List<BaseRule> rules = this.ruleFactory.CreateRules().ToList();
+            IEnumerable<BaseRule> rules = this.ruleFactory.CreateRules();
 
-            int semester = 1;
-            if (DateTime.Now.Month > 6)
-                semester = 2;
-            int subjectId = this.configurationService.MonitoringCourseSubjectId;
+            int semester = DateTime.Now.Semester();
+                
+            int subjectId = this.configurationService.MonitoredSubjectId;
             List<Course> courses = this.courseManagementRepositories.Courses.Get(
                 c =>
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
                 c.Semester == semester).ToList();
 
             Course course = null;
-            if (courses.Count() > 0)
-                course = courses.First();
+            if (courses.Count > 0)
+            {
+                course = courses[0];
+            }
 
-            if( course != null )
+            if (course != null)
             {
                 Configuration configuration = course.Account.Configurations.Single(
-                    cfg => cfg.Protocol.Equals(this.configurationService.MonitoringCourseIncomingMessageProtocol));
+                    cfg => cfg.Protocol.Equals(this.configurationService.IncomingMessageProtocol));
 
-                this.messageReceiver.Connect(configuration.Endpoint, configuration.Port, configuration.UseSsl,
-                                             configuration.Account.User, configuration.Account.Password);
+                this.messageReceiver.Connect(
+                    configuration.Endpoint, 
+                    configuration.Port, 
+                    configuration.UseSsl,
+                    configuration.Account.User,
+                    configuration.Account.Password);
 
                 foreach (IMessage message in this.messageReceiver.FetchMessages())
                 {
@@ -60,6 +66,7 @@ namespace CourseManagement.MessageProcessing
                         }
                     }
                 }
+
                 this.messageReceiver.Disconnect();
             }
         }

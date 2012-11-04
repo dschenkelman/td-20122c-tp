@@ -1,14 +1,12 @@
-﻿namespace CourseManagement.Console
+﻿using System;
+
+namespace CourseManagement.Console
 {
     using System.Data.Entity;
     using System.Linq;
     using MessageProcessing;
-    using MessageProcessing.Actions;
-    using MessageProcessing.Rules;
-    using Messages;
     using Persistence;
     using Persistence.Initialization;
-    using Persistence.Repositories;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
 
@@ -16,28 +14,28 @@
     {
         static void Main(string[] args)
         {
+            SetupDatabase();
+
             IUnityContainer container = new UnityContainer();
 
             // Initialize the container with the config file
             container.LoadConfiguration();
 
-            container.Resolve<MessageProcessor>();
+            var messageProcessor = container.Resolve<MessageProcessor>();
 
-            container.Resolve<ICourseManagementRepositories>();
+            do
+            {
+                messageProcessor.Process();
+                System.Console.WriteLine("Do you want to continue processing? (press N to quit)");
+            } 
+            while (System.Console.ReadKey().Key != ConsoleKey.N);
+        }
 
-            container.Resolve<IMessageReceiver>();
-
-            container.Resolve<IMessageSender>();
-
-            container.Resolve<IGroupFileParser>();
-
-            container.Resolve<BaseRule>("AddDeliverable");
-            container.Resolve<BaseRule>("NewGroup");
-            container.Resolve<BaseRule>("NewGroup");
-
+        private static void SetupDatabase()
+        {
             CompositeDatabaseInitializer<CourseManagementContext> compositeDatabaseInitializer = 
                 new CompositeDatabaseInitializer<CourseManagementContext>(
-                new DropCreateDatabaseIfModelChanges<CourseManagementContext>());
+                    new DropCreateDatabaseIfModelChanges<CourseManagementContext>());
 
             const string PathToSqlScript = @"Scripts\DbSetup.sql";
             compositeDatabaseInitializer.AddInitializer(new ScriptDataInitializer(PathToSqlScript));
