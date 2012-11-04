@@ -114,8 +114,6 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.courseRepository.Verify(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>()), Times.Once());
             this.courseRepository.Verify(cr => cr.Save(), Times.Once());
             this.studentRepository.Verify(sr => sr.GetById(StudentId), Times.Once());
-            this.studentRepository.Verify(sr => sr.Insert(It.Is<Student>(s => s.Id == StudentId && s.Name == Name)), Times.Once());
-            this.studentRepository.Verify(sr => sr.Save(), Times.Once());
         }
 
         [TestMethod]
@@ -130,7 +128,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             const string MessageAddress = "schen.damian@yahoo.com";
             const int StudentId = 90728;
             var student = new Student(StudentId, Name, MessageAddress);
-            course.Students.Add( student );
+            course.Students.Add(student);
             List<Course> courses = new List<Course> { course };
 
             this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses).Verifiable();

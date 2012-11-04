@@ -42,8 +42,6 @@ namespace CourseManagement.MessageProcessing.Actions
             if (student == null)
             {
                 student = this.CreateStudentFromMessage(message);
-                this.courseManagmentRepositories.Students.Insert(student);
-                this.courseManagmentRepositories.Students.Save();
             }
             else
             {

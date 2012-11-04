@@ -58,13 +58,8 @@ namespace CourseManagement.MessageProcessing
 
                 foreach (IMessage message in this.messageReceiver.FetchMessages())
                 {
-                    foreach (var rule in rules)
-                    {
-                        if (rule.IsMatch(message))
-                        {
-                            rule.Process(message);
-                        }
-                    }
+                    IMessage localMessage = message;
+                    rules.Where(r => r.IsMatch(localMessage)).ForEach(r => r.Process(localMessage));
                 }
 
                 this.messageReceiver.Disconnect();
