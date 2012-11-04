@@ -1,6 +1,4 @@
-﻿using CourseManagement.MessageProcessing.Rules;
-
-namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using MessageProcessing.Actions;
     using Messages;
@@ -8,6 +6,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
     using Model;
     using Moq;
     using Persistence.Repositories;
+    using CourseManagement.MessageProcessing.Rules;
 
     [TestClass]
     public class AddTicketReplyToDatabaseRuleFixture

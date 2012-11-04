@@ -161,7 +161,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         [ExpectedException(typeof(InvalidOperationException))]
         [TestMethod]
-        public void ShouldNotSendMessageIfCourseIsRetrieved()
+        public void ShouldNotSendMessageIfCourseIsNotRetrieved()
         {
             // arrange
             const string Protocol = "stmp";
