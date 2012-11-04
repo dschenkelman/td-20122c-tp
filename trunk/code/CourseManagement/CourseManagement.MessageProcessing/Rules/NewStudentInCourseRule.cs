@@ -4,7 +4,7 @@
     using Actions;
     using Messages;
 
-    class NewStudentInCourseRule :BaseRule
+    internal class NewStudentInCourseRule :BaseRule
     {
         public NewStudentInCourseRule(IActionFactory actionFactory) : base(actionFactory)
         {
@@ -13,7 +13,7 @@
 
         public override bool IsMatch(IMessage message)
         {
-            return Regex.IsMatch(message.Subject, @"^\[ALTA-MATERIA-[0-9]+\][\ ]*[0-9]+-[a-zA-Z\ ]+[a-zA-Z]+$");
+            return Regex.IsMatch(message.Subject, @"^\[ALTA-MATERIA-([0-9]+)\][\ ]*([0-9]+)-([a-zA-Z\ ]+[a-zA-Z]+)$");
         }
     }
 }
