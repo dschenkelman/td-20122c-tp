@@ -24,5 +24,10 @@
         {
             get { return this.GetValue("IncomingMessageProtocol"); }
         }
+
+        public string OutgoingMessageProtocol
+        {
+            get { return this.GetValue("OutgoingMessageProtocol"); }
+        }
     }
 }
