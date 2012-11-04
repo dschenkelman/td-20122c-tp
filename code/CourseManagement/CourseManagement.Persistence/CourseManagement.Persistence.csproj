@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="CourseManagementContext.cs" />
     <Compile Include="ICourseManagementContext.cs" />
+    <Compile Include="Initialization\CompositeDatabaseInitializer.cs" />
+    <Compile Include="Initialization\ScriptDataInitializer.cs" />
     <Compile Include="Repositories\CourseManagementRepositories.cs" />
     <Compile Include="Repositories\ICourseManagementRepositories.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -65,6 +67,7 @@
       <Name>CourseManagement.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

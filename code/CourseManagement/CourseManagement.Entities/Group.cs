@@ -7,7 +7,6 @@ namespace CourseManagement.Model
 {
     public class Group
     {
-        
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 

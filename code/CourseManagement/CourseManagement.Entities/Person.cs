@@ -7,6 +7,10 @@
 
     public abstract class Person
     {
+        public Person()
+        {
+        }
+
         protected Person(int id, string name, string messagingSystemId)
         {
             this.Id = id;

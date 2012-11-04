@@ -6,6 +6,10 @@ namespace CourseManagement.Model
     [Table("Teachers")]
     public class Teacher : Person
     {
+        public Teacher() : base()
+        {
+        }
+
         public Teacher(int id, string name, string email) : base(id, name, email)
         {
         }

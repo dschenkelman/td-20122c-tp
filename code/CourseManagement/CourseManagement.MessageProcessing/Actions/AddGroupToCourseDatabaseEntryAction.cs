@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using CourseManagement.Messages;
-using System.Collections;
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +7,7 @@ namespace CourseManagement.MessageProcessing.Actions
     using Model;
     using Persistence.Repositories;
 
-    public class AddGroupToCourseDatabaseEntryAction
+    public class AddGroupToCourseDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
