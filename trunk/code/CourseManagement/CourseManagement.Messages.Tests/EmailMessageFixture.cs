@@ -26,7 +26,7 @@ namespace CourseManagement.Messages.Tests
             const string To2 = "To2";
 
             // act
-            EmailMessage emailMessage = new EmailMessage(Subject, From, date, attachments, To1, To2);
+            EmailMessage emailMessage = new EmailMessage(Subject, From, date, attachments, "body", To1, To2);
 
             // assert
             Assert.AreEqual(Subject, emailMessage.Subject);
