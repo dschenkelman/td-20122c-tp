@@ -1,10 +1,9 @@
-﻿using CourseManagement.Messages;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Messages;
     using Model;
     using Persistence.Repositories;
 

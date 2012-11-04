@@ -1,15 +1,17 @@
-﻿using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.Messages;
-
-namespace CourseManagement.Console
+﻿namespace CourseManagement.Console
 {
+    using System.Data.Entity;
     using System.Linq;
     using MessageProcessing;
+    using MessageProcessing.Actions;
+    using MessageProcessing.Rules;
+    using Messages;
+    using Persistence;
+    using Persistence.Initialization;
+    using Persistence.Repositories;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
-    using Persistence;
-    using Persistence.Repositories;
-    
+
     class Program
     {
         static void Main(string[] args)
@@ -27,10 +29,22 @@ namespace CourseManagement.Console
 
             container.Resolve<IMessageSender>();
 
-            // creates the DB)
             container.Resolve<IGroupFileParser>();
 
-            // creates the DB))
+            container.Resolve<BaseRule>("AddDeliverable");
+            container.Resolve<BaseRule>("NewGroup");
+            container.Resolve<BaseRule>("NewGroup");
+
+            CompositeDatabaseInitializer<CourseManagementContext> compositeDatabaseInitializer = 
+                new CompositeDatabaseInitializer<CourseManagementContext>(
+                new DropCreateDatabaseIfModelChanges<CourseManagementContext>());
+
+            const string PathToSqlScript = @"Scripts\DbSetup.sql";
+            compositeDatabaseInitializer.AddInitializer(new ScriptDataInitializer(PathToSqlScript));
+
+            Database.SetInitializer(compositeDatabaseInitializer);
+
+            // creates the DB));
             using (var db = new CourseManagementContext())
             {
                 var s = db.Subjects.FirstOrDefault();

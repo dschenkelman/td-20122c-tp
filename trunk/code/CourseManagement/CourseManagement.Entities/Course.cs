@@ -7,6 +7,11 @@ namespace CourseManagement.Model
 {
     public class Course
     {
+        public Course()
+        {
+            this.Students = new List<Student>();
+            this.Teachers = new List<Teacher>();
+        }
 
         public Course(int semester, int year, int subjectId)
         {
@@ -16,7 +21,6 @@ namespace CourseManagement.Model
             this.Students = new List<Student>();
             this.Teachers = new List<Teacher>();
         }
-
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

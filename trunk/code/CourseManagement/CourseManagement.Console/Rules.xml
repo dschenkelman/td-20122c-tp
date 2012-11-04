@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <rules>
   <rule name="AddDeliverable">
+    <actions>
+      <action name="AddDeliverable"/>
+    </actions>
   </rule>
   <rule name="NewGroup">
+    <actions>
+      <action name="NewGroup"/>
+    </actions>
   </rule>
   <rule name="NewStudent">
+    <actions>
+      <action name="NewStudent"/>
+    </actions>
   </rule>
 </rules>

@@ -7,7 +7,9 @@ namespace CourseManagement.Model
 {
     public class Deliverable
     {
-        
+        public Deliverable()
+        {
+        }
 
         public Deliverable(DateTime receptionDate)
         {
