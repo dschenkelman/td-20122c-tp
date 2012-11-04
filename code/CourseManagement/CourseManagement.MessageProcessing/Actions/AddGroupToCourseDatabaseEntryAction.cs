@@ -8,7 +8,7 @@
     using Persistence.Repositories;
     using Utilities.Extensions;
 
-    public class AddGroupToCourseDatabaseEntryAction : IAction
+    internal class AddGroupToCourseDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
@@ -18,6 +18,10 @@
         {
             this.courseManagementRepositories = courseManagementRepositories;
             this.groupFileParser = groupFileParser;
+        }
+
+        public void Initialize(ActionEntry actionEntry)
+        {
         }
 
         public void Execute(IMessage message)

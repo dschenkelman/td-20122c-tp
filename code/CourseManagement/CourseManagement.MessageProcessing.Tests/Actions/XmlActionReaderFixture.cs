@@ -7,7 +7,6 @@
     [TestClass]
     public class XmlActionReaderFixture
     {
-
         [TestMethod]
         [DeploymentItem(@"Files\Rules.xml", "Files")]
         public void ShouldRetrieveActionsOfARuleFormXmlFile()
@@ -31,6 +30,8 @@
             // assert
             Assert.AreEqual(1, actionsNamesForRule1.Count);
             Assert.AreEqual("Action1", actionsNamesForRule1[0].Name);
+            Assert.AreEqual("false", actionsNamesForRule1[0].AdditionalData["isPublic"]);
+            Assert.AreEqual("Body1", actionsNamesForRule1[0].AdditionalData["body"]);
             
             Assert.AreEqual(2, actionsNamesForRule2.Count);
             Assert.AreEqual("Action2", actionsNamesForRule2[0].Name);
@@ -38,6 +39,8 @@
             
             Assert.AreEqual(3, actionsNamesForRule3.Count);
             Assert.AreEqual("Action4", actionsNamesForRule3[0].Name);
+            Assert.AreEqual("true", actionsNamesForRule3[0].AdditionalData["isPublic"]);
+            Assert.AreEqual("Body4", actionsNamesForRule3[0].AdditionalData["body"]);
             Assert.AreEqual("Action5", actionsNamesForRule3[1].Name);
             Assert.AreEqual("Action6", actionsNamesForRule3[2].Name);
 

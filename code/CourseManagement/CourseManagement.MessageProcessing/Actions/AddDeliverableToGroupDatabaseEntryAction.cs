@@ -10,7 +10,7 @@
     using Services;
     using Utilities.Extensions;
 
-    class AddDeliverableToGroupDatabaseEntryAction : IAction
+    internal class AddDeliverableToGroupDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
         private readonly IConfigurationService configurationService;
@@ -19,6 +19,10 @@
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
             this.configurationService = service;
+        }
+
+        public void Initialize(ActionEntry actionEntry)
+        {
         }
 
         public void Execute(IMessage message)

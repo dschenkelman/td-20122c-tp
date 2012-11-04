@@ -17,11 +17,12 @@
 
         public IEnumerable<IAction> CreateActions(string ruleName)
         {
-            IEnumerable<ActionEntry> actionsStrings = this.actionFinder.FindActions(ruleName);
+            IEnumerable<ActionEntry> actions = this.actionFinder.FindActions(ruleName);
 
-            return actionsStrings.Select(actS =>
+            return actions.Select(actionEntry =>
                 {
-                    var action = this.container.Resolve<IAction>(actS.Name);
+                    var action = this.container.Resolve<IAction>(actionEntry.Name);
+                    action.Initialize(actionEntry);
                     return action;
                 });
         }

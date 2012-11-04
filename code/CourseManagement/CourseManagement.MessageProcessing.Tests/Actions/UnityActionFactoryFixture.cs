@@ -23,7 +23,7 @@
         }
 
         [TestMethod]
-        public void ShouldUseFindNamesFromActionFinderWhenUsingCreateActions()
+        public void ShouldUseFindActionsFromActionFinderWhenUsingCreateActions()
         {
             // arrange
             UnityActionFactory unityActionFactory = this.CreateActionFactory();
@@ -40,7 +40,7 @@
         }
 
         [TestMethod]
-        public void ShouldRetrieveActionFromContainerMappedFromStringReturnedByFindNamesWhenUsingCreateActions()
+        public void ShouldRetrieveActionFromContainerMappedAndInitializeFromActionEntryReturnedByFindActionsWhenUsingCreateActions()
         {
             // arrange
             UnityActionFactory unityActionFactory = this.CreateActionFactory();
@@ -58,12 +58,17 @@
             this.container.Setup(ct => ct.Resolve(typeof(IAction), action1.Name)).Returns(action1ForRule1.Object);
             this.container.Setup(ct => ct.Resolve(typeof(IAction), action2.Name)).Returns(action2ForRule1.Object);
 
+            action1ForRule1.Setup(a => a.Initialize(action1)).Verifiable();
+            action2ForRule1.Setup(a => a.Initialize(action2)).Verifiable();
+
             // act
             IEnumerable<IAction> actionsRetrieved = unityActionFactory.CreateActions(RuleName);
             var actionsRetrievedList = actionsRetrieved.ToList();
 
             // assert
             Assert.AreSame(action1ForRule1.Object, actionsRetrievedList[0]);
+            action1ForRule1.Verify(a => a.Initialize(action1), Times.Once());
+            action2ForRule1.Verify(a => a.Initialize(action2), Times.Once());
         }
 
         private UnityActionFactory CreateActionFactory()
