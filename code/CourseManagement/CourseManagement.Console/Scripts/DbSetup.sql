@@ -18,4 +18,4 @@ INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Configura
 	VALUES ('pop', 'pop.gmail.com', 995, 1, @AccountId);
 	
 INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Courses
-	VALUES (2012, 2, @SubjectId, @AccountId);
+	VALUES (2012, 2, @SubjectId, @AccountId, 'coursemanagement2012@gmail.com');

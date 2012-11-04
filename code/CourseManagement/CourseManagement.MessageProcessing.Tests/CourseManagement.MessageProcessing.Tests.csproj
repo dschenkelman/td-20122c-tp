@@ -74,6 +74,7 @@
     <Compile Include="Actions\UnityActionFactoryFixture.cs" />
     <Compile Include="Actions\XmlActionReaderFixture.cs" />
     <Compile Include="Rules\AddDeliverableToGroupDatabaseEntryRuleFixture.cs" />
+    <Compile Include="Rules\AddTicketReplyToDatabaseRuleFixture.cs" />
     <Compile Include="Rules\FallbackRuleFixture.cs" />
     <Compile Include="Rules\NewGroupInCourseRuleFixture.cs" />
     <Compile Include="Rules\NewStudentInCourseRuleFixture.cs" />

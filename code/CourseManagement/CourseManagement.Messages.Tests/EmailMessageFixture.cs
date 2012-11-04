@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Moq;
-
-namespace CourseManagement.Messages.Tests
+﻿namespace CourseManagement.Messages.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
 
     [TestClass]
     public class EmailMessageFixture
