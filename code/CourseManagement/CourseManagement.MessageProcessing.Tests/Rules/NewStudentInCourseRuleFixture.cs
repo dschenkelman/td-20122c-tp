@@ -32,7 +32,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             NewStudentInCourseRule rule = CreateRule();
 
             // act
-            bool resultado = rule.IsMatch(message.Object);
+            bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsTrue(resultado);
@@ -49,7 +49,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             NewStudentInCourseRule rule = CreateRule();
 
             // act
-            bool resultado = rule.IsMatch(message.Object);
+            bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsFalse(resultado);

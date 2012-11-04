@@ -1,10 +1,8 @@
-﻿using System;
-using CourseManagement.Messages;
-
-namespace CourseManagement.MessageProcessing.Tests.Testables
+﻿namespace CourseManagement.MessageProcessing.Tests.Testables
 {
     using MessageProcessing.Actions;
     using MessageProcessing.Rules;
+    using Messages;
 
     public class TestableBaseRule : BaseRule
     {
@@ -12,7 +10,7 @@ namespace CourseManagement.MessageProcessing.Tests.Testables
         {
         }
 
-        public override bool IsMatch(IMessage message)
+        public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
             return true;
         }

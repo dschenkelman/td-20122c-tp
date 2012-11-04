@@ -9,7 +9,7 @@
         {
         }
 
-        public override bool IsMatch(IMessage message)
+        public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
             return true;
         }

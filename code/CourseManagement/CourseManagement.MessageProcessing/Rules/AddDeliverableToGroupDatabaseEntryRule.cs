@@ -11,7 +11,7 @@
         {
         }
 
-        public override bool IsMatch(IMessage message)
+        public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
             return Regex.IsMatch(message.Subject, @"^\[ENTREGA-TP-[0-9]+\]$") && message.Attachments.Count() > 0 ;
         }

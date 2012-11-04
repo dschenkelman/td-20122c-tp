@@ -1,6 +1,4 @@
-﻿using CourseManagement.Utilities.Extensions;
-
-namespace CourseManagement.MessageProcessing
+﻿namespace CourseManagement.MessageProcessing
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +8,7 @@ namespace CourseManagement.MessageProcessing
     using Persistence.Repositories;
     using Rules;
     using Services;
+    using Utilities.Extensions;
 
     public class MessageProcessor
     {
@@ -33,37 +32,41 @@ namespace CourseManagement.MessageProcessing
             int semester = DateTime.Now.Semester();
                 
             int subjectId = this.configurationService.MonitoredSubjectId;
-            List<Course> courses = this.courseManagementRepositories.Courses.Get(
+            Course course = this.courseManagementRepositories.Courses.Get(
                 c =>
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
-                c.Semester == semester).ToList();
+                c.Semester == semester).FirstOrDefault();
 
-            Course course = null;
-            if (courses.Count > 0)
+
+            if (course == null)
             {
-                course = courses[0];
+                return;
             }
 
-            if (course != null)
+            Configuration configuration = course.Account.Configurations.First(
+                cfg => cfg.Protocol.Equals(this.configurationService.IncomingMessageProtocol));
+
+            this.messageReceiver.Connect(
+                configuration.Endpoint, 
+                configuration.Port, 
+                configuration.UseSsl,
+                configuration.Account.User,
+                configuration.Account.Password);
+
+            foreach (IMessage message in this.messageReceiver.FetchMessages())
             {
-                Configuration configuration = course.Account.Configurations.Single(
-                    cfg => cfg.Protocol.Equals(this.configurationService.IncomingMessageProtocol));
-
-                this.messageReceiver.Connect(
-                    configuration.Endpoint, 
-                    configuration.Port, 
-                    configuration.UseSsl,
-                    configuration.Account.User,
-                    configuration.Account.Password);
-
-                foreach (IMessage message in this.messageReceiver.FetchMessages())
+                bool previouslyMatched = false;
+                foreach (var rule in rules)
                 {
-                    IMessage localMessage = message;
-                    rules.Where(r => r.IsMatch(localMessage)).ForEach(r => r.Process(localMessage));
+                    if (rule.IsMatch(message, previouslyMatched))
+                    {
+                        previouslyMatched = true;
+                        rule.Process(message);
+                    }
                 }
-
-                this.messageReceiver.Disconnect();
             }
+
+            this.messageReceiver.Disconnect();
         }
     }
 }
