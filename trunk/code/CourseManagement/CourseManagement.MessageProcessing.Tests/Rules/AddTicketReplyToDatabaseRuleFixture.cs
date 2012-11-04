@@ -55,15 +55,15 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.ticketRepository.Setup(tr => tr.GetById(1)).Returns(ticket).Verifiable();
 
             // act and assert
-            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message1.Object));
-            
-            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message2.Object));
+            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message1.Object, false));
+
+            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message2.Object, false));
             this.ticketRepository.Verify(tr => tr.GetById(10), Times.Once());
-            
-            Assert.IsTrue(addTicketReplyToDatabaseRule.IsMatch(message3.Object));
+
+            Assert.IsTrue(addTicketReplyToDatabaseRule.IsMatch(message3.Object, false));
             this.ticketRepository.Verify(tr => tr.GetById(1), Times.Once());
 
-            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message4.Object));
+            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message4.Object, false));
         }
 
         public AddTicketReplyToDatabaseRule CreateAddTicketReplyToDatabaseRule()

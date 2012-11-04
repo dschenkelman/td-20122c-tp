@@ -16,7 +16,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         private MockRepository mockRepository;
         private Mock<IActionFactory> actionFactory;
         private Mock<IMessage> message;
-        private Mock<IMessageAttachment> messageAttachment;
+        private Mock<IMessageAttachment> MessageAttachment;
 
         [TestInitialize]
         public void TestInitialize()
@@ -24,7 +24,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.actionFactory = this.mockRepository.Create<IActionFactory>();
             this.message = this.mockRepository.Create<IMessage>();
-            this.messageAttachment = this.mockRepository.Create<IMessageAttachment>();
+            this.MessageAttachment = this.mockRepository.Create<IMessageAttachment>();
         }
 
         [TestMethod]
@@ -34,9 +34,9 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             const string messageSubject = "[ALTA-GRUPO]";
 
-            messageAttachment.Setup(ma => ma.Name).Returns("attachment.txt").Verifiable();
+            MessageAttachment.Setup(ma => ma.Name).Returns("attachment.txt").Verifiable();
 
-            var attachmentList = new List<IMessageAttachment> { messageAttachment.Object };
+            var attachmentList = new List<IMessageAttachment> { MessageAttachment.Object };
 
             message.Setup(m => m.Subject).Returns(messageSubject).Verifiable();
             message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
@@ -44,11 +44,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             NewGroupInCourseRule rule = CreateRule();
 
             // act
-            bool resultado = rule.IsMatch(message.Object);
+            bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsTrue(resultado);
-            messageAttachment.Verify(ma => ma.Name , Times.Once());
+            MessageAttachment.Verify(ma => ma.Name , Times.Once());
             message.Verify(m => m.Attachments, Times.Exactly(2));
             message.Verify(m => m.Subject, Times.Once());
         }
@@ -60,9 +60,9 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             const string messageSubject = "WRONG-SUBJECT";
 
-            messageAttachment.Setup(ma => ma.Name).Returns("attachment.txt").Verifiable();
+            MessageAttachment.Setup(ma => ma.Name).Returns("attachment.txt").Verifiable();
 
-            var attachmentList = new List<IMessageAttachment> { messageAttachment.Object };
+            var attachmentList = new List<IMessageAttachment> { MessageAttachment.Object };
 
             message.Setup(m => m.Subject).Returns(messageSubject).Verifiable();
             message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
@@ -70,11 +70,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             NewGroupInCourseRule rule = CreateRule();
 
             // act
-            bool resultado = rule.IsMatch(message.Object);
+            bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsFalse(resultado);
-            messageAttachment.Verify(ma => ma.Name, Times.Once());
+            MessageAttachment.Verify(ma => ma.Name, Times.Once());
             message.Verify(m => m.Attachments, Times.Exactly(2));
             message.Verify(m => m.Subject, Times.Once());
         }
@@ -86,12 +86,12 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             const string messageSubject = "[ALTA-GRUPO]";
 
-            messageAttachment.Setup(ma => ma.Name).Returns("attachment.txt").Verifiable();
+            MessageAttachment.Setup(ma => ma.Name).Returns("attachment.txt").Verifiable();
 
             var messageAttachment2 = this.mockRepository.Create<IMessageAttachment>();
             messageAttachment2.Setup(ma => ma.Name).Returns("attachment2.txt").Verifiable();
 
-            var attachmentList = new List<IMessageAttachment> { messageAttachment.Object, messageAttachment2.Object };
+            var attachmentList = new List<IMessageAttachment> { MessageAttachment.Object, messageAttachment2.Object };
 
             message.Setup(m => m.Subject).Returns(messageSubject).Verifiable();
             message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
@@ -99,11 +99,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             NewGroupInCourseRule rule = CreateRule();
 
             // act
-            bool resultado = rule.IsMatch(message.Object);
+            bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsFalse(resultado);
-            messageAttachment.Verify(ma => ma.Name, Times.Never());
+            MessageAttachment.Verify(ma => ma.Name, Times.Never());
             message.Verify(m => m.Attachments, Times.Once());
             message.Verify(m => m.Subject, Times.Once());
         }
@@ -115,23 +115,23 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             const string messageSubject = "[ALTA-GRUPO]";
 
-            messageAttachment.Setup(ma => ma.Name).Returns("attachment.ext1").Verifiable();
+            this.MessageAttachment.Setup(ma => ma.Name).Returns("attachment.ext1").Verifiable();
 
-            var attachmentList = new List<IMessageAttachment> { messageAttachment.Object };
+            var attachmentList = new List<IMessageAttachment> { MessageAttachment.Object };
 
-            message.Setup(m => m.Subject).Returns(messageSubject).Verifiable();
-            message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
+            this.message.Setup(m => m.Subject).Returns(messageSubject).Verifiable();
+            this.message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
 
             NewGroupInCourseRule rule = CreateRule();
 
             // act
-            bool resultado = rule.IsMatch(message.Object);
+            bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsFalse(resultado);
-            messageAttachment.Verify(ma => ma.Name, Times.Once());
-            message.Verify(m => m.Attachments, Times.Exactly(2));
-            message.Verify(m => m.Subject, Times.Once());
+            this.MessageAttachment.Verify(ma => ma.Name, Times.Once());
+            this.message.Verify(m => m.Attachments, Times.Exactly(2));
+            this.message.Verify(m => m.Subject, Times.Once());
         }
 
         private NewGroupInCourseRule CreateRule()

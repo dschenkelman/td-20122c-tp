@@ -1,53 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.Messages;
-
-namespace CourseManagement.MessageProcessing.Rules
+﻿namespace CourseManagement.MessageProcessing.Rules
 {
-    class NewGroupInCourseRule : BaseRule
-    {
-        private IActionFactory actionFactory;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using Actions;
+    using Messages;
 
+    internal class NewGroupInCourseRule : BaseRule
+    {
         private const string MatchingSubject = "[ALTA-GRUPO]";
 
         public NewGroupInCourseRule(IActionFactory actionFactory) : base(actionFactory)
         {
-            this.actionFactory = actionFactory;
         }
 
-        public override bool IsMatch(IMessage message)
+        public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
             var subjectMatch = message.Subject.Equals(MatchingSubject);
 
-            var onlyOneAttachmentInMessage = (message.Attachments.Count() == 1);
+            var onlyOneAttachmentInMessage = message.Attachments.Count() == 1;
 
             var attachmentMatchExtensionTxt = false;
 
-            if ( onlyOneAttachmentInMessage )
+            if (onlyOneAttachmentInMessage)
             {
                 var attachmentName = message.Attachments.First().Name;
 
-                var extension = "";
-                
+                string extension;
+
                 try
                 {
                     extension = Path.GetExtension(attachmentName);
-                    if ( extension != null)
+                    if (extension != null)
                     {
-                        attachmentMatchExtensionTxt = extension.Equals(".txt");    
+                        attachmentMatchExtensionTxt = extension.Equals(".txt");
                     }
-                }catch (Exception)
-                {
-
                 }
-                
+                catch (Exception)
+                {
+                }
             }
-            return (subjectMatch && onlyOneAttachmentInMessage && attachmentMatchExtensionTxt);
+
+            return subjectMatch && onlyOneAttachmentInMessage && attachmentMatchExtensionTxt;
         }
     }
 }

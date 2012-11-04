@@ -19,7 +19,7 @@
         }
 
         [TestMethod]
-        public void ShouldMatchEverythingWithoutChecking()
+        public void ShouldMatchEverythingWithoutCheckingIfNotPreviouslyMatched()
         {
             var fallbackRule = this.CreateFallbackRule();
 
@@ -30,8 +30,8 @@
             message.Setup(m => m.From).Throws(new InvalidOperationException());
             message.Setup(m => m.To).Throws(new InvalidOperationException());
 
-            Assert.IsTrue(fallbackRule.IsMatch(message.Object));
-            Assert.IsTrue(fallbackRule.IsMatch(null));
+            Assert.IsTrue(fallbackRule.IsMatch(message.Object, false));
+            Assert.IsTrue(fallbackRule.IsMatch(null, false));
         }
 
         private FallbackRule CreateFallbackRule()

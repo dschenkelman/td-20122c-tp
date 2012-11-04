@@ -55,7 +55,7 @@
     <Compile Include="Actions\ActionEntry.cs" />
     <Compile Include="Actions\AddDeliverableToGroupDatabaseEntryAction.cs" />
     <Compile Include="Actions\AddGroupToCourseDatabaseEntryAction.cs" />
-    <Compile Include="Actions\AddTicketReplyToDatabaseRule.cs" />
+    <Compile Include="Rules\AddTicketReplyToDatabaseRule.cs" />
     <Compile Include="Actions\AddTicketToDatabaseAction.cs" />
     <Compile Include="Actions\GroupFileParser.cs" />
     <Compile Include="Actions\IGroupFileParser.cs" />

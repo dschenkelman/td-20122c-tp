@@ -21,7 +21,7 @@
             this.subjectRegex = new Regex(SubjectPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
-        public override bool IsMatch(IMessage message)
+        public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
             Match match = this.subjectRegex.Match(message.Subject);
             if (!match.Success)

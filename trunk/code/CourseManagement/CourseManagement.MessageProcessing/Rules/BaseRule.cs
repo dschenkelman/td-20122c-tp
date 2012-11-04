@@ -1,10 +1,8 @@
-﻿using System;
-using CourseManagement.Messages;
-
-namespace CourseManagement.MessageProcessing.Rules
+﻿namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Collections.Generic;
     using Actions;
+    using Messages;
     using Microsoft.Practices.ObjectBuilder2;
 
     public abstract class BaseRule
@@ -29,6 +27,6 @@ namespace CourseManagement.MessageProcessing.Rules
             this.actions.ForEach(a => a.Execute(message));
         }
 
-        public abstract bool IsMatch(IMessage message);
+        public abstract bool IsMatch(IMessage message, bool previouslyMatched);
     }
 }

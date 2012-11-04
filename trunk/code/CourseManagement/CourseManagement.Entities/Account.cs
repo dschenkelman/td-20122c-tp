@@ -6,6 +6,11 @@
 
     public class Account
     {
+        public Account()
+        {
+            this.Configurations = new List<Configuration>();
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 

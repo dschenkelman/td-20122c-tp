@@ -1,14 +1,13 @@
-﻿using System;
-
-namespace CourseManagement.Console
+﻿namespace CourseManagement.Console
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using MessageProcessing;
-    using Persistence;
-    using Persistence.Initialization;
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
+    using Persistence;
+    using Persistence.Initialization;
 
     class Program
     {
