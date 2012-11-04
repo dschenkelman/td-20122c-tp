@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <rules>
-  <rule name="AddDeliverable">
+  <rule name="NewStudent">
     <actions>
-      <action name="AddDeliverable"/>
+      <action name="NewStudent"/>
     </actions>
   </rule>
   <rule name="NewGroup">
@@ -10,9 +10,13 @@
       <action name="AddGroup"/>
     </actions>
   </rule>
-  <rule name="NewStudent">
+  <rule name="AddDeliverable">
     <actions>
-      <action name="NewStudent"/>
+      <action name="AddDeliverable"/>
+    </actions>
+  </rule>
+  <rule name="Fallback">
+    <actions>
     </actions>
   </rule>
 </rules>
