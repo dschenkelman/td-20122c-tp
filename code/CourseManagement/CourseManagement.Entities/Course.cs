@@ -32,14 +32,14 @@ namespace CourseManagement.Model
         public int SubjectId { get; set; }
 
         [ForeignKey("SubjectId")]
-        public Subject Subject { get; set; }
+        public virtual Subject Subject { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
 
         public virtual ICollection<Teacher> Teachers { get; set; }
 
         [ForeignKey("AccountId")]
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
 
         public int AccountId { get; set; }
     }

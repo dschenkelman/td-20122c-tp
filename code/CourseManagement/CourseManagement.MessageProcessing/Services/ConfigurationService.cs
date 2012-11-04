@@ -1,8 +1,8 @@
-﻿using System;
-using System.Configuration;
-
-namespace CourseManagement.MessageProcessing.Services
+﻿namespace CourseManagement.MessageProcessing.Services
 {
+    using System;
+    using System.Configuration;
+
     public class ConfigurationService : IConfigurationService
     {
         public string GetValue(string rulesConfigurationFilePathKey)
@@ -12,20 +12,17 @@ namespace CourseManagement.MessageProcessing.Services
 
         public string RootPath
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.GetValue("AttachmentsRootPath"); }
         }
 
-        public int MonitoringCourseSubjectId
+        public int MonitoredSubjectId
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return Convert.ToInt32(this.GetValue("MonitoredSubjectId")); }
         }
 
-        public string MonitoringCourseIncomingMessageProtocol
+        public string IncomingMessageProtocol
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.GetValue("IncomingMessageProtocol"); }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Utilities.Extensions;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -65,7 +67,7 @@
 
         private int GetSemesterFromMessage(IMessage message)
         {
-            return (1 <= message.Date.Month) && (message.Date.Month <= 6) ? 1 : 2;
+            return message.Date.Semester();
         }
 
         private int GetYearFromMessage(IMessage message)

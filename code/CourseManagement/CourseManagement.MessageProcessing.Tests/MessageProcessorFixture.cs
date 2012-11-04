@@ -1,16 +1,15 @@
-﻿using System;
-using System.Linq.Expressions;
-using CourseManagement.MessageProcessing.Services;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-
-namespace CourseManagement.MessageProcessing.Tests
+﻿namespace CourseManagement.MessageProcessing.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
     using MessageProcessing.Rules;
+    using MessageProcessing.Services;
+    using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model;
     using Moq;
+    using Persistence.Repositories;
 
     [TestClass]
     public class MessageProcessorFixture
@@ -70,8 +69,8 @@ namespace CourseManagement.MessageProcessing.Tests
                 !f.Compile().Invoke(falseCourseWrongSubjectId) && !f.Compile().Invoke(falseCourseWrongSemester)))).
                 Returns(courses).Verifiable();
 
-            this.configurationService.Setup(cs => cs.MonitoringCourseSubjectId).Returns(SubjectId).Verifiable();
-            this.configurationService.Setup(cs => cs.MonitoringCourseIncomingMessageProtocol).Returns(Protocol).Verifiable();
+            this.configurationService.Setup(cs => cs.MonitoredSubjectId).Returns(SubjectId).Verifiable();
+            this.configurationService.Setup(cs => cs.IncomingMessageProtocol).Returns(Protocol).Verifiable();
 
             this.messageReceiver.Setup(
                 mr => mr.Connect(configuration.Endpoint, configuration.Port, configuration.UseSsl,
@@ -124,8 +123,8 @@ namespace CourseManagement.MessageProcessing.Tests
                 !f.Compile().Invoke(falseCourseWrongSubjectId) && !f.Compile().Invoke(falseCourseWrongSemester)))).
                 Returns(courses).Verifiable();
 
-            this.configurationService.Setup(cs => cs.MonitoringCourseSubjectId).Returns(SubjectId).Verifiable();
-            this.configurationService.Setup(cs => cs.MonitoringCourseIncomingMessageProtocol).Returns(Protocol).Verifiable();
+            this.configurationService.Setup(cs => cs.MonitoredSubjectId).Returns(SubjectId).Verifiable();
+            this.configurationService.Setup(cs => cs.IncomingMessageProtocol).Returns(Protocol).Verifiable();
 
             this.messageReceiver.Setup(
                 mr => mr.Connect(configuration.Endpoint, configuration.Port, configuration.UseSsl,
@@ -184,8 +183,8 @@ namespace CourseManagement.MessageProcessing.Tests
                 !f.Compile().Invoke(falseCourseWrongSubjectId) && !f.Compile().Invoke(falseCourseWrongSemester)))).
                 Returns(courses).Verifiable();
 
-            this.configurationService.Setup(cs => cs.MonitoringCourseSubjectId).Returns(SubjectId).Verifiable();
-            this.configurationService.Setup(cs => cs.MonitoringCourseIncomingMessageProtocol).Returns(Protocol).Verifiable();
+            this.configurationService.Setup(cs => cs.MonitoredSubjectId).Returns(SubjectId).Verifiable();
+            this.configurationService.Setup(cs => cs.IncomingMessageProtocol).Returns(Protocol).Verifiable();
 
             this.messageReceiver.Setup(
                 mr => mr.Connect(configuration.Endpoint, configuration.Port, configuration.UseSsl,
