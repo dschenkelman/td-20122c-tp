@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.Messages;
-
-namespace CourseManagement.MessageProcessing.Rules
+﻿namespace CourseManagement.MessageProcessing.Rules
 {
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using Actions;
+    using Messages;
+
     class AddDeliverableToGroupDatabaseEntryRule : BaseRule
     {
         public AddDeliverableToGroupDatabaseEntryRule(IActionFactory actionFactory) : base(actionFactory)

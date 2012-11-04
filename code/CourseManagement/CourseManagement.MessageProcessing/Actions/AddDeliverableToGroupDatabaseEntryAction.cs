@@ -37,7 +37,7 @@
                 throw new InvalidOperationException(string.Format("You can not add deliverable to group when student: {0} is not registered", message.From));
             }
 
-            Course course = this.ParseCourseFromMessage(message);
+            Course course = this.GetCourseFromMessage(message);
             var studentGroup = student.Groups.Where(g => g.CourseId == course.Id).FirstOrDefault();
             
             if (studentGroup == null)
@@ -65,7 +65,7 @@
             this.courseManagmentRepositories.Deliverables.Save();
         }
 
-       private Course ParseCourseFromMessage(IMessage message)
+       private Course GetCourseFromMessage(IMessage message)
         {
             int semester = this.GetSemesterFromMessage(message);
 
@@ -86,9 +86,7 @@
 
         private int GetSemesterFromMessage(IMessage message)
         {
-            if ((1 <= message.Date.Month) && (message.Date.Month <= 6))
-                return 1;
-            return 2;
+            return message.Date.Semester();
         }
     }
 }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using Messages;
     using Model;
     using Persistence.Repositories;
@@ -12,8 +13,13 @@
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
 
+        private const string SubjectPattern = @"^\[ALTA-MATERIA-(?<subjectId>[0-9]+)\][\ ]*(?<studentId>[0-9]+)-(?<studentName>[a-zA-Z\ ]+[a-zA-Z]+)$";
+
+        private readonly Regex subjectRegex;
+
         public NewStudentToCourseDatabaseEntryAction(ICourseManagementRepositories courseManagmentRepositories)
         {
+            this.subjectRegex = new Regex(SubjectPattern, RegexOptions.Compiled);
             this.courseManagmentRepositories = courseManagmentRepositories;
         }
 
@@ -60,10 +66,10 @@
 
         private Student CreateStudentFromMessage(IMessage message)
         {
-            string parsedName = message.Subject.Substring(message.Subject.IndexOf("]") + 1);
-            parsedName = parsedName.Substring(parsedName.IndexOf("-") + 1);
+            var studentName = this.subjectRegex.Match(message.Subject).Groups["studentName"].Value;
+            var studentId = this.ParseStudentIdFromMessage(message);
 
-            return new Student(this.ParseStudentIdFromMessage(message), parsedName, message.From);
+            return new Student(studentId, studentName, message.From);
         }
 
         private int GetSemesterFromMessage(IMessage message)
@@ -78,16 +84,12 @@
 
         private int ParseSubjectCodeFromMessage(IMessage message)
         {
-            string parsedCourse = message.Subject.Substring(0, message.Subject.IndexOf("]"));
-            parsedCourse = parsedCourse.Substring(parsedCourse.LastIndexOf("-") + 1);
-            return Convert.ToInt32(parsedCourse);
+            return Convert.ToInt32(this.subjectRegex.Match(message.Subject).Groups["subjectId"].Value);
         }
 
         private int ParseStudentIdFromMessage(IMessage message)
         {
-            string parsedString = message.Subject.Substring(message.Subject.IndexOf("]") + 1).Trim();
-            parsedString = parsedString.Substring(0, parsedString.IndexOf("-"));
-            return Convert.ToInt32(parsedString);
+            return Convert.ToInt32(this.subjectRegex.Match(message.Subject).Groups["studentId"].Value);
         }
     }
 }
