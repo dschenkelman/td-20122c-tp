@@ -8,6 +8,6 @@ namespace CourseManagement.MessageProcessing.Actions
 {
     public interface IGroupFileParser
     {
-        IEnumerable<int> ObtainIdsFromMessage(IMessage message);
+        IEnumerable<int> GetIdsFromMessage(IMessage message);
     }
 }

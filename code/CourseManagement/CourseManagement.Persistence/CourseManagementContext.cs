@@ -6,7 +6,7 @@ namespace CourseManagement.Persistence
 
     public class CourseManagementContext : DbContext, ICourseManagementContext
     {
-        public IDbSet<Attachment> Attachments { get; set; }
+        public IDbSet<DeliverableAttachment> Attachments { get; set; }
         
         public IDbSet<Course> Courses { get; set; }
 

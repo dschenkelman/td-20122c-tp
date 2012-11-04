@@ -1,10 +1,13 @@
-﻿namespace CourseManagement.Persistence.Repositories
+﻿using System;
+
+namespace CourseManagement.Persistence.Repositories
 {
     using Model;
 
     public class CourseManagementRepositories : ICourseManagementRepositories
     {
-        private readonly IRepository<Attachment> attachments;
+        private readonly IRepository<DeliverableAttachment> deliverableAttachments;
+        private readonly IRepository<TicketAttachment> ticketAttachments;
         private readonly IRepository<Account> accounts;
         private readonly IRepository<Configuration> configurations;
         private readonly IRepository<Course> courses;
@@ -18,7 +21,8 @@
         
 
         public CourseManagementRepositories(IRepository<Account> accounts,
-            IRepository<Attachment> attachments,
+            IRepository<DeliverableAttachment> deliverableAttachments,
+            IRepository<TicketAttachment> ticketAttachments,
             IRepository<Configuration> configurations,
             IRepository<Course> courses, 
             IRepository<Deliverable> deliverables,
@@ -29,7 +33,8 @@
             IRepository<Teacher> teachers,
             IRepository<Ticket> tickets)
         {
-            this.attachments = attachments;
+            this.deliverableAttachments = deliverableAttachments;
+            this.ticketAttachments = ticketAttachments;
             this.courses = courses;
             this.deliverables = deliverables;
             this.groups = groups;
@@ -42,14 +47,19 @@
             this.configurations = configurations;
         }
 
+        public IRepository<TicketAttachment> TicketAttachments
+        {
+            get { return this.ticketAttachments; }
+        }
+
         public IRepository<Account> Accounts
         {
             get { return this.accounts; }
         }
         
-        public IRepository<Attachment> Attachments
+        public IRepository<DeliverableAttachment> DeliverableAttachments
         {
-            get { return this.attachments; }
+            get { return this.deliverableAttachments; }
         }
 
         public IRepository<Configuration> Configurations

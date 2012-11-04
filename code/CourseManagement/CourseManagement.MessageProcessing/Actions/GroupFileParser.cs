@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CourseManagement.Messages;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Messages;
+
     class GroupFileParser : IGroupFileParser
     {
-        public IEnumerable<int> ObtainIdsFromMessage (IMessage message)
+        public IEnumerable<int> GetIdsFromMessage(IMessage message)
         {
             return ParseIdsFromAttachmentInMessage(message);
         }
+
         private static IEnumerable<int> ParseIdsFromAttachmentInMessage(IMessage message)
         {
             if (message.Attachments.Count() != 1)

@@ -4,7 +4,9 @@
 
     public interface ICourseManagementRepositories
     {
-        IRepository<Attachment> Attachments { get; }
+        IRepository<DeliverableAttachment> DeliverableAttachments { get; }
+
+        IRepository<TicketAttachment> TicketAttachments { get; }
 
         IRepository<Account> Accounts { get; }
 

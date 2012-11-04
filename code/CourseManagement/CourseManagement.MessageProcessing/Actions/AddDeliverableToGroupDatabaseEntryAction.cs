@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.MessageProcessing.Services;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using System.IO;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using Messages;
+    using Model;
+    using Persistence.Repositories;
+    using Services;
+    using Utilities.Extensions;
+
     class AddDeliverableToGroupDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
@@ -22,23 +23,29 @@ namespace CourseManagement.MessageProcessing.Actions
 
         public void Execute(IMessage message)
         {
-            var students = courseManagmentRepositories.Students.Get( s => s.MessagingSystemId == message.From );
-            if( students.Count() == 0 )
+            var student = this.courseManagmentRepositories
+                .Students
+                .Get(s => s.MessagingSystemId == message.From)
+                .FirstOrDefault();
+            
+            if (student == null)
             {
-                throw new InvalidOperationException("You can not add deliverable to group when student: " + message.From + " is not registered");
+                throw new InvalidOperationException(string.Format("You can not add deliverable to group when student: {0} is not registered", message.From));
             }
-            Course course = ParseCourseFromMessage(message);
-            var studentGroups = students.ElementAt(0).Groups.Where(
-                g => g.CourseId == course.Id);
-            if( studentGroups.Count() == 0 )
+
+            Course course = this.ParseCourseFromMessage(message);
+            var studentGroup = student.Groups.Where(g => g.CourseId == course.Id).FirstOrDefault();
+            
+            if (studentGroup == null)
             {
                 throw new InvalidOperationException("You can not add deliverable to inexistent student's group.");
             }
-            Deliverable deliverable = new Deliverable(message.Date) {Attachments = new List<Attachment>()};
-            studentGroups.ElementAt(0).Deliverables.Add(deliverable);
 
-            string rootPath = configurationService.RootPath;
-            var directory = Path.Combine(rootPath, message.Subject, DateToYYYYMMDD( message.Date ));
+            Deliverable deliverable = new Deliverable(message.Date);
+            deliverable.GroupId = studentGroup.Id;
+
+            string rootPath = this.configurationService.RootPath;
+            var directory = Path.Combine(rootPath, message.Subject, message.Date.ToIsoFormat());
 
             Directory.CreateDirectory(directory);
             foreach (IMessageAttachment messageAttachment in message.Attachments)
@@ -46,47 +53,30 @@ namespace CourseManagement.MessageProcessing.Actions
                 string path = Path.Combine(directory, messageAttachment.Name);
                 messageAttachment.Download(path);
 
-                Attachment attachment = new Attachment { FileName = messageAttachment.Name, Location = path }; 
-                deliverable.Attachments.Add(attachment);
-
-                courseManagmentRepositories.Attachments.Insert(attachment);
+                DeliverableAttachment deliverableAttachment = new DeliverableAttachment { FileName = messageAttachment.Name, Location = path }; 
+                deliverable.Attachments.Add(deliverableAttachment);
             }
-            courseManagmentRepositories.Deliverables.Insert(deliverable);
 
-            courseManagmentRepositories.Deliverables.Save();
-            courseManagmentRepositories.Groups.Save();
-            courseManagmentRepositories.Students.Save();
+            this.courseManagmentRepositories.Deliverables.Insert(deliverable);
+            this.courseManagmentRepositories.Deliverables.Save();
         }
 
-        private string DateToYYYYMMDD(DateTime date)
+       private Course ParseCourseFromMessage(IMessage message)
         {
-            string year = date.Year + "";
-            string month = date.Month + "";
-            string day = date.Day + "";
+            int semester = this.GetSemesterFromMessage(message);
 
-            if( day.Length == 1 )
-            {
-                day = "0" + day;
-            }
-            if (month.Length == 1)
-            {
-                month = "0" + month;
-            }
-            return year + month + day;
-        }
-
-        private Course ParseCourseFromMessage(IMessage message)
-        {
             List<Course> courses =
-                courseManagmentRepositories.Courses.Get(
+                this.courseManagmentRepositories.Courses.Get(
                     c =>
-                    message.To.Contains(c.Account.User) && c.Semester == GetSemesterFromMessage(message) && c.Year == message.Date.Year 
-                   ).ToList();
+                    message.To.Contains(c.Account.User) 
+                    && c.Semester == semester
+                    && c.Year == message.Date.Year).ToList();
 
             if (courses.Count() == 0)
             {
                 throw new InvalidOperationException("You can not add deliverable. The account: " + message.To + " is not a valid.");
             }
+
             return courses.First();
         }
 

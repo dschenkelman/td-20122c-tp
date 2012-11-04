@@ -1,6 +1,4 @@
-﻿using CourseManagement.Utilities.Extensions;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +6,7 @@ namespace CourseManagement.MessageProcessing.Actions
     using Messages;
     using Model;
     using Persistence.Repositories;
+    using Utilities.Extensions;
 
     public class NewStudentToCourseDatabaseEntryAction : IAction
     {
@@ -57,7 +56,7 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private Student CreateStudentFromMessage(IMessage message)
         {
-            string parsedName = message.Subject.Substring(message.Subject.IndexOf("] ") + 2);
+            string parsedName = message.Subject.Substring(message.Subject.IndexOf("]") + 1);
             parsedName = parsedName.Substring(parsedName.IndexOf("-") + 1);
 
             return new Student(this.ParseStudentIdFromMessage(message), parsedName, message.From);
@@ -75,14 +74,14 @@ namespace CourseManagement.MessageProcessing.Actions
 
         private int ParseSubjectCodeFromMessage(IMessage message)
         {
-            string parsedCourse = message.Subject.Substring(0, message.Subject.IndexOf("] "));
+            string parsedCourse = message.Subject.Substring(0, message.Subject.IndexOf("]"));
             parsedCourse = parsedCourse.Substring(parsedCourse.LastIndexOf("-") + 1);
             return Convert.ToInt32(parsedCourse);
         }
 
         private int ParseStudentIdFromMessage(IMessage message)
         {
-            string parsedString = message.Subject.Substring(message.Subject.IndexOf("] ") + 2);
+            string parsedString = message.Subject.Substring(message.Subject.IndexOf("]") + 1).Trim();
             parsedString = parsedString.Substring(0, parsedString.IndexOf("-"));
             return Convert.ToInt32(parsedString);
         }

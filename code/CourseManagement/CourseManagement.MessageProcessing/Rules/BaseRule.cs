@@ -26,7 +26,7 @@ namespace CourseManagement.MessageProcessing.Rules
 
         public void Process(IMessage message)
         {
-                this.actions.ForEach(a => a.Execute(message));
+            this.actions.ForEach(a => a.Execute(message));
         }
 
         public abstract bool IsMatch(IMessage message);

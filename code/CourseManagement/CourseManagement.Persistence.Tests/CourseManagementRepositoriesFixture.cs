@@ -1,15 +1,14 @@
-﻿using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using Moq;
-
-namespace CourseManagement.Persistence.Tests
+﻿namespace CourseManagement.Persistence.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model;
+    using Repositories;
+    using Moq;
 
     [TestClass]
     public class CourseManagementRepositoriesFixture
     {
-        private Mock<IRepository<Attachment>> attachments;
+        private Mock<IRepository<DeliverableAttachment>> deliverableAttachments;
 
         private Mock<IRepository<Course>> courses;
 
@@ -32,13 +31,15 @@ namespace CourseManagement.Persistence.Tests
         private Mock<IRepository<Configuration>> configurations;
         
         private MockRepository mockRepository;
+        private Mock<IRepository<TicketAttachment>> ticketAttachments;
 
         [TestInitialize]
         public void Initialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.accounts = this.mockRepository.Create<IRepository<Account>>();
-            this.attachments = this.mockRepository.Create<IRepository<Attachment>>();
+            this.deliverableAttachments = this.mockRepository.Create<IRepository<DeliverableAttachment>>();
+            this.ticketAttachments = this.mockRepository.Create<IRepository<TicketAttachment>>();
             this.configurations = this.mockRepository.Create<IRepository<Configuration>>();
             this.courses = this.mockRepository.Create<IRepository<Course>>();
             this.deliverables = this.mockRepository.Create<IRepository<Deliverable>>();
@@ -56,7 +57,7 @@ namespace CourseManagement.Persistence.Tests
         {
             var repositories = this.CreateRepositories();
             Assert.AreSame(repositories.Accounts, this.accounts.Object);
-            Assert.AreSame(repositories.Attachments, this.attachments.Object);
+            Assert.AreSame(repositories.DeliverableAttachments, this.deliverableAttachments.Object);
             Assert.AreSame(repositories.Configurations, this.configurations.Object);
             Assert.AreSame(repositories.Courses, this.courses.Object);
             Assert.AreSame(repositories.Deliverables, this.deliverables.Object);
@@ -66,13 +67,15 @@ namespace CourseManagement.Persistence.Tests
             Assert.AreSame(repositories.Subjects, this.subjects.Object);
             Assert.AreSame(repositories.Teachers, this.teachers.Object);
             Assert.AreSame(repositories.Tickets, this.tickets.Object);
+            Assert.AreSame(repositories.TicketAttachments, this.ticketAttachments.Object);
         }
 
         private CourseManagementRepositories CreateRepositories()
         {
             return new CourseManagementRepositories(
                 this.accounts.Object,
-                this.attachments.Object,
+                this.deliverableAttachments.Object,
+                this.ticketAttachments.Object,
                 this.configurations.Object,
                 this.courses.Object,
                 this.deliverables.Object,

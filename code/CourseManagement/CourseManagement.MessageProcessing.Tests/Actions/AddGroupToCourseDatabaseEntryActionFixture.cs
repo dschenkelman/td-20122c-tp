@@ -1,11 +1,12 @@
-﻿using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.Messages;
+﻿using System.Linq;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using MessageProcessing.Actions;
+    using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Model;
     using Moq;
@@ -95,39 +96,33 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         public void ShouldThrowNonExistingCourseExceptionWhenUsingExecute()
         {
             //arrange
-            var courses = new List<Course> {trueCourse};
+            var courses = new List<Course>();
 
-            trueCourse.Account = new Account{User = "otro"};
-            falseCourseWrongYear.Account = new Account { User = this.messageAddress };
+            this.trueCourse.Account = new Account{ User = "otro" };
+            this.falseCourseWrongYear.Account = new Account { User = this.messageAddress };
 
             var account = new Account { User = this.messageAddress };
             var accounts = new List<Account> { account };
 
-            this.courseRepository.Setup(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(f =>
-                                                        f.Compile().Invoke(falseCourseWrongYear) && (! f.Compile().Invoke(trueCourse)))))
-                                                        .Returns(default(IEnumerable<Course>))
-                                                        .Verifiable();
+            this.courseRepository.Setup(
+                cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(
+                    f => f.Compile().Invoke(this.falseCourseWrongYear) 
+                        && (!f.Compile().Invoke(this.trueCourse)))))
+                        .Returns(default(IEnumerable<Course>))
+                        .Verifiable();
 
             this.accountRepository.Setup(ar => ar.Get(It.Is<Expression<Func<Account, bool>>>(f => f.Compile().Invoke(account)))).Returns(accounts).Verifiable();
 
-            this.message.Setup(e => e.To).Returns(new List<string>{this.messageAddress}).Verifiable();
+            this.message.Setup(e => e.To).Returns(new List<string> { this.messageAddress }).Verifiable();
 
-            this.message.Setup(e => e.Date).Returns(incorrectDateWrongYear).Verifiable();
+            this.message.Setup(e => e.Date).Returns(this.incorrectDateWrongYear).Verifiable();
+
+            this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>())).Returns(courses).Verifiable();
 
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
             
             // act
             action.Execute(this.message.Object);
-
-            // assert
-
-            this.message.Verify(e => e.To, Times.Once());
-
-            this.message.Verify(e => e.Date, Times.Exactly(2));
-
-            this.courseRepository.Verify(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>
-                            (f => (f.Compile().Invoke(trueCourse)) && (!f.Compile().Invoke(falseCourseWrongYear)))), Times.Once());
-
         }
 
         [ExpectedException(typeof(Exception))]
@@ -163,7 +158,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.message.Setup(e => e.Date).Returns(correctDate).Verifiable();
 
-            this.groupParser.Setup(gp => gp.ObtainIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
+            this.groupParser.Setup(gp => gp.GetIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
 
             this.studentRepository.Setup(sr => sr.GetById(correctId)).Returns(default(Student)).Verifiable();
             
@@ -171,21 +166,6 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             //act
             action.Execute(this.message.Object);
-
-            // assert
-
-            this.message.Verify(e => e.To, Times.Once());
-
-            this.message.Verify(e => e.Date, Times.Exactly(2));
-
-            this.courseRepository.Verify(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>
-                            (f => (f.Compile().Invoke(trueCourse)) && (!f.Compile().Invoke(falseCourseWrongYear)))), Times.Once());
-
-            this.groupParser.Verify(gp => gp.ObtainIdsFromMessage(this.message.Object), Times.Once());
-
-            this.studentRepository.Verify(sr => sr.GetById(90202),Times.Once());
-
-
         }
 
         [ExpectedException(typeof(Exception))]
@@ -227,7 +207,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.message.Setup(e => e.Date).Returns(correctDate).Verifiable();
 
-            this.groupParser.Setup(gp => gp.ObtainIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
+            this.groupParser.Setup(gp => gp.GetIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
 
             this.studentRepository.Setup(sr => sr.GetById(correctId)).Returns(studentA).Verifiable();
 
@@ -235,19 +215,6 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             //act
             action.Execute(this.message.Object);
-
-            // assert
-
-            this.message.Verify(e => e.To, Times.Once());
-
-            this.message.Verify(e => e.Date, Times.Exactly(2));
-
-            this.courseRepository.Verify(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>
-                            (f => (f.Compile().Invoke(trueCourse)) && (!f.Compile().Invoke(falseCourseWrongYear)))), Times.Once());
-
-            this.groupParser.Verify(gp => gp.ObtainIdsFromMessage(this.message.Object), Times.Once());
-
-            this.studentRepository.Verify(sr => sr.GetById(90202), Times.Once());
         }
 
         [ExpectedException(typeof(Exception))]
@@ -297,7 +264,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.message.Setup(e => e.Date).Returns(correctDate).Verifiable();
 
-            this.groupParser.Setup(gp => gp.ObtainIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
+            this.groupParser.Setup(gp => gp.GetIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
 
             this.studentRepository.Setup(sr => sr.GetById(correctId)).Returns(studentA).Verifiable();
 
@@ -312,44 +279,25 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             //act
             action.Execute(this.message.Object);
-
-            // assert
-
-            this.message.Verify(e => e.To, Times.Once());
-
-            this.message.Verify(e => e.Date, Times.Exactly(2));
-
-            this.courseRepository.Verify(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>
-                            (f => (f.Compile().Invoke(trueCourse)) && (!f.Compile().Invoke(falseCourseWrongYear)))), Times.Once());
-
-            this.groupParser.Verify(gp => gp.ObtainIdsFromMessage(this.message.Object), Times.Once());
-
-            this.studentRepository.Verify(sr => sr.GetById(90202), Times.Once());
-
-            this.groupRepository.Verify(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>(f =>
-                                            f.Compile().Invoke(existingGroup) && (!f.Compile().Invoke(falseGroup1))
-                                            && (!f.Compile().Invoke(falseGroup2)) && (!f.Compile().Invoke(falseGroup3))
-                                            && (!f.Compile().Invoke(falseGroup4)))) , Times.Once() );
         }
 
         [TestMethod]
         public void ShouldAddNewGroupOfStudentsWhenUsingExecute()
         {
             //arrange
-
             var account = new Account { User = this.messageAddress };
             var accounts = new List<Account> { account };
             const int correctId1 = 90202;
             
             var studentIds = new List<int> { correctId1 };
 
-            var coursesOfStudent = new List<Course> { trueCourse , falseCourse };
+            var coursesOfStudent = new List<Course> { trueCourse, falseCourse };
 
-            trueCourse.Account = new Account { User = this.messageAddress };
-            falseCourse.Account = new Account { User = "anotherMessageAddres" };
-            falseCourseWrongSemester.Account = new Account { User = "anotherMessageAddres" };
-            falseCourseWrongSubjectId.Account = new Account { User = "anotherMessageAddres" };
-            falseCourseWrongYear.Account = new Account { User = "anotherMessageAddres" };
+            this.trueCourse.Account = new Account { User = this.messageAddress };
+            this.falseCourse.Account = new Account { User = "anotherMessageAddres" };
+            this.falseCourseWrongSemester.Account = new Account { User = "anotherMessageAddres" };
+            this.falseCourseWrongSubjectId.Account = new Account { User = "anotherMessageAddres" };
+            this.falseCourseWrongYear.Account = new Account { User = "anotherMessageAddres" };
 
             var studentA = new Student(correctId1, "Sebastian", "asd@gmail.com");
 
@@ -357,30 +305,34 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             var students1 = new List<Student> { studentA };
 
-            var trueGroup = new Group() { Course = trueCourse, CourseId = 0 , Students = students1};
-            var falseGroup1 = new Group() { Course = falseCourse, CourseId = 1 };
-            var falseGroup2 = new Group() { Course = falseCourseWrongSemester, CourseId = 2 };
-            var falseGroup3 = new Group() { Course = falseCourseWrongSubjectId, CourseId = 3 };
-            var falseGroup4 = new Group() { Course = falseCourseWrongYear, CourseId = 4 };
+            var trueGroup = new Group { Course = this.trueCourse, CourseId = 0, Students = students1 };
+            var falseGroup1 = new Group { Course = this.falseCourse, CourseId = 1 };
+            var falseGroup2 = new Group { Course = this.falseCourseWrongSemester, CourseId = 2 };
+            var falseGroup3 = new Group { Course = this.falseCourseWrongSubjectId, CourseId = 3 };
+            var falseGroup4 = new Group { Course = this.falseCourseWrongYear, CourseId = 4 };
 
             var groupsInCourse = new List<Group> { falseGroup1 };
 
-            var correctCourses = new List<Course> { trueCourse };
+            var correctCourses = new List<Course> { this.trueCourse };
 
-            this.courseRepository.Setup(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(f =>
-                                            f.Compile().Invoke(trueCourse) && (!f.Compile().Invoke(falseCourse))
-                                            && (!f.Compile().Invoke(falseCourseWrongYear)) && (!f.Compile().Invoke(falseCourseWrongSubjectId))
-                                            && (!f.Compile().Invoke(falseCourseWrongSemester)))))
-                                            .Returns(correctCourses)
-                                            .Verifiable();
+            this.courseRepository.Setup(
+                cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(
+                    f =>
+                        f.Compile().Invoke(this.trueCourse) 
+                        && (!f.Compile().Invoke(this.falseCourse))
+                        && (!f.Compile().Invoke(this.falseCourseWrongYear))
+                        && (!f.Compile().Invoke(this.falseCourseWrongSubjectId))
+                        && (!f.Compile().Invoke(this.falseCourseWrongSemester)))))
+                        .Returns(correctCourses)
+                        .Verifiable();
 
             this.accountRepository.Setup(ar => ar.Get(It.Is<Expression<Func<Account, bool>>>(f => f.Compile().Invoke(account)))).Returns(accounts).Verifiable();
 
             this.message.Setup(e => e.To).Returns(new List<string> { this.messageAddress }).Verifiable();
 
-            this.message.Setup(e => e.Date).Returns(correctDate).Verifiable();
+            this.message.Setup(e => e.Date).Returns(this.correctDate).Verifiable();
 
-            this.groupParser.Setup(gp => gp.ObtainIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
+            this.groupParser.Setup(gp => gp.GetIdsFromMessage(this.message.Object)).Returns(studentIds).Verifiable();
 
             this.studentRepository.Setup(sr => sr.GetById(correctId1)).Returns(studentA).Verifiable();
 
@@ -391,10 +343,6 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                                             .Returns(groupsInCourse)
                                             .Verifiable();
 
-            this.groupRepository.Setup(gr => gr.Insert((It.IsAny<Group>()))).Verifiable();
-
-            this.groupRepository.Setup(gr => gr.Save()).Verifiable();
-
             this.studentRepository.Setup(sr => sr.Save()).Verifiable();
 
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
@@ -403,29 +351,24 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             action.Execute(this.message.Object);
 
             // assert
+            Assert.AreEqual(1, studentA.Groups.Count);
+            Assert.AreEqual(this.trueCourse.Id, studentA.Groups.ElementAt(0).CourseId);
 
-            this.message.Verify(e => e.To, Times.Exactly(5));
+            this.message.Verify(e => e.To, Times.Once());
 
             this.message.Verify(e => e.Date, Times.Exactly(2));
 
-            this.courseRepository.Verify(cr => cr.Get(It.Is<Expression<Func<Course, bool>>>
-                            (f => (f.Compile().Invoke(trueCourse)) && (!f.Compile().Invoke(falseCourseWrongYear)))), Times.Once());
+            this.courseRepository.Verify(
+                cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(
+                    f => f.Compile().Invoke(this.trueCourse) 
+                        && (!f.Compile().Invoke(this.falseCourseWrongYear)))),
+                        Times.Once());
 
-            this.groupParser.Verify(gp => gp.ObtainIdsFromMessage(this.message.Object), Times.Once());
+            this.groupParser.Verify(gp => gp.GetIdsFromMessage(this.message.Object), Times.Once());
 
             this.studentRepository.Verify(sr => sr.GetById(It.IsAny<int>()), Times.Once());
 
-            this.groupRepository.Verify(gr => gr.Get(It.Is<Expression<Func<Group, bool>>>(f =>
-                                f.Compile().Invoke(trueGroup) && (!f.Compile().Invoke(falseGroup1))
-                                && (!f.Compile().Invoke(falseGroup2)) && (!f.Compile().Invoke(falseGroup3))
-                                && (!f.Compile().Invoke(falseGroup4)))), Times.Once());
-
-            this.groupRepository.Verify(gr => gr.Insert((It.IsAny<Group>())) , Times.Once());
-
-            this.groupRepository.Verify((gr => gr.Save()), Times.Once());
-
-            this.studentRepository.Verify((sr => sr.Save()), Times.Once());
-
+            this.studentRepository.Verify(sr => sr.Save(), Times.Once());
         }
 
         private AddGroupToCourseDatabaseEntryAction CreateAddGroupToCourseDatabaseEntryAction()
