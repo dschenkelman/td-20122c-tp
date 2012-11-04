@@ -78,10 +78,16 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             Mock<IMessage> message = this.mockRepository.Create<IMessage>();
             message.Setup(m => m.From).Returns("matias.servetto@gmail.com");
+            message.Setup(m => m.Subject).Returns("[CNSOULTA-PRIVADA] tema1");
 
             ReplyAction action = CreateAction();
 
+            ActionEntry actionEntry = new ActionEntry("CONSULTA");
+            actionEntry.AdditionalData.Add("public", "true");
+            actionEntry.AdditionalData.Add("body", "body text");
+
             // act
+            action.Initialize(actionEntry);
             action.Execute(message.Object);
 
             //validate

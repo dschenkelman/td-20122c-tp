@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using CourseManagement.MessageProcessing.Services;
 using CourseManagement.Messages;
 using CourseManagement.Model;
@@ -16,24 +17,31 @@ namespace CourseManagement.MessageProcessing.Actions
         private readonly ICourseManagementRepositories courseManagementRepositories;
         private readonly IConfigurationService configurationService;
         private bool isPublic;
+        private string topicRegex;
+        private string body;
 
         public ReplyAction(IMessageSender messageSender, ICourseManagementRepositories courseManagementRepositories, IConfigurationService configurationService)
         {
             this.messageSender = messageSender;
             this.courseManagementRepositories = courseManagementRepositories;
             this.configurationService = configurationService;
-            //TODO initialize
-            this.isPublic = true;
         }
 
         public void Initialize(ActionEntry actionEntry)
         {
-            throw new NotImplementedException();
+            this.isPublic = Boolean.Parse(actionEntry.AdditionalData["public"]);
+            if( this.isPublic )
+            {
+                this.topicRegex = @"^\[CONSULTA-PUBLICA\][\ ]*(?<topic>.*)$";
+            }else
+            {
+                this.topicRegex = @"^\[CONSULTA-PRIVADA\][\ ]*(?<topic>.*)$";
+            }
+            this.body = actionEntry.AdditionalData["body"];
         }
 
         public void Execute(IMessage message)
         {
-            EmailMessage messageToSend = CreateMessage(message);
 
             int semester = DateTime.Now.Semester();
             int subjectId = this.configurationService.MonitoredSubjectId;
@@ -43,8 +51,13 @@ namespace CourseManagement.MessageProcessing.Actions
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
                 c.Semester == semester).ToList();
 
+            EmailMessage messageToSend = null;
+
             if (courses.Count > 0)
             {
+
+                messageToSend = CreateMessage(message, courses.First());
+
                 this.GetDestinationMessageSystemIds(message, courses.First()).ForEach(dmsid => messageToSend.To.Add(dmsid));
 
                 configuration = courses.First().Account.Configurations.Single(
@@ -72,9 +85,12 @@ namespace CourseManagement.MessageProcessing.Actions
             return destinations;
         }
 
-        private EmailMessage CreateMessage(IMessage receivedMessage )
+        private EmailMessage CreateMessage(IMessage receivedMessage, Course course)
         {
-            EmailMessage email = new EmailMessage("No reply", "from", DateTime.Now, null, new string[0] );
+            EmailMessage email =
+                new EmailMessage(
+                    "[CONSULTA-" + Regex.Match(topicRegex, receivedMessage.Subject).Groups["topic"].Value + "] Creada",
+                    course.Account.User, DateTime.Now, new List<EmailAttachment>(), this.body);
             return email;
         }
     }
