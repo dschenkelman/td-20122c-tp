@@ -4,6 +4,6 @@
 
     public interface IActionFinder
     {
-        IEnumerable<string> FindNames(string ruleName);
+        IEnumerable<ActionEntry> FindActions(string ruleName);
     }
 }

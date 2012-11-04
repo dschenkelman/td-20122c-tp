@@ -35,13 +35,13 @@
                 .Returns(RulesConfigurationFilePathValue).Verifiable();
 
             this.actionXmlReader
-                .Setup(r => r.GetActionNames(RulesConfigurationFilePathValue, NotUsedRule))
-                .Returns(new List<string>());
+                .Setup(r => r.GetActionEntries(RulesConfigurationFilePathValue, NotUsedRule))
+                .Returns(new List<ActionEntry>());
 
             ConfigurationActionFinder configurationActionFinder = this.CreateActionFinder();
 
             // act
-            configurationActionFinder.FindNames(NotUsedRule);
+            configurationActionFinder.FindActions(NotUsedRule);
 
             // assert
             this.configurationService.Verify(cs => cs.GetValue(RulesConfigurationFilePathKey), Times.Once());
@@ -57,27 +57,27 @@
 
             const string RuleName = "Rule";
 
-            const string Action1 = "Action1";
-            const string Action2 = "Action2";
-            const string Action3 = "Action3";
+            ActionEntry action1 = new ActionEntry("Action1");
+            ActionEntry action2 = new ActionEntry("Action2");
+            ActionEntry action3 = new ActionEntry("Action3");
 
-            var retrievedActionNames = new List<string> { Action1, Action2, Action3 };
+            var retrievedActionNames = new List<ActionEntry> { action1, action2, action3 };
 
             this.configurationService.Setup(cs => cs.GetValue(RulesConfigurationFilePathKey))
                 .Returns(RulesConfigurationFilePathValue);
             
             this.actionXmlReader
-                .Setup(rcs => rcs.GetActionNames(RulesConfigurationFilePathValue, RuleName))
+                .Setup(rcs => rcs.GetActionEntries(RulesConfigurationFilePathValue, RuleName))
                 .Returns(retrievedActionNames)
                 .Verifiable();
 
             ConfigurationActionFinder configurationActionFinder = this.CreateActionFinder();
 
             // act
-            IEnumerable<string> retrievedRules = configurationActionFinder.FindNames(RuleName);
+            IEnumerable<ActionEntry> retrievedRules = configurationActionFinder.FindActions(RuleName);
 
             // assert
-            this.actionXmlReader.Verify(rcs => rcs.GetActionNames(RulesConfigurationFilePathValue, RuleName), Times.Once());
+            this.actionXmlReader.Verify(rcs => rcs.GetActionEntries(RulesConfigurationFilePathValue, RuleName), Times.Once());
 
             Assert.AreSame(retrievedActionNames, retrievedRules);
         }

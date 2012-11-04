@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\ActionEntry.cs" />
     <Compile Include="Actions\AddDeliverableToGroupDatabaseEntryAction.cs" />
     <Compile Include="Actions\AddGroupToCourseDatabaseEntryAction.cs" />
     <Compile Include="Actions\AddTicketToDatabaseAction.cs" />
