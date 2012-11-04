@@ -20,12 +20,11 @@ namespace CourseManagement.MessageProcessing.Actions
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
             this.configurationService = service;
-            //TODO incialize
-            this.isPrivate = false;
         }
 
         public void Initialize(ActionEntry actionEntry)
         {
+            this.isPrivate = !Boolean.Parse(actionEntry.AdditionalData["public"]);
         }
 
         public void Execute(IMessage message)

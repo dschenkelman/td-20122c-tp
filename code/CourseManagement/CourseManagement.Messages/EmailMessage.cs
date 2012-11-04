@@ -5,7 +5,7 @@
     
     public class EmailMessage : IMessage
     {
-        public EmailMessage(string subject, string from, DateTime date, IEnumerable<IMessageAttachment> attachments, params string[] to)
+        public EmailMessage(string subject, string from, DateTime date, IEnumerable<IMessageAttachment> attachments, String body, params string[] to)
         {
             this.Subject = subject;
             this.From = from;
@@ -13,6 +13,7 @@
             Array.ForEach(to, this.To.Add);
             this.Date = date;
             this.Attachments = attachments;
+            this.Body = body;
         }
 
         public string Subject { get; private set; }
