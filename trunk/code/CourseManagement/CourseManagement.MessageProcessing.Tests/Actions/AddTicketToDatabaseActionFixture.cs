@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Linq.Expressions;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using CourseManagement.MessageProcessing.Actions;
+using CourseManagement.MessageProcessing.Services;
 using CourseManagement.Messages;
 using CourseManagement.Model;
 using CourseManagement.Persistence.Repositories;
@@ -20,6 +22,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Ticket>> ticketRepository;
         private Mock<IRepository<TicketAttachment>> ticketAttachmentsRepository;
         private Mock<IRepository<Student>> studentRepository;
+        private Mock<IConfigurationService> configurationService;
+        private string rootPath;
 
         [TestInitialize]
         public void TestInitialize()
@@ -35,6 +39,10 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.studentRepository = this.mockRepository.Create<IRepository<Student>>();
             this.courseManagmentRepostiories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
+
+            this.rootPath = "c:";
+            this.configurationService = this.mockRepository.Create<IConfigurationService>();
+            this.configurationService.Setup(cmr => cmr.RootPath).Returns(rootPath);
         }
 
         [TestMethod]
@@ -160,6 +168,10 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                     It.Is<Expression<Func<Student, bool>>>(
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
+
+            attachment1.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment1")), Times.Once());
+            attachment2.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment2")), Times.Once());
+			attachment3.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment3")), Times.Once());
             this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Exactly(3));
             this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Once());
 
@@ -234,6 +246,10 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                     It.Is<Expression<Func<Student, bool>>>(
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
+
+            attachment1.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment1")), Times.Never());
+            attachment2.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment2")), Times.Never());
+            attachment3.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment3")), Times.Never());
             this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Never());
             this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Never());
 
@@ -308,6 +324,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                     It.Is<Expression<Func<Student, bool>>>(
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
+            attachment1.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment1")), Times.Never());
+            attachment2.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment2")), Times.Never());
+            attachment3.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment3")), Times.Never());
             this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Never());
             this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Never());
 
@@ -318,7 +337,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         private AddTicketToDatabaseAction CreateAction()
         {
-            return new AddTicketToDatabaseAction(this.courseManagmentRepostiories.Object);
+            return new AddTicketToDatabaseAction(this.courseManagmentRepostiories.Object, this.configurationService.Object);
         }
     }
 }

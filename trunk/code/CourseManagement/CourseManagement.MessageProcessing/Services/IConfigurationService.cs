@@ -9,5 +9,6 @@
         int MonitoredSubjectId { get; }
 
         string IncomingMessageProtocol { get; }
+        string OutgoingMessageProtocol { get; }
     }
 }

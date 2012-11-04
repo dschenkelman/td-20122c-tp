@@ -61,6 +61,7 @@
     <Compile Include="Actions\IXmlActionReader.cs" />
     <Compile Include="Actions\ConfigurationActionFinder.cs" />
     <Compile Include="Actions\NewStudentToCourseDatabaseEntryAction.cs" />
+    <Compile Include="Actions\ReplyAction.cs" />
     <Compile Include="Actions\UnityActionFactory.cs" />
     <Compile Include="Actions\IAction.cs" />
     <Compile Include="Actions\IActionFactory.cs" />

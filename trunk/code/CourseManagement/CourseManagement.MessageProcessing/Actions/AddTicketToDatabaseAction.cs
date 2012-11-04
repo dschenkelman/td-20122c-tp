@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.MessageProcessing.Services;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -11,12 +13,14 @@
     internal class AddTicketToDatabaseAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
-
+        private readonly IConfigurationService configurationService;
         private bool isPrivate;
 
-        public AddTicketToDatabaseAction(ICourseManagementRepositories courseManagmentRepositories)
+        public AddTicketToDatabaseAction(ICourseManagementRepositories courseManagmentRepositories, IConfigurationService service)
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
+            this.configurationService = service;
+            //TODO incialize
             this.isPrivate = false;
         }
 
@@ -34,7 +38,7 @@
                                                     ParseTopicFromMessage(message) + ") as a previous existing ticket.");
             }
 
-            string rootPath = "c:";
+            string rootPath = configurationService.RootPath;
             var directory = Path.Combine(rootPath, message.Subject, DateToYYYYMMDD( message.Date ));
 
             Directory.CreateDirectory(directory);

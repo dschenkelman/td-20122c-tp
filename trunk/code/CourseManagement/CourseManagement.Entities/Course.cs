@@ -42,5 +42,7 @@ namespace CourseManagement.Model
         public virtual Account Account { get; set; }
 
         public int AccountId { get; set; }
+
+        public string PublicDistributionList { get; set; }
     }
 }
