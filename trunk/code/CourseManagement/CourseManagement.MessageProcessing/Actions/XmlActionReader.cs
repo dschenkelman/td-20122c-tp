@@ -7,9 +7,9 @@
 
     public class XmlActionReader : IXmlActionReader
     {
-        public IEnumerable<string> GetActionNames(string rulesConfigurationFilePath, string ruleName)
+        public IEnumerable<ActionEntry> GetActionEntries(string rulesConfigurationFilePath, string ruleName)
         {
-            IEnumerable<string> names;
+            IEnumerable<ActionEntry> names;
             using (Stream xmlStream = File.OpenRead(rulesConfigurationFilePath))
             {
                 var document = XDocument.Load(xmlStream);
@@ -18,7 +18,7 @@
                 names = document.Descendants("rule")
                     .Where(e => e.Attribute("name").Value.Equals(ruleName))
                     .Descendants("action")
-                    .Select(e => e.Attribute("name").Value);
+                    .Select(e => new ActionEntry(e.Attribute("name").Value));
             }
 
             return names;

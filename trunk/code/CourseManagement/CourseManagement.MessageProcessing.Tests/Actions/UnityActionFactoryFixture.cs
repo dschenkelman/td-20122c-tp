@@ -30,13 +30,13 @@
 
             const string RuleName = "Rule1";
 
-            this.actionFinder.Setup(af => af.FindNames(RuleName)).Returns(new List<string>()).Verifiable();
+            this.actionFinder.Setup(af => af.FindActions(RuleName)).Returns(new List<ActionEntry>()).Verifiable();
 
             // act
             unityActionFactory.CreateActions(RuleName);
 
             // assert
-            this.actionFinder.Verify(af => af.FindNames(RuleName), Times.Once());
+            this.actionFinder.Verify(af => af.FindActions(RuleName), Times.Once());
         }
 
         [TestMethod]
@@ -46,17 +46,17 @@
             UnityActionFactory unityActionFactory = this.CreateActionFactory();
             
             const string RuleName = "Rule1";
-            const string Action1 = "Action1";
-            const string Action2 = "Action2";
+            ActionEntry action1 = new ActionEntry("Action1");
+            ActionEntry action2 = new ActionEntry("Action2");
 
             Mock<IAction> action1ForRule1 = this.mockRepository.Create<IAction>();
             Mock<IAction> action2ForRule1 = this.mockRepository.Create<IAction>();
 
-            List<string> actions = new List<string> { Action1, Action2 };
-            this.actionFinder.Setup(af => af.FindNames(RuleName)).Returns(actions);
+            List<ActionEntry> actions = new List<ActionEntry> { action1, action2 };
+            this.actionFinder.Setup(af => af.FindActions(RuleName)).Returns(actions);
 
-            this.container.Setup(ct => ct.Resolve(typeof(IAction), Action1)).Returns(action1ForRule1.Object);
-            this.container.Setup(ct => ct.Resolve(typeof(IAction), Action2)).Returns(action2ForRule1.Object);
+            this.container.Setup(ct => ct.Resolve(typeof(IAction), action1.Name)).Returns(action1ForRule1.Object);
+            this.container.Setup(ct => ct.Resolve(typeof(IAction), action2.Name)).Returns(action2ForRule1.Object);
 
             // act
             IEnumerable<IAction> actionsRetrieved = unityActionFactory.CreateActions(RuleName);

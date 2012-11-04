@@ -4,6 +4,6 @@
 
     public interface IXmlActionReader
     {
-        IEnumerable<string> GetActionNames(string rulesConfigurationFilePath, string ruleName);
+        IEnumerable<ActionEntry> GetActionEntries(string rulesConfigurationFilePath, string ruleName);
     }
 }

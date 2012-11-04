@@ -16,12 +16,12 @@
             this.xmlActionReader = xmlRuleReader;
         }
 
-        public IEnumerable<string> FindNames(string ruleName)
+        public IEnumerable<ActionEntry> FindActions(string ruleName)
         {
             string rulesConfigurationFilePath = 
                 this.configurationService.GetValue(RulesConfigurationFilePathKey);
 
-            return this.xmlActionReader.GetActionNames(rulesConfigurationFilePath, ruleName);
+            return this.xmlActionReader.GetActionEntries(rulesConfigurationFilePath, ruleName);
         }
     }
 }
