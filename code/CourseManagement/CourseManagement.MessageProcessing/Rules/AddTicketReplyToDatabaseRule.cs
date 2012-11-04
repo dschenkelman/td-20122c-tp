@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Text.RegularExpressions;
+    using Actions;
     using Messages;
     using Persistence.Repositories;
-    using Rules;
 
     public class AddTicketReplyToDatabaseRule : BaseRule
     {
