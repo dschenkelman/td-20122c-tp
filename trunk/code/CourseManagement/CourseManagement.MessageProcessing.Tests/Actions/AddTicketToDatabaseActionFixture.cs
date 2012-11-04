@@ -18,7 +18,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private MockRepository mockRepository;
         private Mock<ICourseManagementRepositories> courseManagmentRepostiories;
         private Mock<IRepository<Ticket>> ticketRepository;
-        private Mock<IRepository<Attachment>> attachmentRepository;
+        private Mock<IRepository<TicketAttachment>> ticketAttachmentsRepository;
         private Mock<IRepository<Student>> studentRepository;
 
         [TestInitialize]
@@ -30,8 +30,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.ticketRepository = this.mockRepository.Create<IRepository<Ticket>>();
             this.courseManagmentRepostiories.Setup(cmr => cmr.Tickets).Returns(this.ticketRepository.Object);
 
-            this.attachmentRepository = this.mockRepository.Create<IRepository<Attachment>>();
-            this.courseManagmentRepostiories.Setup(cmr => cmr.Attachments).Returns(this.attachmentRepository.Object);
+            this.ticketAttachmentsRepository = this.mockRepository.Create<IRepository<TicketAttachment>>();
+            this.courseManagmentRepostiories.Setup(cmr => cmr.TicketAttachments).Returns(this.ticketAttachmentsRepository.Object);
 
             this.studentRepository = this.mockRepository.Create<IRepository<Student>>();
             this.courseManagmentRepostiories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
@@ -41,7 +41,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         public void ShouldAddTicketToDatabase()
         {
             // arrange
-            this.attachmentRepository.Setup(tr => tr.Save()).Verifiable();
+            this.ticketAttachmentsRepository.Setup(tr => tr.Save()).Verifiable();
 
             const string MessageSystemId = "matias.servetto@gmail.com";
             Student trueStudent = new Student(91363, "Matias Servetto", MessageSystemId),
@@ -120,9 +120,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             attachment2.Setup(a => a.Download(It.IsAny<String>()));
             attachment3.Setup(a => a.Download(It.IsAny<String>()));
 
-            this.attachmentRepository.Setup(
-                tr => tr.Insert(It.IsAny<Attachment>())).Verifiable();
-            this.attachmentRepository.Setup(tr => tr.Save()).Verifiable();
+            this.ticketAttachmentsRepository.Setup(
+                tr => tr.Insert(It.IsAny<TicketAttachment>())).Verifiable();
+            this.ticketAttachmentsRepository.Setup(tr => tr.Save()).Verifiable();
 
             const string MessageSubject = "[CONSULTA-PUBLICA]Topic";
             Ticket trueTicket = new Ticket { MessageSubject = MessageSubject },
@@ -160,8 +160,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                     It.Is<Expression<Func<Student, bool>>>(
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
-            this.attachmentRepository.Verify(ar => ar.Insert(It.IsAny<Attachment>()), Times.Exactly(3));
-            this.attachmentRepository.Verify(ar => ar.Save(), Times.Once());
+            this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Exactly(3));
+            this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Once());
 
             this.ticketRepository.Verify(
                 tr => tr.Insert(It.IsAny<Ticket>()), Times.Once());
@@ -206,9 +206,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                         f => f.Compile().Invoke(trueTicket) && !f.Compile().Invoke(falseTicket)))).Returns(
                             new List<Ticket>{ trueTicket }).
                 Verifiable();
-            this.attachmentRepository.Setup(
-                tr => tr.Insert(It.IsAny<Attachment>())).Verifiable();
-            this.attachmentRepository.Setup(tr => tr.Save()).Verifiable();
+            this.ticketAttachmentsRepository.Setup(
+                tr => tr.Insert(It.IsAny<TicketAttachment>())).Verifiable();
+            this.ticketAttachmentsRepository.Setup(tr => tr.Save()).Verifiable();
 
             this.ticketRepository.Setup(
                 tr => tr.Insert(It.IsAny<Ticket>())).Verifiable();
@@ -234,8 +234,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                     It.Is<Expression<Func<Student, bool>>>(
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
-            this.attachmentRepository.Verify(ar => ar.Insert(It.IsAny<Attachment>()), Times.Never());
-            this.attachmentRepository.Verify(ar => ar.Save(), Times.Never());
+            this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Never());
+            this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Never());
 
             this.ticketRepository.Verify(
                 tr => tr.Insert(It.IsAny<Ticket>()), Times.Never());
@@ -280,9 +280,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                         f => f.Compile().Invoke(trueTicket) && !f.Compile().Invoke(falseTicket)))).Returns(
                             new List<Ticket> { trueTicket }).
                 Verifiable();
-            this.attachmentRepository.Setup(
-                tr => tr.Insert(It.IsAny<Attachment>())).Verifiable();
-            this.attachmentRepository.Setup(tr => tr.Save()).Verifiable();
+            this.ticketAttachmentsRepository.Setup(
+                tr => tr.Insert(It.IsAny<TicketAttachment>())).Verifiable();
+            this.ticketAttachmentsRepository.Setup(tr => tr.Save()).Verifiable();
 
             this.ticketRepository.Setup(
                 tr => tr.Insert(It.IsAny<Ticket>())).Verifiable();
@@ -308,8 +308,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
                     It.Is<Expression<Func<Student, bool>>>(
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
-            this.attachmentRepository.Verify(ar => ar.Insert(It.IsAny<Attachment>()), Times.Never());
-            this.attachmentRepository.Verify(ar => ar.Save(), Times.Never());
+            this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Never());
+            this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Never());
 
             this.ticketRepository.Verify(
                 tr => tr.Insert(It.IsAny<Ticket>()), Times.Never());

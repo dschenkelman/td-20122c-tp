@@ -1,6 +1,4 @@
-﻿using CourseManagement.Utilities.Extensions;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +6,7 @@ namespace CourseManagement.MessageProcessing.Actions
     using Messages;
     using Model;
     using Persistence.Repositories;
+    using Utilities.Extensions;
 
     public class AddGroupToCourseDatabaseEntryAction : IAction
     {
@@ -24,65 +23,50 @@ namespace CourseManagement.MessageProcessing.Actions
         public void Execute(IMessage message)
         {
             //verify existing course
-            var courseForApplyingGroup = this.GetCourseFromMessage(message);
+            var courseForNewGroup = this.GetCourseFromMessage(message);
 
             //verify existing students
-            var studentsIds = this.groupFileParser.ObtainIdsFromMessage(message);
+            var studentsIds = this.groupFileParser.GetIdsFromMessage(message);
             
             var studentsInCourse = studentsIds.Select(studentId =>
-                                                          {
-                                                              var student =
-                                                                  this.courseManagementRepositories.Students.GetById(
-                                                                      studentId);
+                {
+                    var student =
+                        this.courseManagementRepositories.Students.GetById(
+                            studentId);
 
-                                                              if ( student == null )
-                                                              {
-                                                                  throw new Exception("Students file contains studentsId that don't belong to Student DataBase");
-                                                              }
+                    if (student == null)
+                    {
+                        throw new Exception("Students file contains studentsId that don't belong to Student DataBase");
+                    }
 
-                                                              if (!student.Courses.Contains(courseForApplyingGroup) )
-                                                              {
-                                                                  throw new Exception("Students file contains studentsId that don't belong to Course");
-                                                              }
+                    if (!student.Courses.Any(c => c.Id == courseForNewGroup.Id))
+                    {
+                        throw new Exception("Students file contains studentsId that don't belong to Course");
+                    }
 
-                                                              return student;
-                                                          }).ToList();
+                    return student;
+                }).ToList();
 
             // verify existing group
+            var newGroup = new Group { CourseId = courseForNewGroup.Id };
 
-            var newGroup = new Group { Course = courseForApplyingGroup };
+            var groupsInCourse = this.courseManagementRepositories.Groups.Get(g => (g.CourseId == newGroup.CourseId));
 
-            var groupsInCourse = this.courseManagementRepositories.Groups.Get(g => (g.CourseId == newGroup.CourseId)).ToList();
-
-            studentsInCourse.Select(student =>
-                                        {
-                                            if (groupsInCourse.Any(groupInCourse => (groupInCourse.Students!=null)&&(groupInCourse.Students.Contains(student))))
-                                            {
-                                                throw new Exception(
-                                                    "A Student has been already assigned for an existing Group in the Course");
-                                            }
-                                            return student;
-                                        }).ToList();
+            studentsInCourse.ForEach(student =>
+                {
+                    if (
+                        groupsInCourse.Any(
+                            groupInCourse =>
+                            (groupInCourse.Students != null) &&
+                            groupInCourse.Students.Any(s => s.Id == student.Id)))
+                    {
+                        throw new Exception("A Student has been already assigned for an existing Group in the Course");
+                    }
+                });
 
             // Non-existing group. Proceed to add
-            newGroup.Students = new List<Student>();
-
-            foreach (var studentToAdd in studentsInCourse)
-            {
-                newGroup.Students.Add(studentToAdd);
-            }
-
-            this.courseManagementRepositories.Groups.Insert(newGroup);
-
-            this.courseManagementRepositories.Groups.Save();
-
             foreach (var studentAddGroup in studentsInCourse)
             {
-                if (studentAddGroup.Groups == null)
-                {
-                    studentAddGroup.Groups = new List<Group>();
-                }
-
                 studentAddGroup.Groups.Add(newGroup);
             }
 
@@ -93,15 +77,16 @@ namespace CourseManagement.MessageProcessing.Actions
         {
             int year = message.Date.Year;
             int semester = this.GetSemesterFromMessage(message);
+            string toAddress = message.To.First();
 
-            var courses = this.courseManagementRepositories.Courses.Get(c => (c.Account.User == message.To.First())
-                                            && (c.Year == year) && (c.Semester == semester));
-            if (courses == null)
+            var course = this.courseManagementRepositories.Courses.Get(c => (c.Account.User == toAddress)
+                                            && (c.Year == year) && (c.Semester == semester)).FirstOrDefault();
+            if (course == null)
             {
                 throw new Exception("Course obtained from message doesn't exists");
             }
 
-            return courses.First();
+            return course;
         }
 
         public int GetSemesterFromMessage(IMessage message)

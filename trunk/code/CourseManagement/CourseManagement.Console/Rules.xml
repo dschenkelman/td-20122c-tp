@@ -7,7 +7,7 @@
   </rule>
   <rule name="NewGroup">
     <actions>
-      <action name="NewGroup"/>
+      <action name="AddGroup"/>
     </actions>
   </rule>
   <rule name="NewStudent">

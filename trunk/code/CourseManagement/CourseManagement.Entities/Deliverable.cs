@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CourseManagement.Model
+﻿namespace CourseManagement.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Deliverable
     {
-        public Deliverable()
+        public Deliverable() : this(default(DateTime))
         {
         }
 
         public Deliverable(DateTime receptionDate)
         {
             this.ReceptionDate = receptionDate;
+            this.Attachments = new List<DeliverableAttachment>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,6 +27,6 @@ namespace CourseManagement.Model
 
         public int GroupId { get; set; }
 
-        public List<Attachment> Attachments { get; set; }
+        public List<DeliverableAttachment> Attachments { get; set; }
     }
 }

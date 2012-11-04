@@ -42,13 +42,13 @@ namespace CourseManagement.MessageProcessing.Actions
                 string path = Path.Combine(directory, messageAttachment.Name);
                 messageAttachment.Download(path);
 
-                Attachment attachment = new Attachment { FileName = messageAttachment.Name, Location = path };
+                TicketAttachment attachment = new TicketAttachment() { FileName = messageAttachment.Name, Location = path };
                 ticket.Attachments.Add(attachment);
 
-                this.courseManagmentRepositories.Attachments.Insert(attachment);
+                this.courseManagmentRepositories.TicketAttachments.Insert(attachment);
             }
 
-            this.courseManagmentRepositories.Attachments.Save();
+            this.courseManagmentRepositories.TicketAttachments.Save();
 
             this.courseManagmentRepositories.Tickets.Insert(ticket);
             this.courseManagmentRepositories.Tickets.Save();
