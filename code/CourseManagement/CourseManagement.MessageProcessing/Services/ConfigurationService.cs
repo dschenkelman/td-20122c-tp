@@ -21,5 +21,11 @@ namespace CourseManagement.MessageProcessing.Services
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
         }
+
+        public string MonitoringCourseIncomingMessageProtocol
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
     }
 }
