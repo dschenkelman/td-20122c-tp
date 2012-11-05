@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using MessageProcessing.Rules.Moles;
     using MessageProcessing.Actions;
     using MessageProcessing.Rules;
+    using MessageProcessing.Rules.Moles;
     using Microsoft.Practices.Unity;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
@@ -32,13 +32,13 @@
             // arrange
             UnityRuleFactory unityRuleFactory = this.CreateUnityRuleFactory();
 
-            this.ruleFinder.Setup(rf => rf.FindNames()).Returns(new List<string>()).Verifiable();
+            this.ruleFinder.Setup(rf => rf.FindRules()).Returns(new List<RuleEntry>()).Verifiable();
 
             // act
             unityRuleFactory.CreateRules();
 
             // assert
-            this.ruleFinder.Verify(rf => rf.FindNames(), Times.Once());
+            this.ruleFinder.Verify(rf => rf.FindRules(), Times.Once());
         }
 
         [TestMethod]
@@ -48,11 +48,11 @@
             // arrange
             UnityRuleFactory unityRuleFactory = this.CreateUnityRuleFactory();
 
-            const string Rule1 = "Rule1";
-            const string Rule2 = "Rule2";
-            const string Rule3 = "Rule3";
+            RuleEntry rule1 = new RuleEntry("Rule1");
+            RuleEntry rule2 = new RuleEntry("Rule2");
+            RuleEntry rule3 = new RuleEntry("Rule3");
 
-            var rulesToCreate = new List<string> { Rule1, Rule2, Rule3 };
+            var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
             Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
             Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
@@ -73,11 +73,11 @@
                                               RetrieveActions = () => { }
                                           };
 
-            this.ruleFinder.Setup(rf => rf.FindNames()).Returns(rulesToCreate).Verifiable();
+            this.ruleFinder.Setup(rf => rf.FindRules()).Returns(rulesToCreate).Verifiable();
 
-            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule1)).Returns(moleBaseRule1.Instance).Verifiable();
-            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule2)).Returns(moleBaseRule2.Instance).Verifiable();
-            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule3)).Returns(moleBaseRule3.Instance).Verifiable();
+            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule1.Name)).Returns(moleBaseRule1.Instance).Verifiable();
+            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule2.Name)).Returns(moleBaseRule2.Instance).Verifiable();
+            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule3.Name)).Returns(moleBaseRule3.Instance).Verifiable();
 
             // act
             IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();
@@ -86,18 +86,18 @@
             var rulesList = rules.ToList();
 
             // assert
-            this.unityContainer.Verify(c => c.Resolve(typeof(BaseRule), Rule1), Times.Once());
-            this.unityContainer.Verify(c => c.Resolve(typeof(BaseRule), Rule2), Times.Once());
-            this.unityContainer.Verify(c => c.Resolve(typeof(BaseRule), Rule3), Times.Once());
+            this.unityContainer.Verify(c => c.Resolve(typeof(BaseRule), rule1.Name), Times.Once());
+            this.unityContainer.Verify(c => c.Resolve(typeof(BaseRule), rule2.Name), Times.Once());
+            this.unityContainer.Verify(c => c.Resolve(typeof(BaseRule), rule3.Name), Times.Once());
             
             Assert.AreEqual(3, rulesList.Count);
 
             Assert.AreSame(ruleForRule1.Object, rulesList[0]);
-            Assert.AreEqual(Rule1, rulesList[0].Name);
+            Assert.AreEqual(rule1.Name, rulesList[0].Name);
             Assert.AreSame(ruleForRule2.Object, rulesList[1]);
-            Assert.AreEqual(Rule2, rulesList[1].Name);
+            Assert.AreEqual(rule2.Name, rulesList[1].Name);
             Assert.AreSame(ruleForRule3.Object, rulesList[2]);
-            Assert.AreEqual(Rule3, rulesList[2].Name);
+            Assert.AreEqual(rule3.Name, rulesList[2].Name);
         }
 
         [TestMethod]
@@ -107,11 +107,11 @@
             // arrange
             UnityRuleFactory unityRuleFactory = this.CreateUnityRuleFactory();
 
-            const string Rule1 = "Rule1";
-            const string Rule2 = "Rule2";
-            const string Rule3 = "Rule3";
+            RuleEntry rule1 = new RuleEntry("Rule1");
+            RuleEntry rule2 = new RuleEntry("Rule2");
+            RuleEntry rule3 = new RuleEntry("Rule3");
 
-            var rulesToCreate = new List<string> { Rule1, Rule2, Rule3 };
+            var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
             Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
             Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
@@ -136,11 +136,11 @@
                 RetrieveActions = () => { actionsRetrievedFor3 = true; }
             };
 
-            this.ruleFinder.Setup(rf => rf.FindNames()).Returns(rulesToCreate);
+            this.ruleFinder.Setup(rf => rf.FindRules()).Returns(rulesToCreate);
 
-            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule1)).Returns(moleBaseRule1.Instance);
-            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule2)).Returns(moleBaseRule2.Instance);
-            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), Rule3)).Returns(moleBaseRule3.Instance);
+            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule1.Name)).Returns(moleBaseRule1.Instance);
+            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule2.Name)).Returns(moleBaseRule2.Instance);
+            this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule3.Name)).Returns(moleBaseRule3.Instance);
 
             // act
             IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();

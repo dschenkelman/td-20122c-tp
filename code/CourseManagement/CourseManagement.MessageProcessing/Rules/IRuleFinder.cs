@@ -4,6 +4,6 @@
 
     public interface IRuleFinder
     {
-        IEnumerable<string> FindNames();
+        IEnumerable<RuleEntry> FindRules();
     }
 }

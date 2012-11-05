@@ -16,7 +16,7 @@
             this.xmlRuleReader = xmlRuleReader;
         }
 
-        public IEnumerable<string> FindNames()
+        public IEnumerable<RuleEntry> FindRules()
         {
             string rulesConfigurationFilePath = 
                 this.configurationService.GetValue(RulesConfigurationFilePathKey);

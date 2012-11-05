@@ -17,12 +17,12 @@
 
         public IEnumerable<BaseRule> CreateRules()
         {
-            IEnumerable<string> ruleNames = this.ruleFinder.FindNames();
+            IEnumerable<RuleEntry> rules = this.ruleFinder.FindRules();
 
-            return ruleNames.Select(rn =>
+            return rules.Select(ruleEntry =>
                 {
-                    var rule = this.container.Resolve<BaseRule>(rn);
-                    rule.Name = rn;
+                    var rule = this.container.Resolve<BaseRule>(ruleEntry.Name);
+                    rule.Name = ruleEntry.Name;
                     rule.RetrieveActions();
                     return rule;
                 });

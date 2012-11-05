@@ -4,6 +4,6 @@
 
     public interface IXmlRuleReader
     {
-        IEnumerable<string> GetRuleNames(string rulesConfigurationFilePath);
+        IEnumerable<RuleEntry> GetRuleNames(string rulesConfigurationFilePath);
     }
 }
