@@ -98,6 +98,14 @@
                 Assert.AreEqual(credentialsByHost, value);
             };
 
+            bool useDefaultCredentialsSet = false;
+            MSmtpClient.AllInstances.UseDefaultCredentialsSetBoolean = 
+                (client, value) =>
+                {
+                    useDefaultCredentialsSet = true;
+                    Assert.IsFalse(value);
+                };
+
             var messageSender = this.CreateMessageSender();
 
             messageSender.Connect(Endpoint, Port, useSsl, User, Password);
@@ -106,6 +114,7 @@
             Assert.IsTrue(networkCredentialsCreated);
             Assert.IsTrue(smtpClientCreated);
             Assert.IsTrue(enableSslSet);
+            Assert.IsTrue(useDefaultCredentialsSet);
         }
 
         [TestMethod]
