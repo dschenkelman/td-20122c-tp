@@ -1,4 +1,9 @@
-﻿namespace CourseManagement.MessageProcessing.Rules
+﻿using System;
+using System.Linq;
+using CourseManagement.MessageProcessing.Services;
+using CourseManagement.Utilities.Extensions;
+
+namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Text.RegularExpressions;
     using Actions;
@@ -10,14 +15,17 @@
         private const string SubjectPattern = @"^\[CONSULTA-(?<ticketId>[0-9]+)\].*$";
         
         private readonly ICourseManagementRepositories courseManagementRepositories;
+        private readonly IConfigurationService configurationService;
 
         private readonly Regex subjectRegex;
 
         public AddTicketReplyToDatabaseRule(
             IActionFactory actionFactory, 
-            ICourseManagementRepositories courseManagementRepositories) : base(actionFactory)
+            ICourseManagementRepositories courseManagementRepositories, 
+            IConfigurationService configurationService) : base(actionFactory)
         {
             this.courseManagementRepositories = courseManagementRepositories;
+            this.configurationService = configurationService;
             this.subjectRegex = new Regex(SubjectPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
@@ -33,6 +41,18 @@
             if (!int.TryParse(match.Groups["ticketId"].Value, out ticketId))
             {
                 return false;
+            }
+
+            int semester = message.Date.Semester();
+            int year = message.Date.Year;
+            int subjectId = this.configurationService.MonitoredSubjectId;
+            var course = this.courseManagementRepositories.Courses
+                .Get(c => c.Semester == semester && c.Year == year && subjectId == c.SubjectId)
+                .FirstOrDefault();
+
+            if (!(course.Students.Any(s => s.MessagingSystemId == message.From) || course.Teachers.Any(t => t.MessagingSystemId == message.From)))
+            {
+                throw new InvalidOperationException("Cannot reply to ticket when not registered in course");
             }
 
             return this.courseManagementRepositories.Tickets.GetById(ticketId) != null;
