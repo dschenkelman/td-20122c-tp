@@ -40,6 +40,7 @@
             {
                 this.topicRegex = @"^\[CONSULTA-PRIVADA\][\ ]*(?<topic>.*)$";
             }
+
             this.body = actionEntry.AdditionalData["body"];
             this.subject = actionEntry.AdditionalData["subject"];
         }
@@ -50,20 +51,20 @@
             int semester = DateTime.Now.Semester();
             int subjectId = this.configurationService.MonitoredSubjectId;
             Configuration configuration = null;
-            List<Course> courses = this.courseManagementRepositories.Courses.Get(
+            Course course = this.courseManagementRepositories.Courses.Get(
                 c =>
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
-                c.Semester == semester).ToList();
+                c.Semester == semester).FirstOrDefault();
 
             EmailMessage messageToSend = null;
 
-            if (courses.Count > 0)
+            if (course != null)
             {
-                messageToSend = this.CreateMessage(message, courses.First());
+                messageToSend = this.CreateMessage(message, course);
 
-                this.GetDestinationMessageSystemIds(message, courses.First()).ForEach(dmsid => messageToSend.To.Add(dmsid));
+                this.GetDestinationMessageSystemIds(message, course).ForEach(dmsid => messageToSend.To.Add(dmsid));
 
-                configuration = courses.First().Account.Configurations.Single(
+                configuration = course.Account.Configurations.First(
                     cfg => cfg.Protocol.Equals(this.configurationService.OutgoingMessageProtocol));
             }
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.IO.Moles;
 using System.Linq;
 using CourseManagement.MessageProcessing.Services;
@@ -35,12 +36,11 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         [TestMethod]
         [HostType("Moles")]
-        [Ignore]
         public void ShouldDownloadAllAttachmentsAndAddThemToDatabase()
         {
             // arrange
             const string AttachmentRootPath = @"C:\";
-            
+
             const int TicketId = 123;
 
             this.configurationService.Setup(cs => cs.AttachmentsRootPath).Returns(AttachmentRootPath);
@@ -71,10 +71,15 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             Mock<IMessageAttachment> attachment1 = this.mockRepository.Create<IMessageAttachment>();
             attachment1.Setup(a => a.Name).Returns(Attachment1Name);
             attachment1.Setup(a => a.Download(attachment1Path)).Verifiable();
-            
+
             Mock<IMessageAttachment> attachment2 = this.mockRepository.Create<IMessageAttachment>();
             attachment2.Setup(a => a.Name).Returns(Attachment2Name);
             attachment2.Setup(a => a.Download(attachment2Path)).Verifiable();
+
+            message.Setup(m => m.Attachments).Returns(new List<IMessageAttachment>()
+                                                          {
+                                                             attachment1.Object, attachment2.Object
+                                                          });
 
             Ticket ticket = new Ticket { Id = TicketId };
 
@@ -92,7 +97,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             attachment1.Verify(a => a.Download(attachment1Path), Times.Once());
             attachment2.Verify(a => a.Download(attachment2Path), Times.Once());
 
-            Assert.AreEqual(2, ticket.Attachments);
+            Assert.AreEqual(2, ticket.Attachments.Count);
             var ticketAttachment1 = ticket.Attachments.ElementAt(0);
             var ticketAttachment2 = ticket.Attachments.ElementAt(1);
 
@@ -101,6 +106,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             Assert.AreEqual(Attachment2Name, ticketAttachment2.FileName);
             Assert.AreEqual(attachment2Path, ticketAttachment2.Location);
+
+            this.ticketRepository.Verify(tr => tr.GetById(123), Times.Once());
+            this.ticketRepository.Verify(tr => tr.Save(), Times.Once());
         }
 
         public DownloadReplyAttachmentsAction CreateRelateTicketReplyToTicketAction()

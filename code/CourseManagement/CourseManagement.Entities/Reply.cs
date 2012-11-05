@@ -6,10 +6,10 @@
 
     public class Reply
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column(Order = 2)]
         public int Id { get; set; }
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None), Column(Order = 1)]
         public int RelatedTicketId { get; set; }
 
         [ForeignKey("RelatedTicketId")]
