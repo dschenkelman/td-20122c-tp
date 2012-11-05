@@ -63,8 +63,7 @@ namespace CourseManagement.MessageProcessing.Actions
             return new Ticket
                        {
                            AssignedTeacher = null,
-                           Attachments = new List<Attachment>(),
-                           Creator = ParseStudentFromMessage(message),
+                           Creator = this.ParseStudentFromMessage(message),
                            DateCreated = message.Date,
                            IsPrivate = this.isPrivate,
                            LastUpdated = message.Date,

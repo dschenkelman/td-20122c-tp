@@ -1,19 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Linq.Expressions;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.MessageProcessing.Services;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-
-namespace CourseManagement.MessageProcessing.Tests.Actions
+﻿namespace CourseManagement.MessageProcessing.Tests.Actions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq.Expressions;
+    using MessageProcessing.Actions;
+    using MessageProcessing.Services;
+    using Messages;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model;
+    using Moq;
+    using Persistence.Repositories;
+
     [TestClass]
     public class AddTicketToDatabaseActionFixture
     {

@@ -65,14 +65,6 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\AddDeliverableToGroupDatabaseEntryActionFixture.cs" />
-    <Compile Include="Actions\AddGroupToCourseDatabaseEntryActionFixture.cs" />
-    <Compile Include="Actions\AddTicketToDatabaseActionFixture.cs" />
-    <Compile Include="Actions\ConfigurationActionFinderFixture.cs" />
-    <Compile Include="Actions\NewStudentToCourseDatabaseEntryActionFixture.cs" />
-    <Compile Include="Actions\ReplyActionFixture.cs" />
-    <Compile Include="Actions\UnityActionFactoryFixture.cs" />
-    <Compile Include="Actions\XmlActionReaderFixture.cs" />
     <Compile Include="Rules\AddDeliverableToGroupDatabaseEntryRuleFixture.cs" />
     <Compile Include="Rules\AddNewTicketToDatabaseRuleFixture.cs" />
     <Compile Include="Rules\AddTicketReplyToDatabaseRuleFixture.cs" />
