@@ -1,4 +1,7 @@
-﻿namespace CourseManagement.Persistence.Repositories
+﻿using System.Data.Entity.Validation;
+using System.Diagnostics;
+
+namespace CourseManagement.Persistence.Repositories
 {
     using System;
     using System.Collections.Generic;

@@ -21,7 +21,6 @@
         [Required]
         public string MessageSubject { get; set; }
         
-        [Required]
         public string MessageBody { get; set; }
 
         [Required]
