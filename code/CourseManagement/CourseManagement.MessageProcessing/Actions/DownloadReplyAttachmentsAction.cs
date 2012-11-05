@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.MessageProcessing.Services;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using Messages;
     using Persistence.Repositories;
@@ -7,7 +9,7 @@
     {
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
-        public DownloadReplyAttachmentsAction(ICourseManagementRepositories courseManagementRepositories)
+        public DownloadReplyAttachmentsAction(ICourseManagementRepositories courseManagementRepositories, IConfigurationService configurationService)
         {
             this.courseManagementRepositories = courseManagementRepositories;
         }

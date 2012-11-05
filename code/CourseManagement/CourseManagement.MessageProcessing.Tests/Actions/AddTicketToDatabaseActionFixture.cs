@@ -40,7 +40,7 @@
 
             this.rootPath = "c:";
             this.configurationService = this.mockRepository.Create<IConfigurationService>();
-            this.configurationService.Setup(cmr => cmr.RootPath).Returns(rootPath);
+            this.configurationService.Setup(cmr => cmr.AttachmentsRootPath).Returns(rootPath);
         }
 
         [TestMethod]

@@ -15,7 +15,9 @@
         private readonly ICourseManagementRepositories courseManagmentRepositories;
         private readonly IConfigurationService configurationService;
 
-        public AddDeliverableToGroupDatabaseEntryAction(ICourseManagementRepositories courseManagmentRepositories, IConfigurationService service)
+        public AddDeliverableToGroupDatabaseEntryAction(
+            ICourseManagementRepositories courseManagmentRepositories,
+            IConfigurationService service)
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
             this.configurationService = service;
@@ -48,7 +50,7 @@
             Deliverable deliverable = new Deliverable(message.Date);
             deliverable.GroupId = studentGroup.Id;
 
-            string rootPath = this.configurationService.RootPath;
+            string rootPath = this.configurationService.AttachmentsRootPath;
             var directory = Path.Combine(rootPath, message.Subject, message.Date.ToIsoFormat());
 
             Directory.CreateDirectory(directory);

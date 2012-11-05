@@ -11,6 +11,5 @@
         public string FileName { get; set; }
 
         public string Location { get; set; }
-
     }
 }

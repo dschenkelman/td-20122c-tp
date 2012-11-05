@@ -10,7 +10,7 @@
             return ConfigurationManager.AppSettings[rulesConfigurationFilePathKey];
         }
 
-        public string RootPath
+        public string AttachmentsRootPath
         {
             get { return this.GetValue("AttachmentsRootPath"); }
         }

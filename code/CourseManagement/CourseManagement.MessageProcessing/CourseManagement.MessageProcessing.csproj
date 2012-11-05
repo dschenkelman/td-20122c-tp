@@ -56,6 +56,7 @@
     <Compile Include="Actions\AddDeliverableToGroupDatabaseEntryAction.cs" />
     <Compile Include="Actions\AddGroupToCourseDatabaseEntryAction.cs" />
     <Compile Include="Actions\DownloadReplyAttachmentsAction.cs" />
+    <Compile Include="Actions\RelateTicketReplyToTicketAction.cs" />
     <Compile Include="Rules\AddNewTicketToDatabaseRule.cs" />
     <Compile Include="Rules\AddTicketReplyToDatabaseRule.cs" />
     <Compile Include="Actions\AddTicketToDatabaseAction.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Actions\IXmlActionReader.cs" />
     <Compile Include="Actions\ConfigurationActionFinder.cs" />
     <Compile Include="Actions\NewStudentToCourseDatabaseEntryAction.cs" />
-    <Compile Include="Actions\ReplyAction.cs" />
+    <Compile Include="Actions\CreateEmailReplyAction.cs" />
     <Compile Include="Actions\UnityActionFactory.cs" />
     <Compile Include="Actions\IAction.cs" />
     <Compile Include="Actions\IActionFactory.cs" />

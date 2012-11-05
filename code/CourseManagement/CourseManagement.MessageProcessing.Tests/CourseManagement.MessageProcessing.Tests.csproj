@@ -35,7 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CourseManagement.EmailProcessing.Moles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="CourseManagement.MessageProcessing.Moles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Moles.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
@@ -51,6 +50,8 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib.Behaviors, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="mscorlib.Moles, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0ae41878053f6703, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Behaviors, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -65,6 +66,16 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\AddDeliverableToGroupDatabaseEntryActionFixture.cs" />
+    <Compile Include="Actions\AddGroupToCourseDatabaseEntryActionFixture.cs" />
+    <Compile Include="Actions\AddTicketToDatabaseActionFixture.cs" />
+    <Compile Include="Actions\ConfigurationActionFinderFixture.cs" />
+    <Compile Include="Actions\DownloadReplyAttachmentsActionFixture.cs" />
+    <Compile Include="Actions\NewStudentToCourseDatabaseEntryActionFixture.cs" />
+    <Compile Include="Actions\RelateTicketReplyToTicketActionFixture.cs" />
+    <Compile Include="Actions\CreateReplyEmailActionFixture.cs" />
+    <Compile Include="Actions\UnityActionFactoryFixture.cs" />
+    <Compile Include="Actions\XmlActionReaderFixture.cs" />
     <Compile Include="Rules\AddDeliverableToGroupDatabaseEntryRuleFixture.cs" />
     <Compile Include="Rules\AddNewTicketToDatabaseRuleFixture.cs" />
     <Compile Include="Rules\AddTicketReplyToDatabaseRuleFixture.cs" />
@@ -97,9 +108,14 @@
       <Project>{5D94790D-C723-4A0A-B99E-EE2554D8B437}</Project>
       <Name>CourseManagement.Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CourseManagement.Utilities\CourseManagement.Utilities.csproj">
+      <Project>{527DC86D-2D4E-467C-95B1-8CDEB99345D0}</Project>
+      <Name>CourseManagement.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Moles Include="CourseManagement.EmailProcessing.moles" />
+    <Moles Include="mscorlib.moles" />
     <None Include="packages.config" />
     <Moles Include="System.configuration.moles" />
   </ItemGroup>
