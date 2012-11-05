@@ -15,6 +15,16 @@
       <action name="AddDeliverable"/>
     </actions>
   </rule>
+  <rule name="AddPublicTicket">
+    <actions>
+      <action name="AddTicket" public="true"/>
+    </actions>
+  </rule>
+  <rule name="AddPrivateTicket">
+    <actions>
+      <action name="AddTicket" public="false"/>
+    </actions>
+  </rule>
   <rule name="TicketReply">
     <actions>
       <action name="RelateTicketToReply"/>

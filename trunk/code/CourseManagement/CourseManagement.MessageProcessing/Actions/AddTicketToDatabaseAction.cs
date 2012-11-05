@@ -49,10 +49,10 @@ namespace CourseManagement.MessageProcessing.Actions
                 TicketAttachment attachment = new TicketAttachment() { FileName = messageAttachment.Name, Location = path };
                 ticket.Attachments.Add(attachment);
 
-                this.courseManagmentRepositories.TicketAttachments.Insert(attachment);
+                //this.courseManagmentRepositories.TicketAttachments.Insert(attachment);
             }
 
-            this.courseManagmentRepositories.TicketAttachments.Save();
+            //this.courseManagmentRepositories.TicketAttachments.Save();
 
             this.courseManagmentRepositories.Tickets.Insert(ticket);
             this.courseManagmentRepositories.Tickets.Save();
@@ -61,17 +61,15 @@ namespace CourseManagement.MessageProcessing.Actions
         private Ticket ParseTicketFromMessage(IMessage message)
         {
             return new Ticket
-                       {
-                           AssignedTeacher = null,
-                           Creator = this.ParseStudentFromMessage(message),
-                           DateCreated = message.Date,
-                           IsPrivate = this.isPrivate,
-                           LastUpdated = message.Date,
-                           MessageBody = message.Body,
-                           State = TicketState.Unassigned,
-                           MessageSubject = message.Subject,
-                           Replies = new List<Reply>()
-                       };
+            {
+                StudentId = this.ParseStudentFromMessage(message).Id,
+                DateCreated = message.Date,
+                IsPrivate = this.isPrivate,
+                LastUpdated = message.Date,
+                MessageBody = message.Body,
+                State = TicketState.Unassigned,
+                MessageSubject = message.Subject,
+            };
         }
 
         private Student ParseStudentFromMessage(IMessage message)
