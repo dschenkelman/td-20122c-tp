@@ -1,30 +1,23 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using Messages;
+    using Model;
+    using Persistence.Repositories;
 
-    public class RelateTicketReplyToTicketAction : IAction
+    public class RelateTicketReplyToTicketAction : BaseTicketReplyAction
     {
-        private const string SubjectPattern = @"^\[CONSULTA-(?<ticketId>[0-9]+)\].*$";
-        
         private readonly ICourseManagementRepositories courseManagementRepositories;
-        private readonly Regex subjectRegex;
 
         public RelateTicketReplyToTicketAction(ICourseManagementRepositories courseManagementRepositories)
         {
             this.courseManagementRepositories = courseManagementRepositories;
-            this.subjectRegex = new Regex(SubjectPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
         }
 
-        public void Initialize(ActionEntry actionEntry)
+        public override void Initialize(ActionEntry actionEntry)
         {
         }
 
-        public void Execute(IMessage message)
+        public override void Execute(IMessage message)
         {
             int ticketId = this.ParseTicketId(message);
 
@@ -40,12 +33,6 @@ namespace CourseManagement.MessageProcessing.Actions
             ticket.Replies.Add(reply);
 
             this.courseManagementRepositories.Tickets.Save();
-        }
-
-        private int ParseTicketId(IMessage message)
-        {
-            Match match = this.subjectRegex.Match(message.Subject);
-            return Convert.ToInt32(match.Groups["ticketId"].Value);
         }
     }
 }

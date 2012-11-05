@@ -75,6 +75,7 @@
     <Compile Include="Actions\RelateTicketReplyToTicketActionFixture.cs" />
     <Compile Include="Actions\CreateReplyEmailActionFixture.cs" />
     <Compile Include="Actions\UnityActionFactoryFixture.cs" />
+    <Compile Include="Actions\UpdateTicketStatusActionFixture.cs" />
     <Compile Include="Actions\XmlActionReaderFixture.cs" />
     <Compile Include="Rules\AddDeliverableToGroupDatabaseEntryRuleFixture.cs" />
     <Compile Include="Rules\AddNewTicketToDatabaseRuleFixture.cs" />
