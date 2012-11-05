@@ -5,7 +5,7 @@
         Unassigned,
         Assigned,
         Pending,
-        Reolved,
+        Resolved,
         Closed
     }
 }
