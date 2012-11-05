@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CourseManagement.Model
+﻿namespace CourseManagement.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Ticket
     {
-        public ICollection<Attachment> Attachments { get; set; }
+        public Ticket()
+        {
+            this.Attachments = new List<TicketAttachment>();
+            this.Replies = new List<Reply>();
+        }
+
+        public virtual ICollection<TicketAttachment> Attachments { get; set; }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -30,7 +36,7 @@ namespace CourseManagement.Model
         [Required]
         public TicketState State { get; set; }
 
-        public int TeacherId { get; set; }
+        public int? TeacherId { get; set; }
 
         public int StudentId { get; set; }
         
