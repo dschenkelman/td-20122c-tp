@@ -33,21 +33,15 @@
             int subjectCode = this.ParseSubjectCodeFromMessage(message);
             int year = this.GetYearFromMessage(message);
             int semester = this.GetSemesterFromMessage(message);
-           
-            // verify
+
+            // perform action
             List<Course> courses = this.courseManagmentRepositories.Courses.Get(c =>
                                                                 ((c.Subject.Code == subjectCode) &&
                                                                 (c.Year == year) && (c.Semester == semester))).ToList();
-            if (courses.Count == 0)
-            {
-                throw new Exception("Subject: " + subjectCode + " is not being dictate in this semester: " + semester + "º " + year);
-            }
-
             Course course = courses[0];
 
             var student = this.courseManagmentRepositories.Students.GetById(studentId);
-
-            // perform action
+            
             if (student == null)
             {
                 student = this.CreateStudentFromMessage(message);
