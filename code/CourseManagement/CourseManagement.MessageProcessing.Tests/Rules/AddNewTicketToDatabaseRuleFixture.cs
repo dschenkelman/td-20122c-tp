@@ -1,25 +1,22 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.MessageProcessing.Rules;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-
-namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿namespace CourseManagement.MessageProcessing.Tests.Rules
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using MessageProcessing.Actions;
+    using MessageProcessing.Rules;
+    using Messages;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model;
+    using Moq;
+    using Persistence.Repositories;
+
     [TestClass]
     public class AddNewTicketToDatabaseRuleFixture
     {
         private Mock<IActionFactory> actionFactory;
         private MockRepository mockRepository;
         private Mock<ICourseManagementRepositories> repositories;
-        private Mock<IRepository<Ticket>> ticketRepository;
 
         [TestInitialize]
         public void Initialize()
@@ -27,66 +24,50 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.actionFactory = this.mockRepository.Create<IActionFactory>();
             this.repositories = this.mockRepository.Create<ICourseManagementRepositories>();
-            this.ticketRepository = this.mockRepository.Create<IRepository<Ticket>>();
-            this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
         }
 
         [TestMethod]
-        public void ShouldMatchOnlyIfTicketIsNotInDatabase()
+        public void ShouldCreatePublicRegexIfRuleEntryAdditionalDataIsPublic()
         {
-            // arrange
-            const string SubjectThatDoesNotMatchPattern = "[CONSULTA-155]";
             const string ValidPublicSubject = "[CONSULTA-PUBLICA] MVC";
             const string ValidPrivateSubject = "[CONSULTA-PRIVADA] patrones de diseño";
+            RuleEntry ruleEntry = new RuleEntry("rule");
+            ruleEntry.AdditionalData.Add("public", "true");
 
-            var addTicketReplyToDatabaseRule = this.CreateAddTicketReplyToDatabaseRule();
+            var rule = this.CreateAddTicketReplyToDatabaseRule();
 
-            Mock<IMessage> message1 = this.mockRepository.Create<IMessage>();
-            message1.Setup(m => m.Subject).Returns(SubjectThatDoesNotMatchPattern).Verifiable();
+            rule.Initialize(ruleEntry);
 
-            Mock<IMessage> message2 = this.mockRepository.Create<IMessage>();
-            message2.Setup(m => m.Subject).Returns(ValidPublicSubject).Verifiable();
+            Mock<IMessage> matchingMessage = this.mockRepository.Create<IMessage>();
+            matchingMessage.Setup(m => m.Subject).Returns(ValidPublicSubject);
+            
+            Mock<IMessage> notMatchingMessage = this.mockRepository.Create<IMessage>();
+            notMatchingMessage.Setup(m => m.Subject).Returns(ValidPrivateSubject);
 
-            Mock<IMessage> message3 = this.mockRepository.Create<IMessage>();
-            message3.Setup(m => m.Subject).Returns(ValidPrivateSubject).Verifiable();
-
-            this.ticketRepository.Setup(tr => tr.Get(It.Is<Expression<Func<Ticket, bool>>>(f => true))).Returns(
-                new List<Ticket>()).Verifiable();
-
-            // act and assert
-            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message1.Object, false));
-            this.ticketRepository.Verify(tr => tr.Get(It.Is<Expression<Func<Ticket, bool>>>(f => true)), Times.Never());
-
-            Assert.IsTrue(addTicketReplyToDatabaseRule.IsMatch(message2.Object, false));
-            this.ticketRepository.Verify(tr => tr.Get(It.Is<Expression<Func<Ticket, bool>>>(f => true)), Times.Once());
-
-            Assert.IsTrue(addTicketReplyToDatabaseRule.IsMatch(message3.Object, false));
-            this.ticketRepository.Verify(tr => tr.Get(It.Is<Expression<Func<Ticket, bool>>>(f => true)), Times.Exactly(2));
+            Assert.IsTrue(rule.IsMatch(matchingMessage.Object, false));
+            Assert.IsFalse(rule.IsMatch(notMatchingMessage.Object, false));
         }
 
         [TestMethod]
-        public void ShouldNotMatchIfTicketIsInDatabase()
+        public void ShouldCreatePrivateRegexIfRuleEntryAdditionalDataIsPrivate()
         {
-            // arrange
-            const string SubjectWithExistingTopic = "[CONSULTA-PUBLICA] contenedor-contenido";
+            const string ValidPublicSubject = "[CONSULTA-PUBLICA] MVC";
+            const string ValidPrivateSubject = "[CONSULTA-PRIVADA] patrones de diseño";
+            RuleEntry ruleEntry = new RuleEntry("rule");
+            ruleEntry.AdditionalData.Add("public", "false");
 
-            var addTicketReplyToDatabaseRule = this.CreateAddTicketReplyToDatabaseRule();
+            var rule = this.CreateAddTicketReplyToDatabaseRule();
 
-            Mock<IMessage> message = this.mockRepository.Create<IMessage>();
-            message.Setup(m => m.Subject).Returns(SubjectWithExistingTopic).Verifiable();
+            rule.Initialize(ruleEntry);
 
-            Ticket ticket = new Ticket {MessageSubject = SubjectWithExistingTopic};
-            this.ticketRepository.Setup(
-                tr =>
-                tr.Get(
-                    It.Is<Expression<Func<Ticket, bool>>>(
-                        f =>
-                        f.Compile().Invoke(ticket)))).Returns(
-                            new List<Ticket>{ ticket }).Verifiable();
+            Mock<IMessage> matchingMessage = this.mockRepository.Create<IMessage>();
+            matchingMessage.Setup(m => m.Subject).Returns(ValidPrivateSubject);
 
-            // act and assert
+            Mock<IMessage> notMatchingMessage = this.mockRepository.Create<IMessage>();
+            notMatchingMessage.Setup(m => m.Subject).Returns(ValidPublicSubject);
 
-            Assert.IsFalse(addTicketReplyToDatabaseRule.IsMatch(message.Object, false));
+            Assert.IsTrue(rule.IsMatch(matchingMessage.Object, false));
+            Assert.IsFalse(rule.IsMatch(notMatchingMessage.Object, false));
         }
 
         private AddNewTicketToDatabaseRule CreateAddTicketReplyToDatabaseRule()
