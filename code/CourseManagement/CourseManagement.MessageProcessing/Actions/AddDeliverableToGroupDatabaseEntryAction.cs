@@ -12,14 +12,14 @@
 
     internal class AddDeliverableToGroupDatabaseEntryAction : IAction
     {
-        private readonly ICourseManagementRepositories courseManagmentRepositories;
+        private readonly ICourseManagementRepositories courseManagementRepositories;
         private readonly IConfigurationService configurationService;
 
         public AddDeliverableToGroupDatabaseEntryAction(
-            ICourseManagementRepositories courseManagmentRepositories,
+            ICourseManagementRepositories courseManagementRepositories,
             IConfigurationService service)
         {
-            this.courseManagmentRepositories = courseManagmentRepositories;
+            this.courseManagementRepositories = courseManagementRepositories;
             this.configurationService = service;
         }
 
@@ -29,16 +29,11 @@
 
         public void Execute(IMessage message)
         {
-            var student = this.courseManagmentRepositories
+            var student = this.courseManagementRepositories
                 .Students
                 .Get(s => s.MessagingSystemId == message.From)
                 .FirstOrDefault();
             
-            if (student == null)
-            {
-                throw new InvalidOperationException(string.Format("You can not add deliverable to group when student: {0} is not registered", message.From));
-            }
-
             Course course = this.GetCourseFromMessage(message);
             var studentGroup = student.Groups.Where(g => g.CourseId == course.Id).FirstOrDefault();
             
@@ -67,8 +62,8 @@
                 deliverable.Attachments.Add(deliverableAttachment);
             }
 
-            this.courseManagmentRepositories.Deliverables.Insert(deliverable);
-            this.courseManagmentRepositories.Deliverables.Save();
+            this.courseManagementRepositories.Deliverables.Insert(deliverable);
+            this.courseManagementRepositories.Deliverables.Save();
         }
 
        private Course GetCourseFromMessage(IMessage message)
@@ -76,7 +71,7 @@
             int semester = this.GetSemesterFromMessage(message);
 
             List<Course> courses =
-                this.courseManagmentRepositories.Courses.Get(
+                this.courseManagementRepositories.Courses.Get(
                     c =>
                     message.To.Contains(c.Account.User) 
                     && c.Semester == semester
