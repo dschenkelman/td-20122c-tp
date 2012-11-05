@@ -72,6 +72,7 @@
     <Compile Include="Actions\ConfigurationActionFinderFixture.cs" />
     <Compile Include="Actions\DownloadReplyAttachmentsActionFixture.cs" />
     <Compile Include="Actions\NewStudentToCourseDatabaseEntryActionFixture.cs" />
+    <Compile Include="Actions\NewTicketEmailReplyActionFixture.cs" />
     <Compile Include="Actions\RelateTicketReplyToTicketActionFixture.cs" />
     <Compile Include="Actions\CreateReplyEmailActionFixture.cs" />
     <Compile Include="Actions\UnityActionFactoryFixture.cs" />

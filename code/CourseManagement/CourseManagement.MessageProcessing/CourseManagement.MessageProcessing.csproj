@@ -57,6 +57,7 @@
     <Compile Include="Actions\AddGroupToCourseDatabaseEntryAction.cs" />
     <Compile Include="Actions\BaseTicketReplyAction.cs" />
     <Compile Include="Actions\DownloadReplyAttachmentsAction.cs" />
+    <Compile Include="Actions\NewTicketEmailReplyAction.cs" />
     <Compile Include="Actions\RelateTicketReplyToTicketAction.cs" />
     <Compile Include="Actions\UpdateTicketStatusAction.cs" />
     <Compile Include="Rules\AddNewTicketToDatabaseRule.cs" />

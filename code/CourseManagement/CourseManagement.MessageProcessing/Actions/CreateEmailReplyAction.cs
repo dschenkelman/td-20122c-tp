@@ -9,49 +9,36 @@
     using Services;
     using Utilities.Extensions;
 
-    internal class CreateEmailReplyAction : IAction
+    public class CreateEmailReplyAction : IAction
     {
+        protected readonly ICourseManagementRepositories CourseManagementRepositories;
+
         private readonly IMessageSender messageSender;
-
-        protected readonly ICourseManagementRepositories courseManagementRepositories;
-
         private readonly IConfigurationService configurationService;
         private bool isPublic;
         private string body;
         private string subject;
-        private string topicRegex;
 
         public CreateEmailReplyAction(IMessageSender messageSender, ICourseManagementRepositories courseManagementRepositories, IConfigurationService configurationService)
         {
             this.messageSender = messageSender;
-            this.courseManagementRepositories = courseManagementRepositories;
+            this.CourseManagementRepositories = courseManagementRepositories;
             this.configurationService = configurationService;
         }
 
         public void Initialize(ActionEntry actionEntry)
         {
             this.isPublic = bool.Parse(actionEntry.AdditionalData["public"]);
-            
-            if (this.isPublic)
-            {
-                this.topicRegex = @"^\[CONSULTA-PUBLICA\][\ ]*(?<topic>.*)$";
-            }
-            else
-            {
-                this.topicRegex = @"^\[CONSULTA-PRIVADA\][\ ]*(?<topic>.*)$";
-            }
-
             this.body = actionEntry.AdditionalData["body"];
             this.subject = actionEntry.AdditionalData["subject"];
         }
 
         public void Execute(IMessage message)
         {
-
             int semester = DateTime.Now.Semester();
             int subjectId = this.configurationService.MonitoredSubjectId;
             Configuration configuration = null;
-            Course course = this.courseManagementRepositories.Courses.Get(
+            Course course = this.CourseManagementRepositories.Courses.Get(
                 c =>
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
                 c.Semester == semester).FirstOrDefault();
@@ -79,6 +66,11 @@
             this.messageSender.Disconnect();
         }
 
+        protected virtual string GenerateSubject(IMessage receivedMessage)
+        {
+            return this.subject;
+        }
+
         private List<string> GetDestinationMessageSystemIds(IMessage message, Course course)
         {
             List<string> destinations = new List<string> { message.From };
@@ -93,18 +85,13 @@
         private EmailMessage CreateMessage(IMessage receivedMessage, Course course)
         {
             EmailMessage email = new EmailMessage(
-                this.GenerateSubject(receivedMessage) ,
+                this.GenerateSubject(receivedMessage),
                     course.Account.User,
                     DateTime.Now,
                     new List<EmailAttachment>(),
                     this.body);
 
             return email;
-        }
-
-        protected virtual string GenerateSubject(IMessage receivedMessage)
-        {
-            return this.subject;
         }
     }
 }

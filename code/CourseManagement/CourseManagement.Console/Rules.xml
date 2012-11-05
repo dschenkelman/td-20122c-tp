@@ -18,11 +18,19 @@
   <rule name="AddTicket" public="true">
     <actions>
       <action name="AddTicket" public="true"/>
+      <action name="NewTicketEmailReply"
+              body=""
+              public="true"
+              subject="[CONSULTA-{0}] Creada"/>
     </actions>
   </rule>
   <rule name="AddTicket" public="false">
     <actions>
       <action name="AddTicket" public="false"/>
+      <action name="NewTicketEmailReply"
+              body=""
+              public="false"
+              subject="[CONSULTA-{0}] Creada"/>
     </actions>
   </rule>
   <rule name="TicketReply">
@@ -33,7 +41,7 @@
   </rule>
   <rule name="Fallback">
     <actions>
-      <action name="EmailReplyAction"
+      <action name="EmailReply"
               body="An e-mail you sent did not match any of the configured rules." 
               public="false" 
               subject="Error processing e-mail"/>
