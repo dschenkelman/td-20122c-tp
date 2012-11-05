@@ -15,7 +15,12 @@
             this.actionFactory = actionFactory;
         }
 
-        public string Name { get; set; }
+        public virtual void Initialize(RuleEntry ruleEntry)
+        {
+            this.Name = ruleEntry.Name;
+        }
+
+        public string Name { get; private set; }
 
         public void RetrieveActions()
         {

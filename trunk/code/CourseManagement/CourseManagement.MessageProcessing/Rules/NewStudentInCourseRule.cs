@@ -8,7 +8,6 @@
     {
         public NewStudentInCourseRule(IActionFactory actionFactory) : base(actionFactory)
         {
-            this.Name = string.Empty;
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)

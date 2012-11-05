@@ -22,8 +22,12 @@
             // assert
             Assert.AreEqual(4, ruleNames.Count);
             Assert.AreEqual("Rule1", ruleNames[0].Name);
+            Assert.AreEqual("true", ruleNames[0].AdditionalData["public"]);
+            Assert.AreEqual("true", ruleNames[0].AdditionalData["fake"]);
             Assert.AreEqual("Rule2", ruleNames[1].Name);
             Assert.AreEqual("Rule3", ruleNames[2].Name);
+            Assert.AreEqual("false", ruleNames[2].AdditionalData["public"]);
+            Assert.AreEqual("false", ruleNames[2].AdditionalData["fake"]);
             Assert.AreEqual("Rule4", ruleNames[3].Name);
         }
 
