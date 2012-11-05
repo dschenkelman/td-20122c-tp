@@ -16,7 +16,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
     public class AddGroupToCourseDatabaseEntryActionFixture
     {
         private MockRepository mockRepository;
-        private Mock<ICourseManagementRepositories> courseManagementRepostiories;
+        private Mock<ICourseManagementRepositories> courseManagementRepositories;
         private Mock<IRepository<Group>> groupRepository;
         private Mock<IRepository<Account>> accountRepository;
         private Mock<IRepository<Course>> courseRepository;
@@ -50,19 +50,19 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         public void TestInitialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-            this.courseManagementRepostiories = this.mockRepository.Create<ICourseManagementRepositories>();
+            this.courseManagementRepositories = this.mockRepository.Create<ICourseManagementRepositories>();
             
             this.accountRepository = this.mockRepository.Create<IRepository<Account>>();
-            this.courseManagementRepostiories.Setup(cmr => cmr.Accounts).Returns(this.accountRepository.Object);
+            this.courseManagementRepositories.Setup(cmr => cmr.Accounts).Returns(this.accountRepository.Object);
 
             this.courseRepository = this.mockRepository.Create<IRepository<Course>>();
-            this.courseManagementRepostiories.Setup(cmr => cmr.Courses).Returns(this.courseRepository.Object);
+            this.courseManagementRepositories.Setup(cmr => cmr.Courses).Returns(this.courseRepository.Object);
 
             this.groupRepository = this.mockRepository.Create<IRepository<Group>>();
-            this.courseManagementRepostiories.Setup(cmr => cmr.Groups).Returns(this.groupRepository.Object);
+            this.courseManagementRepositories.Setup(cmr => cmr.Groups).Returns(this.groupRepository.Object);
 
             this.studentRepository = this.mockRepository.Create<IRepository<Student>>();
-            this.courseManagementRepostiories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
+            this.courseManagementRepositories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
 
             this.groupParser = this.mockRepository.Create<IGroupFileParser>();
             
@@ -373,7 +373,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         private AddGroupToCourseDatabaseEntryAction CreateAddGroupToCourseDatabaseEntryAction()
         {
-            return new AddGroupToCourseDatabaseEntryAction(this.courseManagementRepostiories.Object , this.groupParser.Object);
+            return new AddGroupToCourseDatabaseEntryAction(this.courseManagementRepositories.Object , this.groupParser.Object);
         }
     }
 }
