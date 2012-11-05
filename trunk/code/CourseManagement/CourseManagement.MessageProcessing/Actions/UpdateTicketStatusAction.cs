@@ -35,10 +35,18 @@
             var teacher = course.Teachers.FirstOrDefault(t => t.MessagingSystemId == message.From);
 
             int ticketId = this.ParseTicketId(message);
-
             var ticket = this.courseManagementRepositories.Tickets.GetById(ticketId);
-            ticket.State = TicketState.Pending;
-            ticket.TeacherId = teacher.Id;
+
+            if (teacher != null)
+            {
+                ticket.State = TicketState.Pending;
+                ticket.TeacherId = teacher.Id;
+            }
+            else if (ticket.State == TicketState.Pending)
+            {
+                ticket.State = TicketState.Assigned;
+            }
+
             this.courseManagementRepositories.Tickets.Save();
         }
     }

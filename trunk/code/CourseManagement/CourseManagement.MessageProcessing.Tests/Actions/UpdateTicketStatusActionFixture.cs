@@ -10,7 +10,6 @@
     using Model;
     using Moq;
     using Persistence.Repositories;
-    
 
     [TestClass]
     public class UpdateTicketStatusActionFixture
@@ -18,7 +17,6 @@
         private MockRepository mockRepository;
         private Mock<ICourseManagementRepositories> repositories;
         private Mock<IRepository<Course>> courseRepository;
-        private Mock<IRepository<Teacher>> teacherRepository;
         private Mock<IRepository<Ticket>> ticketRepository;
         private Mock<IConfigurationService> configurationService;
 
@@ -30,16 +28,14 @@
 
             this.repositories = this.mockRepository.Create<ICourseManagementRepositories>();
             this.courseRepository = this.mockRepository.Create<IRepository<Course>>();
-            this.teacherRepository = this.mockRepository.Create<IRepository<Teacher>>();
             this.ticketRepository = this.mockRepository.Create<IRepository<Ticket>>();
 
             this.repositories.Setup(r => r.Courses).Returns(this.courseRepository.Object);
-            this.repositories.Setup(r => r.Teachers).Returns(this.teacherRepository.Object);
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
         }
 
         [TestMethod]
-        public void ShouldMoveTicketToAssignedWhenItIsAnsweredByTeacher()
+        public void ShouldMoveTicketToPendingWhenItIsAnsweredByTeacher()
         {
             // arrange
             const string FromAddress = "From@From.com";
@@ -95,6 +91,49 @@
                      && !e.Compile().Invoke(notMatchingCourseBecauseOfYear)
                      && !e.Compile().Invoke(notMatchingCourseBecauseOfSubject))), 
                      Times.Once());
+        }
+
+        [TestMethod]
+        public void ShouldMoveTicketToAssignedWhenItIsPendingAndAnsweredByStudentAndAlreadyHasAssignedTeacher()
+        {
+            // arrange
+            const string FromAddress = "From@From.com";
+            const int TicketId = 123;
+
+            const int SubjectId = 7510;
+            const string MessageSubject = "[Consulta-123]";
+            DateTime messageDate = new DateTime(2012, 11, 4);
+
+            Mock<IMessage> message = this.mockRepository.Create<IMessage>();
+            message.Setup(m => m.Subject).Returns(MessageSubject);
+            message.Setup(m => m.Date).Returns(messageDate);
+            message.Setup(m => m.From).Returns(FromAddress);
+
+            this.configurationService.Setup(cs => cs.MonitoredSubjectId).Returns(SubjectId);
+
+            Course course = new Course(2, 2012, SubjectId);
+
+            Teacher teacher = new Teacher(1, "Not important", "Another address");
+            course.Teachers.Add(teacher);
+
+            this.courseRepository.Setup(cr => cr.Get(It.IsAny<Expression<Func<Course, bool>>>()))
+                .Returns(new List<Course> { course })
+                .Verifiable();
+
+            Ticket ticket = new Ticket { State = TicketState.Pending, Id = TicketId, TeacherId = teacher.Id };
+            this.ticketRepository.Setup(tr => tr.GetById(TicketId)).Returns(ticket).Verifiable();
+            this.ticketRepository.Setup(tr => tr.Save()).Verifiable();
+
+            var updateTicketStatusAction = this.CreateUpdateTicketStatusAction();
+
+            // act
+            updateTicketStatusAction.Execute(message.Object);
+
+            // assert
+            Assert.AreEqual(TicketState.Assigned, ticket.State);
+            Assert.AreEqual(teacher.Id, ticket.TeacherId);
+            this.ticketRepository.Verify(tr => tr.GetById(TicketId), Times.Once());
+            this.ticketRepository.Verify(tr => tr.Save(), Times.Once());
         }
 
         private UpdateTicketStatusAction CreateUpdateTicketStatusAction()

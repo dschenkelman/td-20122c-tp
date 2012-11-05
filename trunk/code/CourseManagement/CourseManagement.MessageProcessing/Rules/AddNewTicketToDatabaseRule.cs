@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.Messages;
-using CourseManagement.Persistence.Repositories;
-
-namespace CourseManagement.MessageProcessing.Rules
+﻿namespace CourseManagement.MessageProcessing.Rules
 {
-    class AddNewTicketToDatabaseRule :BaseRule
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using Actions;
+    using Messages;
+    using Persistence.Repositories;
+
+    internal class AddNewTicketToDatabaseRule : BaseRule
     {
         private const string SubjectPattern = @"\[CONSULTA-(PUBLICA|PRIVADA)\][a-zA-Z\ ]*";
         
