@@ -21,10 +21,10 @@
 
             // assert
             Assert.AreEqual(4, ruleNames.Count);
-            Assert.AreEqual("Rule1", ruleNames[0]);
-            Assert.AreEqual("Rule2", ruleNames[1]);
-            Assert.AreEqual("Rule3", ruleNames[2]);
-            Assert.AreEqual("Rule4", ruleNames[3]);
+            Assert.AreEqual("Rule1", ruleNames[0].Name);
+            Assert.AreEqual("Rule2", ruleNames[1].Name);
+            Assert.AreEqual("Rule3", ruleNames[2].Name);
+            Assert.AreEqual("Rule4", ruleNames[3].Name);
         }
 
         private XmlRuleReader CreateXmlRuleReader()

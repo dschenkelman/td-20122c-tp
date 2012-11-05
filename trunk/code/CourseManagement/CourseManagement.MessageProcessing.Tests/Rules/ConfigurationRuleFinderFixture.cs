@@ -34,12 +34,12 @@
 
             this.ruleXmlReader
                 .Setup(rcs => rcs.GetRuleNames(RulesConfigurationFilePathValue))
-                .Returns(new List<string>());
+                .Returns(new List<RuleEntry>());
 
             ConfigurationRuleFinder configurationRuleFinder = this.CreateConfigurationRuleFinder();
 
             // act
-            configurationRuleFinder.FindNames();
+            configurationRuleFinder.FindRules();
 
             // assert
             this.configurationService.Verify(cs => cs.GetValue(RulesConfigurationFilePathKey), Times.Once());
@@ -53,11 +53,11 @@
 
             const string RulesConfigurationFilePathValue = "Rules.xml";
 
-            const string Rule1 = "Rule1";
-            const string Rule2 = "Rule2";
-            const string Rule3 = "Rule3";
+            RuleEntry rule1 = new RuleEntry("Rule1");
+            RuleEntry rule2 = new RuleEntry("Rule2");
+            RuleEntry rule3 = new RuleEntry("Rule3");
 
-            var retrievedRuleNames = new List<string> { Rule1, Rule2, Rule3 };
+            var retrievedRuleNames = new List<RuleEntry> { rule1, rule2, rule3 };
 
             this.configurationService.Setup(cs => cs.GetValue(RulesConfigurationFilePathKey))
                 .Returns(RulesConfigurationFilePathValue);
@@ -70,7 +70,7 @@
             ConfigurationRuleFinder configurationRuleFinder = this.CreateConfigurationRuleFinder();
 
             // act
-            IEnumerable<string> retrievedRules = configurationRuleFinder.FindNames();
+            IEnumerable<RuleEntry> retrievedRules = configurationRuleFinder.FindRules();
 
             // assert
             this.ruleXmlReader.Verify(rcs => rcs.GetRuleNames(RulesConfigurationFilePathValue), Times.Once());
