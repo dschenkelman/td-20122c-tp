@@ -19,5 +19,7 @@
         public string Password { get; set; }
 
         public virtual ICollection<Configuration> Configurations { get; set; }
+
+        public virtual Course Course { get; set; }
     }
 }

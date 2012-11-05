@@ -1,4 +1,10 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Actions
+﻿using System.IO;
+using System.IO.Moles;
+using System.Linq;
+using CourseManagement.MessageProcessing.Services;
+using CourseManagement.Utilities.Extensions;
+
+namespace CourseManagement.MessageProcessing.Tests.Actions
 {
     using System;
     using MessageProcessing.Actions;
@@ -14,6 +20,7 @@
         private MockRepository mockRepository;
         private Mock<ICourseManagementRepositories> repositories;
         private Mock<IRepository<Ticket>> ticketRepository;
+        private Mock<IConfigurationService> configurationService;
 
         [TestInitialize]
         public void Initialize()
@@ -22,17 +29,52 @@
             this.repositories = this.mockRepository.Create<ICourseManagementRepositories>();
             this.ticketRepository = this.mockRepository.Create<IRepository<Ticket>>();
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
+
+            this.configurationService = this.mockRepository.Create<IConfigurationService>();
         }
 
         [TestMethod]
+        [HostType("Moles")]
+        [Ignore]
         public void ShouldDownloadAllAttachmentsAndAddThemToDatabase()
         {
             // arrange
+            const string AttachmentRootPath = @"C:\";
+            
             const int TicketId = 123;
+
+            this.configurationService.Setup(cs => cs.AttachmentsRootPath).Returns(AttachmentRootPath);
+
+            const string Attachment1Name = "Attachment1";
+            const string Attachment2Name = "Attachment2";
+
+            const string Subject = "[Consulta-123]";
+            DateTime messageDate = new DateTime(2012, 11, 4);
+
             Mock<IMessage> message = this.mockRepository.Create<IMessage>();
-            message.Setup(m => m.Subject).Returns("[Consulta-123]");
+            message.Setup(m => m.Subject).Returns(Subject);
             message.Setup(m => m.Body).Returns("Body");
-            message.Setup(m => m.Date).Returns(new DateTime(2012, 11, 4));
+            message.Setup(m => m.Date).Returns(messageDate);
+
+            string attachmentDirectory = Path.Combine(AttachmentRootPath, Subject, messageDate.ToIsoFormat());
+            string attachment1Path = Path.Combine(attachmentDirectory, Attachment1Name);
+            string attachment2Path = Path.Combine(attachmentDirectory, Attachment2Name);
+
+            bool directoryCreated = false;
+            MDirectory.CreateDirectoryString = p =>
+                                                   {
+                                                       directoryCreated = true;
+                                                       Assert.AreEqual(attachmentDirectory, p);
+                                                       return null;
+                                                   };
+
+            Mock<IMessageAttachment> attachment1 = this.mockRepository.Create<IMessageAttachment>();
+            attachment1.Setup(a => a.Name).Returns(Attachment1Name);
+            attachment1.Setup(a => a.Download(attachment1Path)).Verifiable();
+            
+            Mock<IMessageAttachment> attachment2 = this.mockRepository.Create<IMessageAttachment>();
+            attachment2.Setup(a => a.Name).Returns(Attachment2Name);
+            attachment2.Setup(a => a.Download(attachment2Path)).Verifiable();
 
             Ticket ticket = new Ticket { Id = TicketId };
 
@@ -46,11 +88,26 @@
             relateTicketReplyToTicketAction.Execute(message.Object);
 
             // assert
+            Assert.IsTrue(directoryCreated);
+            attachment1.Verify(a => a.Download(attachment1Path), Times.Once());
+            attachment2.Verify(a => a.Download(attachment2Path), Times.Once());
+
+            Assert.AreEqual(2, ticket.Attachments);
+            var ticketAttachment1 = ticket.Attachments.ElementAt(0);
+            var ticketAttachment2 = ticket.Attachments.ElementAt(1);
+
+            Assert.AreEqual(Attachment1Name, ticketAttachment1.FileName);
+            Assert.AreEqual(attachment1Path, ticketAttachment1.Location);
+
+            Assert.AreEqual(Attachment2Name, ticketAttachment2.FileName);
+            Assert.AreEqual(attachment2Path, ticketAttachment2.Location);
         }
 
         public DownloadReplyAttachmentsAction CreateRelateTicketReplyToTicketAction()
         {
-            return new DownloadReplyAttachmentsAction(this.repositories.Object);
+            return new DownloadReplyAttachmentsAction(
+                this.repositories.Object, 
+                this.configurationService.Object);
         }
     }
 }

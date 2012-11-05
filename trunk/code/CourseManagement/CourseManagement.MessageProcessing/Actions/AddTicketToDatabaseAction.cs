@@ -37,7 +37,7 @@ namespace CourseManagement.MessageProcessing.Actions
                                                     ParseTopicFromMessage(message) + ") as a previous existing ticket.");
             }
 
-            string rootPath = configurationService.RootPath;
+            string rootPath = configurationService.AttachmentsRootPath;
             var directory = Path.Combine(rootPath, message.Subject, DateToYYYYMMDD( message.Date ));
 
             Directory.CreateDirectory(directory);

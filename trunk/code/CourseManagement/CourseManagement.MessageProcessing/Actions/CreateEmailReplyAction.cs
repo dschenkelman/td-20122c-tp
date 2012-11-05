@@ -19,6 +19,7 @@
         private bool isPublic;
         private string body;
         private string subject;
+        private string topicRegex;
 
         public CreateEmailReplyAction(IMessageSender messageSender, ICourseManagementRepositories courseManagementRepositories, IConfigurationService configurationService)
         {
@@ -29,11 +30,13 @@
 
         public void Initialize(ActionEntry actionEntry)
         {
-            this.isPublic = Boolean.Parse(actionEntry.AdditionalData["public"]);
-            if( this.isPublic )
+            this.isPublic = bool.Parse(actionEntry.AdditionalData["public"]);
+            
+            if (this.isPublic)
             {
                 this.topicRegex = @"^\[CONSULTA-PUBLICA\][\ ]*(?<topic>.*)$";
-            }else
+            }
+            else
             {
                 this.topicRegex = @"^\[CONSULTA-PRIVADA\][\ ]*(?<topic>.*)$";
             }
