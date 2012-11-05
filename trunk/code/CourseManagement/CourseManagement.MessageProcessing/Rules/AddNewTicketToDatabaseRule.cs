@@ -8,29 +8,30 @@
 
     internal class AddNewTicketToDatabaseRule : BaseRule
     {
-        private const string SubjectPattern = @"\[CONSULTA-(PUBLICA|PRIVADA)\][a-zA-Z\ ]*";
+        private const string SubjectPatternTemplate = @"\[CONSULTA-{0}\][a-zA-Z\ ]*";
         
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
-        private readonly Regex subjectRegex;
+        private Regex subjectRegex;
 
         public AddNewTicketToDatabaseRule(
             IActionFactory actionFactory, 
             ICourseManagementRepositories courseManagementRepositories) : base(actionFactory)
         {
             this.courseManagementRepositories = courseManagementRepositories;
-            this.subjectRegex = new Regex(SubjectPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        }
+
+        public override void Initialize(RuleEntry ruleEntry)
+        {
+            base.Initialize(ruleEntry);
+            bool isPublic = bool.Parse(ruleEntry.AdditionalData["public"]);
+            string pattern = string.Format(SubjectPatternTemplate, isPublic ? "PUBLICA" : "PRIVADA");
+            this.subjectRegex = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            Match match = this.subjectRegex.Match(message.Subject);
-            if (!match.Success)
-            {
-                return false;
-            }
-
-            return this.courseManagementRepositories.Tickets.Get(t => t.MessageSubject == message.Subject).ToList().Count == 0;
+            return this.subjectRegex.IsMatch(message.Subject);
         }
     }
 }

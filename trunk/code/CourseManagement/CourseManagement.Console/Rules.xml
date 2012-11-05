@@ -15,12 +15,12 @@
       <action name="AddDeliverable"/>
     </actions>
   </rule>
-  <rule name="AddPublicTicket">
+  <rule name="AddTicket" public="true">
     <actions>
       <action name="AddTicket" public="true"/>
     </actions>
   </rule>
-  <rule name="AddPrivateTicket">
+  <rule name="AddTicket" public="false">
     <actions>
       <action name="AddTicket" public="false"/>
     </actions>
