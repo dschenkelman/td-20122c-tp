@@ -30,12 +30,6 @@
         {
             Ticket ticket = this.ParseTicketFromMessage(message);
 
-            if (this.courseManagmentRepositories.Tickets.Get(t => t.MessageSubject == message.Subject).ToList().Count() != 0)
-            {
-                throw new InvalidOperationException("You can not add a new ticket with the same topic (" +
-                                                    this.ParseTopicFromMessage(message) + ") as a previous existing ticket.");
-            }
-
             string rootPath = this.configurationService.AttachmentsRootPath;
             var directory = Path.Combine(rootPath, message.Subject, message.Date.ToIsoFormat());
 
@@ -79,11 +73,6 @@
             }
 
             return student;
-        }
-
-        private string ParseTopicFromMessage(IMessage message)
-        {
-            return message.Subject.Split(']')[1];
         }
     }
 }
