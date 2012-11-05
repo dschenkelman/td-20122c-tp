@@ -21,4 +21,4 @@ INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Courses
 	VALUES (2012, 2, @SubjectId, @AccountId, 'coursemanagement2012@gmail.com');
 	
 INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Teachers
-	VALUES (1,'TeacherName1',1,'cmteacher2012@gmail.com');
+	VALUES (1,'Sample Teacher','cmteacher2012@gmail.com');

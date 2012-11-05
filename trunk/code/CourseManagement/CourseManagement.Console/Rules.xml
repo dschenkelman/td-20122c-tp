@@ -17,10 +17,16 @@
   </rule>
   <rule name="TicketReply">
     <actions>
+      <action name="RelateTicketToReply"/>
+      <action name="DownloadReplyAttachments"/>
     </actions>
   </rule>
   <rule name="Fallback">
     <actions>
+      <action name="EmailReplyAction"
+              body="An e-mail you sent did not match any of the configured rules." 
+              public="false" 
+              subject="Error processing e-mail"/>
     </actions>
   </rule>
 </rules>

@@ -27,6 +27,8 @@
 
             this.currentClient = new SmtpClient(serverEndpoint, port);
             this.currentClient.EnableSsl = useSsl;
+            this.currentClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            this.currentClient.UseDefaultCredentials = false;
             this.currentClient.Credentials = new NetworkCredential(user, password);
         }
 
