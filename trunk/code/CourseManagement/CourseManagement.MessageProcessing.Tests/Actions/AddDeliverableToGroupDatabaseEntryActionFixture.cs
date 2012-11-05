@@ -127,33 +127,6 @@
 
             this.deliverableRepository.Verify(dr => dr.Save(), Times.Once());
         }
-        
-        [ExpectedException(typeof(InvalidOperationException))]
-        [TestMethod]
-        public void ShouldNotAddDeliverableSendedByANonRegisteredEmail()
-        {
-            // arrange
-            Student trueStudent = new Student(91363, "Matias", "message@address.com");
-            Student falseStudent = new Student(90202, "Sebastian", "other.test@address.com");
-            this.studentRepository.Setup(
-                sr => sr.Get(It.Is<Expression<Func<Student, bool>>>(f => f.Compile().Invoke(trueStudent) &&
-                                                                         !f.Compile().Invoke(falseStudent)))).
-                Returns(new List<Student>()).Verifiable();
-
-            Mock<IMessage> message = mockRepository.Create<IMessage>();
-            message.Setup(e => e.From).Returns("message@address.com");
-
-            AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
-
-            // act
-            action.Execute(message.Object);
-
-            // validate
-            this.studentRepository.Verify(
-                sr => sr.Get(It.Is<Expression<Func<Student, bool>>>(f => f.Compile().Invoke(trueStudent) &&
-                                                                         f.Compile().Invoke(falseStudent))),
-                Times.Once());
-        }
 
         [ExpectedException(typeof(InvalidOperationException))]
         [TestMethod]
