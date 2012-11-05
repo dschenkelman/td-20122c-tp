@@ -1,4 +1,5 @@
-﻿using CourseManagement.Messages;
+﻿using CourseManagement.MessageProcessing.Rules;
+using CourseManagement.Messages;
 
 namespace CourseManagement.MessageProcessing.Tests.Rules
 {
@@ -23,12 +24,26 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         }
 
         [TestMethod]
+        public void ShouldSetRuleNameWhenInitializing()
+        {
+            // arrange
+            const string RuleName = "RuleName";
+            TestableBaseRule baseRule = this.CreateBaseRule();
+
+            RuleEntry ruleEntry = new RuleEntry(RuleName);
+            baseRule.Initialize(ruleEntry);
+
+            Assert.AreEqual(RuleName, baseRule.Name);
+        }
+
+        [TestMethod]
         public void ShouldCreateActionsThroughActionFactoryWhenRetrievingRules()
         {
             // arrange
             const string RuleName = "RuleName";
             TestableBaseRule baseRule = this.CreateBaseRule();
-            baseRule.Name = RuleName;
+            RuleEntry ruleEntry = new RuleEntry(RuleName);
+            baseRule.Initialize(ruleEntry);
             this.actionFactory
                 .Setup(af => af.CreateActions(RuleName))
                 .Returns(new List<IAction>())
@@ -47,7 +62,8 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             // arrange
             const string RuleName = "RuleName";
             TestableBaseRule baseRule = this.CreateBaseRule();
-            baseRule.Name = RuleName;
+            RuleEntry ruleEntry = new RuleEntry(RuleName);
+            baseRule.Initialize(ruleEntry);
 
             Mock<IAction> action1 = this.mockRepository.Create<IAction>();
             Mock<IAction> action2 = this.mockRepository.Create<IAction>();

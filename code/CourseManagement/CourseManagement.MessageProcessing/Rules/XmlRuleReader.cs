@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Rules
+﻿using CourseManagement.Utilities.Extensions;
+
+namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Collections.Generic;
     using System.IO;
@@ -9,16 +11,22 @@
     {
         public IEnumerable<RuleEntry> GetRuleNames(string rulesConfigurationFilePath)
         {
-            IEnumerable<RuleEntry> names;
+            IEnumerable<RuleEntry> ruleEntries;
             using (Stream xmlStream = File.OpenRead(rulesConfigurationFilePath))
             {
                 var document = XDocument.Load(xmlStream);
 
                 // TODO: Add error handling logic
-                names = document.Descendants("rule").Select(e => new RuleEntry(e.Attribute("name").Value));
+                ruleEntries = document.Descendants("rule").Select(e =>
+                    {
+                        var ruleEntry = new RuleEntry(e.Attribute("name").Value);
+                        e.Attributes().Where(a => a.Name != "name").ForEach(
+                            a => ruleEntry.AdditionalData.Add(a.Name.LocalName, a.Value));
+                        return ruleEntry;
+                    });
             }
 
-            return names;
+            return ruleEntries;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <rules>
-  <rule name="Rule1">
+  <rule name="Rule1" public="true" fake="true">
 	  <actions>
 		  <action name="Action1" body="Body1" isPublic="false" />
 	  </actions>
@@ -11,7 +11,7 @@
 		  <action name="Action3" />
 	  </actions>
   </rule>
-  <rule name="Rule3">
+  <rule name="Rule3" public="false" fake="false">
 	  <actions>
 		  <action name="Action4" body="Body4" isPublic="true"/>
 		  <action name="Action5" />

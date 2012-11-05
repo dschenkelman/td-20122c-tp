@@ -55,12 +55,15 @@
             var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
             Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            ruleForRule1.Setup(r => r.Initialize(rule1)).Verifiable();
             Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            ruleForRule2.Setup(r => r.Initialize(rule2)).Verifiable();
             Mock<BaseRule> ruleForRule3 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            ruleForRule3.Setup(r => r.Initialize(rule3)).Verifiable();
 
             MBaseRule moleBaseRule1 = new MBaseRule(ruleForRule1.Object)
                                           {
-                                              RetrieveActions = () => { }
+                                              RetrieveActions = () => { },
                                           };
 
             MBaseRule moleBaseRule2 = new MBaseRule(ruleForRule2.Object)
@@ -93,11 +96,12 @@
             Assert.AreEqual(3, rulesList.Count);
 
             Assert.AreSame(ruleForRule1.Object, rulesList[0]);
-            Assert.AreEqual(rule1.Name, rulesList[0].Name);
             Assert.AreSame(ruleForRule2.Object, rulesList[1]);
-            Assert.AreEqual(rule2.Name, rulesList[1].Name);
             Assert.AreSame(ruleForRule3.Object, rulesList[2]);
-            Assert.AreEqual(rule3.Name, rulesList[2].Name);
+
+            ruleForRule1.Verify(r => r.Initialize(rule1), Times.Once());
+            ruleForRule2.Verify(r => r.Initialize(rule2), Times.Once());
+            ruleForRule3.Verify(r => r.Initialize(rule3), Times.Once());
         }
 
         [TestMethod]
@@ -114,8 +118,11 @@
             var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
             Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            ruleForRule1.Setup(r => r.Initialize(rule1)).Verifiable();
             Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            ruleForRule2.Setup(r => r.Initialize(rule2)).Verifiable();
             Mock<BaseRule> ruleForRule3 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            ruleForRule3.Setup(r => r.Initialize(rule3)).Verifiable();
 
             bool actionsRetrievedFor1 = false;
             bool actionsRetrievedFor2 = false;

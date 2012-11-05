@@ -22,7 +22,7 @@
             return rules.Select(ruleEntry =>
                 {
                     var rule = this.container.Resolve<BaseRule>(ruleEntry.Name);
-                    rule.Name = ruleEntry.Name;
+                    rule.Initialize(ruleEntry);
                     rule.RetrieveActions();
                     return rule;
                 });
