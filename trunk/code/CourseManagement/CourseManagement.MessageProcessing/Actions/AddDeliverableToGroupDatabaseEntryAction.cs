@@ -59,7 +59,11 @@
                 string path = Path.Combine(directory, messageAttachment.Name);
                 messageAttachment.Download(path);
 
-                DeliverableAttachment deliverableAttachment = new DeliverableAttachment { FileName = messageAttachment.Name, Location = path }; 
+                DeliverableAttachment deliverableAttachment = new DeliverableAttachment
+                                                                  {
+                                                                      FileName = messageAttachment.Name,
+                                                                      Location = path
+                                                                  }; 
                 deliverable.Attachments.Add(deliverableAttachment);
             }
 

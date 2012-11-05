@@ -167,11 +167,9 @@
                         f => f.Compile().Invoke(trueStudent) && !f.Compile().Invoke(falseStudent))), Times.Once());
 
 
-            attachment1.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment1")), Times.Once());
-            attachment2.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment2")), Times.Once());
-			attachment3.Verify(e => e.Download(Path.Combine(rootPath, MessageSubject, "20120202", "Attachment3")), Times.Once());
-            this.ticketAttachmentsRepository.Verify(ar => ar.Insert(It.IsAny<TicketAttachment>()), Times.Exactly(3));
-            this.ticketAttachmentsRepository.Verify(ar => ar.Save(), Times.Once());
+            attachment1.Verify(e => e.Download(Path.Combine(this.rootPath, MessageSubject, "20120202", "Attachment1")), Times.Once());
+            attachment2.Verify(e => e.Download(Path.Combine(this.rootPath, MessageSubject, "20120202", "Attachment2")), Times.Once());
+            attachment3.Verify(e => e.Download(Path.Combine(this.rootPath, MessageSubject, "20120202", "Attachment3")), Times.Once());
 
             this.ticketRepository.Verify(
                 tr => tr.Insert(It.IsAny<Ticket>()), Times.Once());
