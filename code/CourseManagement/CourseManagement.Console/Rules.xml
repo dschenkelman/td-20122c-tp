@@ -15,7 +15,7 @@
       <action name="AddDeliverable"/>
     </actions>
   </rule>
-  <rule name="AddTicket" public="true">
+  <rule name="AddTicket-Public" public="true">
     <actions>
       <action name="AddTicket" public="true"/>
       <action name="NewTicketEmailReply"
@@ -24,7 +24,7 @@
               subject="[CONSULTA-{0}] Creada"/>
     </actions>
   </rule>
-  <rule name="AddTicket" public="false">
+  <rule name="AddTicket-Private" public="false">
     <actions>
       <action name="AddTicket" public="false"/>
       <action name="NewTicketEmailReply"
