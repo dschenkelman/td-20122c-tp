@@ -21,7 +21,15 @@
 
             return rules.Select(ruleEntry =>
                 {
-                    var rule = this.container.Resolve<BaseRule>(ruleEntry.Name);
+                    var ruleName = ruleEntry.Name;
+
+                    if (ruleName.Contains("-"))
+                    {
+                        //Ticket rule
+                        ruleName = ruleName.Split('-').First();
+                    }
+
+                    var rule = this.container.Resolve<BaseRule>(ruleName);
                     rule.Initialize(ruleEntry);
                     rule.RetrieveActions();
                     return rule;
