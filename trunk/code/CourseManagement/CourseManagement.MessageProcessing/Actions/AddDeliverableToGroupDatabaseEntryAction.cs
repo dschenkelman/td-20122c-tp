@@ -79,6 +79,7 @@
 
             if (courses.Count() == 0)
             {
+                // TODO can it really get to this point sometime?
                 throw new InvalidOperationException("You can not add deliverable. The account: " + message.To + " is not a valid.");
             }
 
