@@ -28,12 +28,14 @@ namespace CourseManagement.MessageProcessing.Rules
                 return false;
             }
 
+            int year = message.Date.Year;
+            int semester = message.Date.Semester();
             int subjectCode = int.Parse(Regex.Match(message.Subject, this.subjectCodeRegex).Groups["subjectCode"].Value);
             return
                 this.courseManagementRepositories.Courses.Get(
                     c =>
-                    ((c.Subject.Code == subjectCode) && (c.Year == message.Date.Year) &&
-                     (c.Semester == message.Date.Semester()))).ToList().Count() != 0;
+                    ((c.Subject.Code == subjectCode) && (c.Year == year) &&
+                     (c.Semester == semester))).ToList().Count() != 0;
         }
     }
 }

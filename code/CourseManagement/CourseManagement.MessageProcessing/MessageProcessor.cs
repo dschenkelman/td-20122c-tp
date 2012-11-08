@@ -61,7 +61,13 @@
                     if (rule.IsMatch(message, previouslyMatched))
                     {
                         previouslyMatched = true;
-                        rule.Process(message);
+                        try
+                        {
+                            rule.Process(message);
+                        }catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
                 }
             }

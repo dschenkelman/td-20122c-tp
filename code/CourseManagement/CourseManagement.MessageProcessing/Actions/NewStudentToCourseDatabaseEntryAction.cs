@@ -48,7 +48,7 @@
             }
             else
             {
-                if (course.Students.Contains(student))
+                if (course.Students.Select(s => s.Id == student.Id ).ToList().Count() != 0)
                 {
                     throw new Exception("Student: " + student.Id + " " + student.Name + " is already in course.");
                 }
