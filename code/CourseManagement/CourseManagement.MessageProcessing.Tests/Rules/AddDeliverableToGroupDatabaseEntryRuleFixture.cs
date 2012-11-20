@@ -58,6 +58,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(new List<IMessageAttachment> {messageAttachment.Object}).Verifiable();
 
             AddDeliverableToGroupDatabaseEntryRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("AddDeliverable", "^\\[ENTREGA-TP-[0-9]+\\]$"));
 
             // act and validate
             Assert.IsTrue(rule.IsMatch(message.Object, false));
@@ -95,6 +96,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(new List<IMessageAttachment> { messageAttachment.Object }).Verifiable();
 
             AddDeliverableToGroupDatabaseEntryRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("AddDeliverable", "^\\[ENTREGA-TP-[0-9]+\\]$"));
 
             // act and validate
             Assert.IsFalse(rule.IsMatch(message.Object, false));
@@ -131,6 +133,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(new List<IMessageAttachment>()).Verifiable();
 
             AddDeliverableToGroupDatabaseEntryRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("AddDeliverable", "^\\[ENTREGA-TP-[0-9]+\\]$"));
 
             // act and validate
             Assert.IsFalse(rule.IsMatch(message.Object, false));
@@ -168,6 +171,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(new List<IMessageAttachment> { messageAttachment.Object }).Verifiable();
 
             AddDeliverableToGroupDatabaseEntryRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("AddDeliverable", "^\\[ENTREGA-TP-[0-9]+\\]$"));
 
             // act and validate
             Assert.IsFalse(rule.IsMatch(message.Object, false));

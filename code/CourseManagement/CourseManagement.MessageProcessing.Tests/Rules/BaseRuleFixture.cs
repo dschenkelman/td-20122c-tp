@@ -28,9 +28,10 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         {
             // arrange
             const string RuleName = "RuleName";
+            const string RuleSubjectRegex = "RuleRegex";
             TestableBaseRule baseRule = this.CreateBaseRule();
 
-            RuleEntry ruleEntry = new RuleEntry(RuleName);
+            RuleEntry ruleEntry = new RuleEntry(RuleName, RuleSubjectRegex);
             baseRule.Initialize(ruleEntry);
 
             Assert.AreEqual(RuleName, baseRule.Name);
@@ -41,8 +42,9 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         {
             // arrange
             const string RuleName = "RuleName";
+            const string RuleSubjectRegex = "RuleRegex";
             TestableBaseRule baseRule = this.CreateBaseRule();
-            RuleEntry ruleEntry = new RuleEntry(RuleName);
+            RuleEntry ruleEntry = new RuleEntry(RuleName, RuleSubjectRegex);
             baseRule.Initialize(ruleEntry);
             this.actionFactory
                 .Setup(af => af.CreateActions(RuleName))
@@ -61,8 +63,9 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         {
             // arrange
             const string RuleName = "RuleName";
+            const string RuleSubjectRegex = "RuleRegex";
             TestableBaseRule baseRule = this.CreateBaseRule();
-            RuleEntry ruleEntry = new RuleEntry(RuleName);
+            RuleEntry ruleEntry = new RuleEntry(RuleName, RuleSubjectRegex);
             baseRule.Initialize(ruleEntry);
 
             Mock<IAction> action1 = this.mockRepository.Create<IAction>();

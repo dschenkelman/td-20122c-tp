@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <rules>
-  <rule name="NewStudent">
+  <rule name="NewStudent" subject="^\\[ALTA-MATERIA-(?&lt;subjectCode&gt;[0-9]+)\\][\\ ]*([0-9]+)-([a-zA-Z\\ ]+[a-zA-Z]+)$">
     <actions>
       <action name="NewStudent"/>
     </actions>
   </rule>
-  <rule name="NewGroup">
+  <rule name="NewGroup" subject="^\\[ALTA-GRUPO\\]$">
     <actions>
       <action name="AddGroup"/>
     </actions>
   </rule>
-  <rule name="AddDeliverable">
+  <rule name="AddDeliverable" subject="^\\[ENTREGA-TP-[0-9]+\\]$">
     <actions>
       <action name="AddDeliverable"/>
     </actions>
   </rule>
-  <rule name="AddTicket-Public" public="true">
+  <rule name="AddTicket-Public" public="true" subject="^\\[CONSULTA-PUBLICA\\][a-zA-Z\\ ]*$">
     <actions>
       <action name="AddTicket" public="true"/>
       <action name="NewTicketEmailReply"
@@ -24,7 +24,7 @@
               subject="[CONSULTA-{0}] Creada"/>
     </actions>
   </rule>
-  <rule name="AddTicket-Private" public="false">
+  <rule name="AddTicket-Private" public="false" subject="^\\[CONSULTA-PRIVADA\\][a-zA-Z\\ ]*$">
     <actions>
       <action name="AddTicket" public="false"/>
       <action name="NewTicketEmailReply"
@@ -33,13 +33,13 @@
               subject="[CONSULTA-{0}] Creada"/>
     </actions>
   </rule>
-  <rule name="TicketReply">
+  <rule name="TicketReply" subject="^\\[CONSULTA-(?&lt;ticketId&gt;[0-9]*)\\]$">
     <actions>
       <action name="RelateTicketToReply"/>
       <action name="DownloadReplyAttachments"/>
     </actions>
   </rule>
-  <rule name="Fallback">
+  <rule name="Fallback" subject=".*">
     <actions>
       <action name="EmailReply"
               body="An e-mail you sent did not match any of the configured rules." 

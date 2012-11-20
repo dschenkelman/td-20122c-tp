@@ -24,11 +24,15 @@
             Assert.AreEqual("Rule1", ruleNames[0].Name);
             Assert.AreEqual("true", ruleNames[0].AdditionalData["public"]);
             Assert.AreEqual("true", ruleNames[0].AdditionalData["fake"]);
+            Assert.AreEqual("regex1", ruleNames[0].AdditionalData["subject"]);
             Assert.AreEqual("Rule2", ruleNames[1].Name);
+            Assert.AreEqual("regex2", ruleNames[1].AdditionalData["subject"]);
             Assert.AreEqual("Rule3", ruleNames[2].Name);
             Assert.AreEqual("false", ruleNames[2].AdditionalData["public"]);
             Assert.AreEqual("false", ruleNames[2].AdditionalData["fake"]);
+            Assert.AreEqual("regex3", ruleNames[2].AdditionalData["subject"]);
             Assert.AreEqual("Rule4", ruleNames[3].Name);
+            Assert.AreEqual("regex4", ruleNames[3].AdditionalData["subject"]);
         }
 
         private XmlRuleReader CreateXmlRuleReader()

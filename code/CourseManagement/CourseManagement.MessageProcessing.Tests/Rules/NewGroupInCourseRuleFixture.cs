@@ -42,6 +42,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
 
             NewGroupInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewGroup", "\\[ALTA-GRUPO\\]"));
 
             // act
             bool resultado = rule.IsMatch(message.Object, false);
@@ -68,14 +69,15 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
 
             NewGroupInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewGroup", "\\[ALTA-GRUPO\\]"));
 
             // act
             bool resultado = rule.IsMatch(message.Object, false);
 
             // validate
             Assert.IsFalse(resultado);
-            MessageAttachment.Verify(ma => ma.Name, Times.Once());
-            message.Verify(m => m.Attachments, Times.Exactly(2));
+            MessageAttachment.Verify(ma => ma.Name, Times.Never());
+            message.Verify(m => m.Attachments, Times.Never());
             message.Verify(m => m.Subject, Times.Once());
         }
 
@@ -97,6 +99,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
 
             NewGroupInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewGroup", "\\[ALTA-GRUPO\\]"));
 
             // act
             bool resultado = rule.IsMatch(message.Object, false);
@@ -123,6 +126,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.message.Setup(m => m.Attachments).Returns(attachmentList).Verifiable();
 
             NewGroupInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewGroup", "\\[ALTA-GRUPO\\]"));
 
             // act
             bool resultado = rule.IsMatch(message.Object, false);

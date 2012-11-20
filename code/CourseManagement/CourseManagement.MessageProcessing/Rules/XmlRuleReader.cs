@@ -19,7 +19,7 @@ namespace CourseManagement.MessageProcessing.Rules
                 // TODO: Add error handling logic
                 ruleEntries = document.Descendants("rule").Select(e =>
                     {
-                        var ruleEntry = new RuleEntry(e.Attribute("name").Value);
+                        var ruleEntry = new RuleEntry(e.Attribute("name").Value, e.Attribute("subject").Value);
                         e.Attributes().Where(a => a.Name != "name").ForEach(
                             a => ruleEntry.AdditionalData.Add(a.Name.LocalName, a.Value));
                         return ruleEntry;

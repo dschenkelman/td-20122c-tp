@@ -13,24 +13,22 @@ namespace CourseManagement.MessageProcessing.Rules
     internal class NewStudentInCourseRule : BaseRule
     {
         readonly private ICourseManagementRepositories courseManagementRepositories;
-        private string subjectCodeRegex;
 
         public NewStudentInCourseRule(ICourseManagementRepositories courseManagementRepositories, IActionFactory actionFactory) : base(actionFactory)
         {
             this.courseManagementRepositories = courseManagementRepositories;
-            this.subjectCodeRegex = @"^\[ALTA-MATERIA-(?<subjectCode>[0-9]+)\][\ ]*([0-9]+)-([a-zA-Z\ ]+[a-zA-Z]+)$";
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            if( !Regex.IsMatch(message.Subject, @"^\[ALTA-MATERIA-([0-9]+)\][\ ]*([0-9]+)-([a-zA-Z\ ]+[a-zA-Z]+)$") )
+            if( !this.subjectRegex.IsMatch(message.Subject) )
             {
                 return false;
             }
 
             int year = message.Date.Year;
             int semester = message.Date.Semester();
-            int subjectCode = int.Parse(Regex.Match(message.Subject, this.subjectCodeRegex).Groups["subjectCode"].Value);
+            int subjectCode = int.Parse(this.subjectRegex.Match(message.Subject).Groups["subjectCode"].Value);
             return
                 this.courseManagementRepositories.Courses.Get(
                     c =>

@@ -48,9 +48,9 @@
             // arrange
             UnityRuleFactory unityRuleFactory = this.CreateUnityRuleFactory();
 
-            RuleEntry rule1 = new RuleEntry("Rule1");
-            RuleEntry rule2 = new RuleEntry("Rule2");
-            RuleEntry rule3 = new RuleEntry("Rule3");
+            RuleEntry rule1 = new RuleEntry("Rule1", "RegexRule1");
+            RuleEntry rule2 = new RuleEntry("Rule2", "RegexRule2");
+            RuleEntry rule3 = new RuleEntry("Rule3", "RegexRule3");
 
             var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
@@ -111,9 +111,9 @@
             // arrange
             UnityRuleFactory unityRuleFactory = this.CreateUnityRuleFactory();
 
-            RuleEntry rule1 = new RuleEntry("Rule1");
-            RuleEntry rule2 = new RuleEntry("Rule2");
-            RuleEntry rule3 = new RuleEntry("Rule3");
+            RuleEntry rule1 = new RuleEntry("Rule1", "RegexRule1");
+            RuleEntry rule2 = new RuleEntry("Rule2", "RegexRule2");
+            RuleEntry rule3 = new RuleEntry("Rule3", "RegexRule3");
 
             var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 

@@ -18,7 +18,7 @@ namespace CourseManagement.MessageProcessing.Rules
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            if( ! Regex.IsMatch(message.Subject, @"^\[ENTREGA-TP-[0-9]+\]$") || message.Attachments.Count() == 0 )
+            if( ! this.subjectRegex.IsMatch(message.Subject) || message.Attachments.Count() == 0 )
             {
                 return false;
             }
