@@ -15,6 +15,11 @@
             get { return this.GetValue("AttachmentsRootPath"); }
         }
 
+        public string LogsRootPath
+        {
+            get { return this.GetValue("LogsRootPath"); }
+        }
+
         public int MonitoredSubjectId
         {
             get { return Convert.ToInt32(this.GetValue("MonitoredSubjectId")); }
