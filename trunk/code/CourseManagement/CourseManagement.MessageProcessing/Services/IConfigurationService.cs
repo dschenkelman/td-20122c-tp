@@ -5,6 +5,7 @@
         string GetValue(string rulesConfigurationFilePathKey);
 
         string AttachmentsRootPath { get; }
+        string LogsRootPath { get; }
 
         int MonitoredSubjectId { get; }
 

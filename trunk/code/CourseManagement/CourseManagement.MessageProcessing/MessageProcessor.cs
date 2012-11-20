@@ -9,6 +9,7 @@
     using Rules;
     using Services;
     using Utilities.Extensions;
+    using Utilities.Log;
 
     public class MessageProcessor
     {
@@ -64,8 +65,12 @@
                         try
                         {
                             rule.Process(message);
-                        }catch(Exception e)
+                            Logger.GetInstance().LogProcessedRule(this.configurationService.LogsRootPath,
+                                         subjectId + "", rule.Name, message.From, message.Date);
+                        }catch(InvalidOperationException e)
                         {
+                            Logger.GetInstance().LogInvalidOperation(this.configurationService.LogsRootPath,
+                                                                     subjectId + "", rule.Name, e.Message);
                             Console.WriteLine(e.Message);
                         }
                     }
