@@ -31,7 +31,7 @@
         {
             const string ValidPublicSubject = "[CONSULTA-PUBLICA] MVC";
             const string ValidPrivateSubject = "[CONSULTA-PRIVADA] patrones de diseño";
-            RuleEntry ruleEntry = new RuleEntry("rule");
+            RuleEntry ruleEntry = new RuleEntry("AddTicket-Public", "^\\[CONSULTA-PUBLICA\\][a-zA-Z\\ ]*$");
             ruleEntry.AdditionalData.Add("public", "true");
 
             var rule = this.CreateAddTicketReplyToDatabaseRule();
@@ -53,7 +53,7 @@
         {
             const string ValidPublicSubject = "[CONSULTA-PUBLICA] MVC";
             const string ValidPrivateSubject = "[CONSULTA-PRIVADA] patrones de diseño";
-            RuleEntry ruleEntry = new RuleEntry("rule");
+            RuleEntry ruleEntry = new RuleEntry("AddTicket-Public", "\\[CONSULTA-PRIVADA\\][a-zA-Z\\ ]*");
             ruleEntry.AdditionalData.Add("public", "false");
 
             var rule = this.CreateAddTicketReplyToDatabaseRule();

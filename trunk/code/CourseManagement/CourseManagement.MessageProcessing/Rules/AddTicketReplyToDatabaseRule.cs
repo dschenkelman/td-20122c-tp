@@ -12,12 +12,8 @@ namespace CourseManagement.MessageProcessing.Rules
 
     public class AddTicketReplyToDatabaseRule : BaseRule
     {
-        private const string SubjectPattern = @"^\[CONSULTA-(?<ticketId>[0-9]+)\].*$";
-        
         private readonly ICourseManagementRepositories courseManagementRepositories;
         private readonly IConfigurationService configurationService;
-
-        private readonly Regex subjectRegex;
 
         public AddTicketReplyToDatabaseRule(
             IActionFactory actionFactory, 
@@ -26,7 +22,6 @@ namespace CourseManagement.MessageProcessing.Rules
         {
             this.courseManagementRepositories = courseManagementRepositories;
             this.configurationService = configurationService;
-            this.subjectRegex = new Regex(SubjectPattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)

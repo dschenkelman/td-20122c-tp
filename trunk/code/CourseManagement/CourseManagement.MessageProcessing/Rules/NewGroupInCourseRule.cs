@@ -8,15 +8,16 @@
 
     internal class NewGroupInCourseRule : BaseRule
     {
-        private const string MatchingSubject = "[ALTA-GRUPO]";
-
         public NewGroupInCourseRule(IActionFactory actionFactory) : base(actionFactory)
         {
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            var subjectMatch = message.Subject.Equals(MatchingSubject);
+            if( this.subjectRegex.IsMatch(message.Subject) == false )
+            {
+                return false;
+            }
 
             var onlyOneAttachmentInMessage = message.Attachments.Count() == 1;
 
@@ -41,7 +42,7 @@
                 }
             }
 
-            return subjectMatch && onlyOneAttachmentInMessage && attachmentMatchExtensionTxt;
+            return onlyOneAttachmentInMessage && attachmentMatchExtensionTxt;
         }
     }
 }

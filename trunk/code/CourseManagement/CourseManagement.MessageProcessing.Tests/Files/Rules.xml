@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <rules>
-  <rule name="Rule1" public="true" fake="true">
+  <rule name="Rule1" public="true" fake="true" subject="regex1">
 	  <actions>
 		  <action name="Action1" body="Body1" isPublic="false" />
 	  </actions>
   </rule>
-  <rule name="Rule2">
+  <rule name="Rule2" subject="regex2">
 	  <actions>
 		  <action name="Action2" />
 		  <action name="Action3" />
 	  </actions>
   </rule>
-  <rule name="Rule3" public="false" fake="false">
+  <rule name="Rule3" public="false" fake="false" subject="regex3">
 	  <actions>
 		  <action name="Action4" body="Body4" isPublic="true"/>
 		  <action name="Action5" />
 		  <action name="Action6" />
 	  </actions>
   </rule>
-  <rule name="Rule4">
+  <rule name="Rule4" subject="regex4">
 	  <actions>
 		  <action name="Action7" />
 		  <action name="Action8" />

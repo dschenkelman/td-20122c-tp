@@ -58,6 +58,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Date).Returns(new DateTime(Year, 7, 5));
 
             NewStudentInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewStudent", "^\\[ALTA-MATERIA-(?<subjectCode>[0-9]+)\\][\\ ]*([0-9]+)-([a-zA-Z\\ ]+[a-zA-Z]+)$"));
 
             // act
             bool resultado = rule.IsMatch(message.Object, false);
@@ -91,6 +92,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message5.Setup(m => m.From).Returns("servetto.matias@gmail.com");
 
             NewStudentInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewStudent", "^\\[ALTA-MATERIA-(?<subjectCode>[0-9]+)\\][\\ ]*([0-9]+)-([a-zA-Z\\ ]+[a-zA-Z]+)$"));
 
             // act and validate
             Assert.IsFalse(rule.IsMatch(message1.Object, false));
@@ -127,6 +129,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             message.Setup(m => m.Date).Returns(new DateTime(Year, 7, 5));
 
             NewStudentInCourseRule rule = CreateRule();
+            rule.Initialize(new RuleEntry("NewStudent", "^\\[ALTA-MATERIA-(?<subjectCode>[0-9]+)\\][\\ ]*([0-9]+)-([a-zA-Z\\ ]+[a-zA-Z]+)$"));
 
             // act and validate
             Assert.IsFalse(rule.IsMatch(message.Object, false));

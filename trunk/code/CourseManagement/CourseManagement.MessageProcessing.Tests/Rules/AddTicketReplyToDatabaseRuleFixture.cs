@@ -41,14 +41,15 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         {
             // arrange
             const int SubjectId = 1;
-            const string SubjectThatDoesNotMatchPattern = "[Consulta-Privada]";
-            const string SubjectWithNonExistentTicketId = "[Consulta-10]";
-            const string SubjectWithNonIntegerTicketId = "[Consulta-999999999999999999]";
-            const string ValidSubject = "[Consulta-1]";
+            const string SubjectThatDoesNotMatchPattern = "[CONSULTA-Privada]";
+            const string SubjectWithNonExistentTicketId = "[CONSULTA-10]";
+            const string SubjectWithNonIntegerTicketId = "[CONSULTA-999999999999999999]";
+            const string ValidSubject = "[CONSULTA-1]";
             const string FromAddress = "From@From.com";
             DateTime dateTime = new DateTime(2012, 11, 5);
 
             var addTicketReplyToDatabaseRule = this.CreateAddTicketReplyToDatabaseRule();
+            addTicketReplyToDatabaseRule.Initialize(new RuleEntry("TicketReply", "^\\[CONSULTA-(?<ticketId>[0-9]*)\\]$"));
 
             Mock<IMessage> message1 = this.mockRepository.Create<IMessage>();
             message1.Setup(m => m.Subject).Returns(SubjectThatDoesNotMatchPattern);
@@ -101,7 +102,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             // arrange
             const string FromAddress = "From@From.com";
             const int SubjectId = 1;
-            const string MessageSubject = "[Consulta-1]";
+            const string MessageSubject = "[CONSULTA-1]";
             DateTime messageDate = new DateTime(2012, 11, 4);
 
             Mock<IMessage> message = this.mockRepository.Create<IMessage>();
@@ -124,6 +125,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
                 .Verifiable();
 
             var addTicketReplyToDatabaseRule = this.CreateAddTicketReplyToDatabaseRule();
+            addTicketReplyToDatabaseRule.Initialize(new RuleEntry("TicketReply", "^\\[CONSULTA-(?<ticketId>[0-9]*)\\]$"));
 
             Ticket ticket = new Ticket();
             this.ticketRepository.Setup(tr => tr.GetById(1)).Returns(ticket).Verifiable();
