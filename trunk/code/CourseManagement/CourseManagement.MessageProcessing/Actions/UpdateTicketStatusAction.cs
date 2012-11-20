@@ -1,10 +1,11 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System.Linq;
     using Messages;
     using Model;
     using Persistence.Repositories;
-    using Services;
     using Utilities.Extensions;
 
     public class UpdateTicketStatusAction : BaseTicketReplyAction

@@ -117,8 +117,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void ShouldRetrieveExceptionFromAddingAnAlreadyAddedStudentToCourse()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ShouldThrowWhenAddingAnAlreadyAddedStudentToCourse()
         {
             // arrange
             const int CourseCode = 7508;

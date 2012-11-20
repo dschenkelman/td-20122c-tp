@@ -1,7 +1,8 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System.Collections.Generic;
-    using Services;
 
     public class ConfigurationActionFinder : IActionFinder
     {

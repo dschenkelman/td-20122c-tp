@@ -19,7 +19,7 @@
     <actions>
       <action name="AddTicket" public="true"/>
       <action name="NewTicketEmailReply"
-              body=""
+              body="De ahora en mas, responder con el tag incluyendo el numero de consulta."
               public="true"
               subject="[CONSULTA-{0}] Creada"/>
     </actions>
@@ -28,7 +28,7 @@
     <actions>
       <action name="AddTicket" public="false"/>
       <action name="NewTicketEmailReply"
-              body=""
+              body="De ahora en mas, responder con el tag incluyendo el numero de consulta."
               public="false"
               subject="[CONSULTA-{0}] Creada"/>
     </actions>

@@ -1,9 +1,10 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System.Linq;
     using Messages;
     using Persistence.Repositories;
-    using Services;
 
     public class NewTicketEmailReplyAction : CreateEmailReplyAction
     {

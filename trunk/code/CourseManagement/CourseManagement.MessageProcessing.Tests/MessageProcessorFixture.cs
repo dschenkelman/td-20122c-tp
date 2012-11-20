@@ -1,5 +1,6 @@
 ﻿using CourseManagement.MessageProcessing.Actions;
 using CourseManagement.MessageProcessing.Rules.Moles;
+using CourseManagement.Persistence.Configuration;
 
 namespace CourseManagement.MessageProcessing.Tests
 {
@@ -7,7 +8,6 @@ namespace CourseManagement.MessageProcessing.Tests
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using MessageProcessing.Rules;
-    using MessageProcessing.Services;
     using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Model;
