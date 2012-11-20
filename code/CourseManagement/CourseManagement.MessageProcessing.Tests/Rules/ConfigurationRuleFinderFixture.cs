@@ -1,8 +1,9 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using System.Collections.Generic;
     using MessageProcessing.Rules;
-    using MessageProcessing.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 

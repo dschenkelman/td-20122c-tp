@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +9,6 @@
     using Messages;
     using Model;
     using Persistence.Repositories;
-    using Services;
     using Utilities.Extensions;
 
     internal class AddDeliverableToGroupDatabaseEntryAction : IAction

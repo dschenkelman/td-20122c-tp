@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using CourseManagement.MessageProcessing.Services;
-
-namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿namespace CourseManagement.MessageProcessing.Tests.Rules
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
     using MessageProcessing.Actions;
     using MessageProcessing.Rules;
     using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Model;
     using Moq;
+    using Persistence.Configuration;
     using Persistence.Repositories;
 
     [TestClass]

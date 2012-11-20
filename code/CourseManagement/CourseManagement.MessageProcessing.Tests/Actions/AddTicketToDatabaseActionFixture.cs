@@ -1,11 +1,12 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Actions
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Tests.Actions
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq.Expressions;
     using MessageProcessing.Actions;
-    using MessageProcessing.Services;
     using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Model;

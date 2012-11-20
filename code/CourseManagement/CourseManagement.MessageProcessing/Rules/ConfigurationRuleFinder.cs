@@ -1,7 +1,8 @@
-﻿namespace CourseManagement.MessageProcessing.Rules
+﻿using CourseManagement.Persistence.Configuration;
+
+namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Collections.Generic;
-    using Services;
 
     public class ConfigurationRuleFinder : IRuleFinder
     {

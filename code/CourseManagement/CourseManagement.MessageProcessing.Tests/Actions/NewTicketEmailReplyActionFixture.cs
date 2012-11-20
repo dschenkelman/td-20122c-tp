@@ -4,11 +4,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CourseManagement.MessageProcessing.Actions;
 using CourseManagement.Model;
+using CourseManagement.Persistence.Configuration;
 using CourseManagement.Persistence.Repositories;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
-    using MessageProcessing.Services;
     using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;

@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO.Moles;
 using System.Linq;
-using CourseManagement.MessageProcessing.Services;
+using CourseManagement.Persistence.Configuration;
 using CourseManagement.Utilities.Extensions;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
