@@ -5,7 +5,7 @@
     using System.Linq;
     using Messages;
 
-    class GroupFileParser : IGroupFileParser
+    public class GroupFileParser : IGroupFileParser
     {
         public IEnumerable<int> GetIdsFromMessage(IMessage message)
         {
