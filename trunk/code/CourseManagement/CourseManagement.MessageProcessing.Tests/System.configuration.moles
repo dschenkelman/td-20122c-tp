@@ -1,0 +1,8 @@
+<Moles xmlns="http://schemas.microsoft.com/moles/2010/">
+  <Assembly Name="System.configuration" />
+  <MoleGeneration>
+    <Types>
+      <Add FullName="System.Configuration.ConfigurationManager"/>
+    </Types>
+  </MoleGeneration>
+</Moles>

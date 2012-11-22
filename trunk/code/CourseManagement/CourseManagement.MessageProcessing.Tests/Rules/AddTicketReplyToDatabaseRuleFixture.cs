@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +23,7 @@
         private Mock<IRepository<Ticket>> ticketRepository;
         private Mock<IConfigurationService> configurationService;
         private Mock<IRepository<Course>> courseRepository;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
@@ -33,6 +36,8 @@
             this.courseRepository = this.mockRepository.Create<IRepository<Course>>();
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
             this.repositories.Setup(r => r.Courses).Returns(this.courseRepository.Object);
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -137,7 +142,8 @@
             return new AddTicketReplyToDatabaseRule(
                 this.actionFactory.Object,
                 this.repositories.Object,
-                this.configurationService.Object);
+                this.configurationService.Object,
+                this.logger.Object);
         }
     }
 }

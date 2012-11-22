@@ -5,16 +5,18 @@
     using System.Linq;
     using Actions;
     using Messages;
+    using Persistence.Logging;
 
     internal class NewGroupInCourseRule : BaseRule
     {
-        public NewGroupInCourseRule(IActionFactory actionFactory) : base(actionFactory)
+        public NewGroupInCourseRule(IActionFactory actionFactory, ILogger logger)
+            : base(actionFactory, logger)
         {
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            if( this.subjectRegex.IsMatch(message.Subject) == false )
+            if (this.subjectRegex.IsMatch(message.Subject) == false)
             {
                 return false;
             }

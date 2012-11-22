@@ -15,28 +15,31 @@ namespace CourseManagement.MessageProcessing.Actions
     internal class AddDeliverableToGroupDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagementRepositories;
-        private readonly IConfigurationService configurationService;
+        private readonly IConfigurationService configurationConfigurationService;
+        private readonly ILogger logger;
 
         public AddDeliverableToGroupDatabaseEntryAction(
             ICourseManagementRepositories courseManagementRepositories,
-            IConfigurationService service)
+            IConfigurationService configurationService,
+            ILogger logger)
         {
             this.courseManagementRepositories = courseManagementRepositories;
-            this.configurationService = service;
+            this.configurationConfigurationService = configurationService;
+            this.logger = logger;
         }
 
         public void Initialize(ActionEntry actionEntry)
         {
         }
 
-        public void Execute(IMessage message, ILogger logger)
+        public void Execute(IMessage message)
         {
             var student = this.courseManagementRepositories
                 .Students
                 .Get(s => s.MessagingSystemId == message.From)
                 .FirstOrDefault();
 
-            logger.Log(LogLevel.Information, "Obtaining Student's Group");
+            this.logger.Log(LogLevel.Information, "Obtaining Student's Group");
             Course course = this.GetCourseFromMessage(message);
             var studentGroup = student.Groups.Where(g => g.CourseId == course.Id).FirstOrDefault();
             
@@ -45,11 +48,11 @@ namespace CourseManagement.MessageProcessing.Actions
                 throw new InvalidOperationException("You can not add deliverable to inexistent student's group.");
             }
 
-            logger.Log(LogLevel.Information, "Adding Deliverable to Group");
+            this.logger.Log(LogLevel.Information, "Adding Deliverable to Group");
             Deliverable deliverable = new Deliverable(message.Date);
             deliverable.GroupId = studentGroup.Id;
 
-            string rootPath = this.configurationService.AttachmentsRootPath;
+            string rootPath = this.configurationConfigurationService.AttachmentsRootPath;
             var directory = Path.Combine(rootPath, message.Subject, message.Date.ToIsoFormat());
 
             Directory.CreateDirectory(directory);

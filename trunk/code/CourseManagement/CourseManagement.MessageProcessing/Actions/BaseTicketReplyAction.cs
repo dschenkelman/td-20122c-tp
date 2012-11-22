@@ -19,7 +19,7 @@ namespace CourseManagement.MessageProcessing.Actions
 
         public abstract void Initialize(ActionEntry actionEntry);
 
-        public abstract void Execute(IMessage message, ILogger logger);
+        public abstract void Execute(IMessage message);
 
         protected int ParseTicketId(IMessage message)
         {

@@ -95,7 +95,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var relateTicketReplyToTicketAction = this.CreateRelateTicketReplyToTicketAction();
 
             // act
-            relateTicketReplyToTicketAction.Execute(message.Object, this.logger.Object);
+            relateTicketReplyToTicketAction.Execute(message.Object);
 
             // assert
             Assert.IsTrue(directoryCreated);
@@ -119,8 +119,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         public DownloadReplyAttachmentsAction CreateRelateTicketReplyToTicketAction()
         {
             return new DownloadReplyAttachmentsAction(
-                this.repositories.Object, 
-                this.configurationService.Object);
+                this.repositories.Object,
+                this.configurationService.Object, this.logger.Object);
         }
     }
 }

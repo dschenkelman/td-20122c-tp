@@ -3,10 +3,12 @@
     using MessageProcessing.Actions;
     using MessageProcessing.Rules;
     using Messages;
+    using Persistence.Logging;
 
     public class TestableBaseRule : BaseRule
     {
-        public TestableBaseRule(IActionFactory actionFactory) : base(actionFactory)
+        public TestableBaseRule(IActionFactory actionFactory, ILogger logger)
+            : base(actionFactory, logger)
         {
         }
 

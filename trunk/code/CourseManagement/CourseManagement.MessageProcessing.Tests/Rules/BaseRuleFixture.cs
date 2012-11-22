@@ -57,7 +57,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
                 .Verifiable();
 
             // act
-            baseRule.RetrieveActions(this.logger.Object);
+            baseRule.RetrieveActions();
 
             // assert
             this.actionFactory.Verify(af => af.CreateActions(RuleName), Times.Once());
@@ -86,22 +86,22 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
                 .Returns(actions.Select(a => a.Object))
                 .Verifiable();
 
-            actions.ForEach(a => a.Setup(act => act.Execute(email.Object, this.logger.Object)).Verifiable());
+            actions.ForEach(a => a.Setup(act => act.Execute(email.Object)).Verifiable());
 
             // act
-            baseRule.RetrieveActions(this.logger.Object);
+            baseRule.RetrieveActions();
 
-            actions.ForEach(a => a.Verify(act => act.Execute(email.Object, this.logger.Object), Times.Never()));
+            actions.ForEach(a => a.Verify(act => act.Execute(email.Object), Times.Never()));
 
-            baseRule.Process(email.Object, this.logger.Object);
+            baseRule.Process(email.Object);
 
             // assert
-            actions.ForEach(a => a.Verify(act => act.Execute(email.Object, this.logger.Object), Times.Once()));
+            actions.ForEach(a => a.Verify(act => act.Execute(email.Object), Times.Once()));
         }
 
         private TestableBaseRule CreateBaseRule()
         {
-            return new TestableBaseRule(this.actionFactory.Object);
+            return new TestableBaseRule(this.actionFactory.Object, this.logger.Object);
         }
     }
 }

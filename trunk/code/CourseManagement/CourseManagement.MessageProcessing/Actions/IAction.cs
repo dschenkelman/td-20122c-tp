@@ -1,6 +1,4 @@
-﻿using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using Messages;
 
@@ -8,6 +6,6 @@ namespace CourseManagement.MessageProcessing.Actions
     {
         void Initialize(ActionEntry actionEntry);
         
-        void Execute(IMessage message, ILogger logger);
+        void Execute(IMessage message);
     }
 }

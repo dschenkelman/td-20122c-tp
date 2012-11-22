@@ -1,27 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using CourseManagement.Utilities.Extensions;
-
-namespace CourseManagement.MessageProcessing.Rules
+﻿namespace CourseManagement.MessageProcessing.Rules
 {
-    using System.Text.RegularExpressions;
+    using System.Linq;
     using Actions;
     using Messages;
+    using Persistence.Logging;
+    using Persistence.Repositories;
+    using Utilities.Extensions;
 
     internal class NewStudentInCourseRule : BaseRule
     {
-        readonly private ICourseManagementRepositories courseManagementRepositories;
+        private readonly ICourseManagementRepositories courseManagementRepositories;
 
-        public NewStudentInCourseRule(ICourseManagementRepositories courseManagementRepositories, IActionFactory actionFactory) : base(actionFactory)
+        public NewStudentInCourseRule(
+            ICourseManagementRepositories courseManagementRepositories,
+            IActionFactory actionFactory,
+            ILogger logger)
+            : base(actionFactory, logger)
         {
             this.courseManagementRepositories = courseManagementRepositories;
         }
 
         public override bool IsMatch(IMessage message, bool previouslyMatched)
         {
-            if( !this.subjectRegex.IsMatch(message.Subject) )
+            if (!this.subjectRegex.IsMatch(message.Subject))
             {
                 return false;
             }

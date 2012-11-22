@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 using CourseManagement.Utilities.Extensions;
 
 namespace CourseManagement.MessageProcessing.Rules
@@ -18,7 +19,8 @@ namespace CourseManagement.MessageProcessing.Rules
         public AddTicketReplyToDatabaseRule(
             IActionFactory actionFactory, 
             ICourseManagementRepositories courseManagementRepositories, 
-            IConfigurationService configurationService) : base(actionFactory)
+            IConfigurationService configurationService,
+            ILogger logger) : base(actionFactory, logger)
         {
             this.courseManagementRepositories = courseManagementRepositories;
             this.configurationService = configurationService;

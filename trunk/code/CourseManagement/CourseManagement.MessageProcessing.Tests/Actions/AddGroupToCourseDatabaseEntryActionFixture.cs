@@ -128,7 +128,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
             
             // act
-            action.Execute(this.message.Object, this.logger.Object);
+            action.Execute(this.message.Object);
         }
 
         [ExpectedException(typeof(Exception))]
@@ -171,7 +171,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object, this.logger.Object);
+            action.Execute(this.message.Object);
         }
 
         [ExpectedException(typeof(Exception))]
@@ -220,7 +220,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object, this.logger.Object);
+            action.Execute(this.message.Object);
 
             // assert
             Assert.AreEqual(1, studentA.Groups.Count);
@@ -304,7 +304,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object, this.logger.Object);
+            action.Execute(this.message.Object);
 
             // assert
             Assert.AreEqual(1, studentA.Groups.Count);
@@ -394,7 +394,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object, this.logger.Object);
+            action.Execute(this.message.Object);
 
             // assert
             Assert.AreEqual(1, studentA.Groups.Count);
@@ -419,7 +419,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         private AddGroupToCourseDatabaseEntryAction CreateAddGroupToCourseDatabaseEntryAction()
         {
-            return new AddGroupToCourseDatabaseEntryAction(this.courseManagementRepositories.Object , this.groupParser.Object);
+            return new AddGroupToCourseDatabaseEntryAction(this.courseManagementRepositories.Object, this.groupParser.Object, this.logger.Object);
         }
     }
 }

@@ -6,16 +6,20 @@
     using Messages;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using Persistence.Logging;
 
     [TestClass]
     public class FallbackRuleFixture
     {
         private Mock<IActionFactory> actionFactory;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
         {
             this.actionFactory = new Mock<IActionFactory>(MockBehavior.Strict);
+            this.logger = new Mock<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -51,7 +55,7 @@
 
         private FallbackRule CreateFallbackRule()
         {
-            return new FallbackRule(this.actionFactory.Object);
+            return new FallbackRule(this.actionFactory.Object, this.logger.Object);
         }
     }
 }

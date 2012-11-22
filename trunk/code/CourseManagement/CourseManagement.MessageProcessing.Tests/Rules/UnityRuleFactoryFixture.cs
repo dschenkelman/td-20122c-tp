@@ -1,7 +1,4 @@
-﻿using System;
-using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -11,6 +8,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
     using Microsoft.Practices.Unity;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using Persistence.Logging;
 
     [TestClass]
     public class UnityRuleFactoryFixture
@@ -30,7 +28,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.actionFactory = this.mockRepository.Create<IActionFactory>();
 
             this.logger = this.mockRepository.Create<ILogger>();
-            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -42,7 +40,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.ruleFinder.Setup(rf => rf.FindRules()).Returns(new List<RuleEntry>()).Verifiable();
 
             // act
-            unityRuleFactory.CreateRules(this.logger.Object);
+            unityRuleFactory.CreateRules();
 
             // assert
             this.ruleFinder.Verify(rf => rf.FindRules(), Times.Once());
@@ -61,11 +59,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
-            Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object, this.logger.Object);
             ruleForRule1.Setup(r => r.Initialize(rule1)).Verifiable();
-            Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object, this.logger.Object);
             ruleForRule2.Setup(r => r.Initialize(rule2)).Verifiable();
-            Mock<BaseRule> ruleForRule3 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            Mock<BaseRule> ruleForRule3 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object, this.logger.Object);
             ruleForRule3.Setup(r => r.Initialize(rule3)).Verifiable();
 
             MBaseRule moleBaseRule1 = new MBaseRule(ruleForRule1.Object)
@@ -90,7 +88,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule3.Name)).Returns(moleBaseRule3.Instance).Verifiable();
 
             // act
-            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules(this.logger.Object);
+            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();
             
             // using to list forces the yield  of the enumerable
             var rulesList = rules.ToList();
@@ -124,11 +122,11 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             var rulesToCreate = new List<RuleEntry> { rule1, rule2, rule3 };
 
-            Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            Mock<BaseRule> ruleForRule1 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object, this.logger.Object);
             ruleForRule1.Setup(r => r.Initialize(rule1)).Verifiable();
-            Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            Mock<BaseRule> ruleForRule2 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object, this.logger.Object);
             ruleForRule2.Setup(r => r.Initialize(rule2)).Verifiable();
-            Mock<BaseRule> ruleForRule3 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object);
+            Mock<BaseRule> ruleForRule3 = this.mockRepository.Create<BaseRule>(this.actionFactory.Object, this.logger.Object);
             ruleForRule3.Setup(r => r.Initialize(rule3)).Verifiable();
 
             bool actionsRetrievedFor1 = false;
@@ -157,7 +155,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
             this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule3.Name)).Returns(moleBaseRule3.Instance);
 
             // act
-            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules(this.logger.Object);
+            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();
 
             // using to list forces the yield  of the enumerable
             rules.ToList();
@@ -170,7 +168,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
         private UnityRuleFactory CreateUnityRuleFactory()
         {
-            return new UnityRuleFactory(this.unityContainer.Object, this.ruleFinder.Object);
+            return new UnityRuleFactory(this.unityContainer.Object, this.ruleFinder.Object, this.logger.Object);
         }
     }
 }

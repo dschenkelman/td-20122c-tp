@@ -66,7 +66,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 9, 5));
 
             // act
-            action.Execute(email.Object, this.logger.Object);
+            action.Execute(email.Object);
 
             // assert
             Assert.AreEqual(1, course.Students.Count);
@@ -109,7 +109,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 3, 14));
 
             // act
-            action.Execute(email.Object, this.logger.Object);
+            action.Execute(email.Object);
 
             // assert
             Assert.AreEqual(1, course.Students.Count);
@@ -148,12 +148,13 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 11, 19));
 
             // act
-            action.Execute(email.Object, this.logger.Object);
+            action.Execute(email.Object);
         }
 
         private NewStudentToCourseDatabaseEntryAction CreateNewStudentToCourseDatabaseEntryAction()
         {
-            return new NewStudentToCourseDatabaseEntryAction(this.courseManagementRepositories.Object);
+            return new NewStudentToCourseDatabaseEntryAction(this.courseManagementRepositories.Object,
+                this.logger.Object);
         }
     }
 }

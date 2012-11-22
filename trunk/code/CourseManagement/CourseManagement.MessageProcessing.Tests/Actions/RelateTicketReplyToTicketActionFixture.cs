@@ -49,7 +49,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var relateTicketReplyToTicketAction = this.CreateRelateTicketReplyToTicketAction();
 
             // act
-            relateTicketReplyToTicketAction.Execute(message.Object, this.logger.Object);
+            relateTicketReplyToTicketAction.Execute(message.Object);
 
             // assert
             Assert.AreEqual(1, ticket.Replies.Count);
@@ -64,7 +64,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         public RelateTicketReplyToTicketAction CreateRelateTicketReplyToTicketAction()
         {
-            return new RelateTicketReplyToTicketAction(this.repositories.Object);
+            return new RelateTicketReplyToTicketAction(this.repositories.Object, this.logger.Object);
         }
     }
 }

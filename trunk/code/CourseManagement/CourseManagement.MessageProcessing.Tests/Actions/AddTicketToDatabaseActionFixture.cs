@@ -92,7 +92,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddTicketToDatabaseAction action = CreateAction();
 
             //act
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             //validate
             this.studentRepository.Verify(
@@ -163,7 +163,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddTicketToDatabaseAction action = CreateAction();
 
             //act
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             //validate
             this.studentRepository.Verify(
@@ -239,7 +239,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddTicketToDatabaseAction action = CreateAction();
 
             //act
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             //validate
             this.studentRepository.Verify(
@@ -261,7 +261,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         private AddTicketToDatabaseAction CreateAction()
         {
-            return new AddTicketToDatabaseAction(this.courseManagmentRepostiories.Object, this.configurationService.Object);
+            return new AddTicketToDatabaseAction(this.courseManagmentRepostiories.Object, this.configurationService.Object, this.logger.Object);
         }
     }
 }
