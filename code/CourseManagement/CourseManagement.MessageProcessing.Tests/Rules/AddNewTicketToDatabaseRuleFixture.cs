@@ -1,6 +1,7 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Tests.Rules
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using MessageProcessing.Actions;
@@ -17,6 +18,7 @@
         private Mock<IActionFactory> actionFactory;
         private MockRepository mockRepository;
         private Mock<ICourseManagementRepositories> repositories;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
@@ -24,6 +26,8 @@
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.actionFactory = this.mockRepository.Create<IActionFactory>();
             this.repositories = this.mockRepository.Create<ICourseManagementRepositories>();
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -72,7 +76,9 @@
 
         private AddNewTicketToDatabaseRule CreateAddTicketReplyToDatabaseRule()
         {
-            return new AddNewTicketToDatabaseRule(this.actionFactory.Object, this.repositories.Object);
+            return new AddNewTicketToDatabaseRule(this.actionFactory.Object, 
+                this.repositories.Object,
+                this.logger.Object);
         }
     }
 }

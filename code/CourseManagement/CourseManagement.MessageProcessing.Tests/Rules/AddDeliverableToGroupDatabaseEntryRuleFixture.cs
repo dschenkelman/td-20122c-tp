@@ -1,18 +1,18 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.MessageProcessing.Rules;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Rules
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using MessageProcessing.Actions;
+    using MessageProcessing.Rules;
+    using Messages;
+    using Model;
+    using Persistence.Repositories;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class AddDeliverableToGroupDatabaseEntryRuleFixture
     {
@@ -20,6 +20,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
         private Mock<IActionFactory> actionFactory;
         private Mock<ICourseManagementRepositories> courseManagementRepositories;
         private Mock<IRepository<Student>> studentRepository;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -31,7 +32,8 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             this.studentRepository = this.mockRepository.Create<IRepository<Student>>();
             this.courseManagementRepositories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
-
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -187,7 +189,9 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
         private AddDeliverableToGroupDatabaseEntryRule CreateRule()
         {
-            return new AddDeliverableToGroupDatabaseEntryRule(this.courseManagementRepositories.Object, this.actionFactory.Object);
+            return new AddDeliverableToGroupDatabaseEntryRule(
+                this.courseManagementRepositories.Object, 
+                this.actionFactory.Object, this.logger.Object);
         }
     }
 }

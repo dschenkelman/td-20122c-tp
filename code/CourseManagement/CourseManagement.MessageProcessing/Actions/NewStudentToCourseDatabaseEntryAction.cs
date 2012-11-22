@@ -1,6 +1,4 @@
-﻿using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -10,26 +8,31 @@ namespace CourseManagement.MessageProcessing.Actions
     using Model;
     using Persistence.Repositories;
     using Utilities.Extensions;
+    using Persistence.Logging;
 
     internal class NewStudentToCourseDatabaseEntryAction : IAction
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
+        private readonly ILogger logger;
 
         private const string SubjectPattern = @"^\[ALTA-MATERIA-(?<subjectId>[0-9]+)\][\ ]*(?<studentId>[0-9]+)-(?<studentName>[a-zA-Z\ ]+[a-zA-Z]+)$";
 
         private readonly Regex subjectRegex;
 
-        public NewStudentToCourseDatabaseEntryAction(ICourseManagementRepositories courseManagmentRepositories)
+        public NewStudentToCourseDatabaseEntryAction(
+            ICourseManagementRepositories courseManagmentRepositories,
+            ILogger logger)
         {
             this.subjectRegex = new Regex(SubjectPattern, RegexOptions.Compiled);
             this.courseManagmentRepositories = courseManagmentRepositories;
+            this.logger = logger;
         }
 
         public void Initialize(ActionEntry actionEntry)
         {
         }
 
-        public void Execute(IMessage message, ILogger logger)
+        public void Execute(IMessage message)
         {
             int studentId = this.ParseStudentIdFromMessage(message);
             int subjectCode = this.ParseSubjectCodeFromMessage(message);
@@ -50,12 +53,13 @@ namespace CourseManagement.MessageProcessing.Actions
             }
             else
             {
-                if (course.Students.Select(s => s.Id == student.Id ).Count() != 0)
+                if (course.Students.Select(s => s.Id == student.Id).Count() != 0)
                 {
                     throw new InvalidOperationException("Student: " + student.Id + " " + student.Name + " is already in course.");
                 }
             }
-            logger.Log(LogLevel.Information, "Adding Student to Course");
+            
+            this.logger.Log(LogLevel.Information, "Adding Student to Course");
             course.Students.Add(student);
             this.courseManagmentRepositories.Courses.Save();
         }

@@ -83,7 +83,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var updateTicketStatusAction = this.CreateUpdateTicketStatusAction();
 
             // act
-            updateTicketStatusAction.Execute(message.Object, this.logger.Object);
+            updateTicketStatusAction.Execute(message.Object);
 
             // assert
             Assert.AreEqual(TicketState.Pending, ticket.State);
@@ -133,7 +133,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var updateTicketStatusAction = this.CreateUpdateTicketStatusAction();
 
             // act
-            updateTicketStatusAction.Execute(message.Object, this.logger.Object);
+            updateTicketStatusAction.Execute(message.Object);
 
             // assert
             Assert.AreEqual(TicketState.Assigned, ticket.State);
@@ -144,7 +144,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         private UpdateTicketStatusAction CreateUpdateTicketStatusAction()
         {
-            return new UpdateTicketStatusAction(this.configurationService.Object, this.repositories.Object);
+            return new UpdateTicketStatusAction(this.configurationService.Object,
+                this.repositories.Object, this.logger.Object);
         }
     }
 }

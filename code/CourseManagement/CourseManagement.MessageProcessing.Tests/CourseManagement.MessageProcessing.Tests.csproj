@@ -50,7 +50,6 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="mscorlib.Behaviors, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="mscorlib.Moles">
       <HintPath>..\CourseManagement.Messages.Tests\bin\Debug\mscorlib.Moles.dll</HintPath>
     </Reference>
@@ -118,7 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Moles Include="CourseManagement.EmailProcessing.moles" />
+    <None Include="mscorlib.moles" />
     <None Include="packages.config" />
+    <Moles Include="System.configuration.moles" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Files\Rules.xml">

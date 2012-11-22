@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using CourseManagement.MessageProcessing.Actions;
-using CourseManagement.MessageProcessing.Rules;
-using CourseManagement.Messages;
-using CourseManagement.Model;
-using CourseManagement.Persistence.Repositories;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-
-namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿namespace CourseManagement.MessageProcessing.Tests.Rules
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using MessageProcessing.Actions;
+    using MessageProcessing.Rules;
+    using Messages;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Model;
+    using Moq;
+    using Persistence.Logging;
+    using Persistence.Repositories;
+
     [TestClass]
     public class NewStudentInCourseRuleFixture
     {
-
         private MockRepository mockRepository;
         private Mock<IActionFactory> actionFactory;
         private Mock<ICourseManagementRepositories> courseManagementRepositories;
         private Mock<IRepository<Course>> courseRepository;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -29,6 +30,8 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
             this.courseRepository = this.mockRepository.Create<IRepository<Course>>();
             this.courseManagementRepositories.Setup(cmr => cmr.Courses).Returns(this.courseRepository.Object);
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -137,7 +140,10 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
 
         private NewStudentInCourseRule CreateRule()
         {
-            return new NewStudentInCourseRule(this.courseManagementRepositories.Object, this.actionFactory.Object);
+            return new NewStudentInCourseRule(
+                this.courseManagementRepositories.Object,
+                this.actionFactory.Object,
+                this.logger.Object);
         }
     }
 }

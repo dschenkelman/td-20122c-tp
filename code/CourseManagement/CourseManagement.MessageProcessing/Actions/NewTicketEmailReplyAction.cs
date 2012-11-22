@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Actions
 {
@@ -11,8 +12,9 @@ namespace CourseManagement.MessageProcessing.Actions
         public NewTicketEmailReplyAction(
             IMessageSender messageSender, 
             ICourseManagementRepositories courseManagementRepositories,
-            IConfigurationService configurationService) 
-            : base(messageSender, courseManagementRepositories, configurationService)
+            IConfigurationService configurationService,
+            ILogger logger) 
+            : base(messageSender, courseManagementRepositories, configurationService, logger)
         {
         }
 

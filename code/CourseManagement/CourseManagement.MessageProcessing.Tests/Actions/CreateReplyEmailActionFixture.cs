@@ -93,7 +93,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // act
             action.Initialize(actionEntry);
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             //validate
             this.messageSender.Verify(ms => ms.Connect(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once());
@@ -156,7 +156,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // act
             action.Initialize(actionEntry);
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             //validate
             this.messageSender.Verify(ms => ms.Connect(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never());
@@ -219,7 +219,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // act
             action.Initialize(actionEntry);
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             //validate
             this.messageSender.Verify(ms => ms.Connect(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never());
@@ -229,7 +229,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
         private CreateEmailReplyAction CreateAction()
         {
-            return new CreateEmailReplyAction(this.messageSender.Object, this.courseManagementRepositories.Object, this.configurationService.Object);
+            return new CreateEmailReplyAction(this.messageSender.Object, this.courseManagementRepositories.Object, this.configurationService.Object, this.logger.Object);
         }
     }
 }

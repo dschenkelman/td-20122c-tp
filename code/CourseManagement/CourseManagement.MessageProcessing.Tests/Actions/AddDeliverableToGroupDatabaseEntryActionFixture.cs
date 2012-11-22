@@ -112,7 +112,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 
             // act
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
             
             // assert
             this.studentRepository.Verify(
@@ -185,7 +185,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 
             // act
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             // validate
             this.studentRepository.Verify(
@@ -245,7 +245,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 
             // act
-            action.Execute(message.Object, this.logger.Object);
+            action.Execute(message.Object);
 
             // validate
             this.studentRepository.Verify(
@@ -257,7 +257,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private AddDeliverableToGroupDatabaseEntryAction CreateAction()
         {
             return new AddDeliverableToGroupDatabaseEntryAction(this.courseManagementRepositories.Object,
-                                                                this.configurationService.Object);
+                                                                this.configurationService.Object, this.logger.Object);
         }
     }
 }

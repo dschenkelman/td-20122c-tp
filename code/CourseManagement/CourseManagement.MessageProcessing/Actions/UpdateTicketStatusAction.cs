@@ -1,11 +1,10 @@
-﻿using CourseManagement.Persistence.Configuration;
-using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System.Linq;
     using Messages;
     using Model;
+    using Persistence.Configuration;
+    using Persistence.Logging;
     using Persistence.Repositories;
     using Utilities.Extensions;
 
@@ -13,19 +12,24 @@ namespace CourseManagement.MessageProcessing.Actions
     {
         private readonly IConfigurationService configurationService;
         private readonly ICourseManagementRepositories courseManagementRepositories;
+        private readonly ILogger logger;
 
-        public UpdateTicketStatusAction(IConfigurationService configurationService, ICourseManagementRepositories courseManagementRepositories) 
+        public UpdateTicketStatusAction(
+            IConfigurationService configurationService,
+            ICourseManagementRepositories courseManagementRepositories,
+            ILogger logger) 
             : base()
         {
             this.configurationService = configurationService;
             this.courseManagementRepositories = courseManagementRepositories;
+            this.logger = logger;
         }
 
         public override void Initialize(ActionEntry actionEntry)
         {
         }
 
-        public override void Execute(IMessage message, ILogger logger)
+        public override void Execute(IMessage message)
         {
             int semester = message.Date.Semester();
             int year = message.Date.Year;
@@ -39,7 +43,7 @@ namespace CourseManagement.MessageProcessing.Actions
             int ticketId = this.ParseTicketId(message);
             var ticket = this.courseManagementRepositories.Tickets.GetById(ticketId);
 
-            logger.Log(LogLevel.Information, "Updating Ticket Status");
+            this.logger.Log(LogLevel.Information, "Updating Ticket Status");
 
             if (teacher != null)
             {

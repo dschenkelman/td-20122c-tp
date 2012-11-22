@@ -5,6 +5,7 @@ using System.Reflection;
 using CourseManagement.MessageProcessing.Actions;
 using CourseManagement.Model;
 using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 using CourseManagement.Persistence.Repositories;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
@@ -20,6 +21,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IMessageSender> messageSender;
         private Mock<IConfigurationService> configurationService;
         private Mock<IRepository<Ticket>> ticketRepository;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
@@ -30,6 +32,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.ticketRepository = new Mock<IRepository<Ticket>>(MockBehavior.Strict);
 
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
+
+            this.logger = new Mock<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<string>()));
         }
 
         [TestMethod]
@@ -69,7 +74,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             return new NewTicketEmailReplyAction(
                 this.messageSender.Object,
                 this.repositories.Object, 
-                this.configurationService.Object);
+                this.configurationService.Object,
+                this.logger.Object);
         }
 
         private T InvokeNonPublicMethod<T>(object o, string methodName, params object[] parameters)

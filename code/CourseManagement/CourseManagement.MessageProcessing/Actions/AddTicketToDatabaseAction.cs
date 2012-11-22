@@ -1,13 +1,12 @@
-﻿using CourseManagement.Persistence.Configuration;
-using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.IO;
     using System.Linq;
     using Messages;
     using Model;
+    using Persistence.Configuration;
+    using Persistence.Logging;
     using Persistence.Repositories;
     using Utilities.Extensions;
 
@@ -15,12 +14,17 @@ namespace CourseManagement.MessageProcessing.Actions
     {
         private readonly ICourseManagementRepositories courseManagmentRepositories;
         private readonly IConfigurationService configurationService;
+        private readonly ILogger logger;
         private bool isPrivate;
 
-        public AddTicketToDatabaseAction(ICourseManagementRepositories courseManagmentRepositories, IConfigurationService service)
+        public AddTicketToDatabaseAction(
+            ICourseManagementRepositories courseManagmentRepositories,
+            IConfigurationService service,
+            ILogger logger)
         {
             this.courseManagmentRepositories = courseManagmentRepositories;
             this.configurationService = service;
+            this.logger = logger;
         }
 
         public void Initialize(ActionEntry actionEntry)
@@ -28,10 +32,10 @@ namespace CourseManagement.MessageProcessing.Actions
             this.isPrivate = !bool.Parse(actionEntry.AdditionalData["public"]);
         }
 
-        public void Execute(IMessage message, ILogger logger)
+        public void Execute(IMessage message)
         {
             Ticket ticket = this.ParseTicketFromMessage(message);
-            logger.Log(LogLevel.Information, "Obtaining ticket attachments");
+            this.logger.Log(LogLevel.Information, "Obtaining ticket attachments");
             string rootPath = this.configurationService.AttachmentsRootPath;
             var directory = Path.Combine(rootPath, message.Subject, message.Date.ToIsoFormat());
 
@@ -44,7 +48,8 @@ namespace CourseManagement.MessageProcessing.Actions
                 TicketAttachment attachment = new TicketAttachment { FileName = messageAttachment.Name, Location = path };
                 ticket.Attachments.Add(attachment);
             }
-            logger.Log(LogLevel.Information, "Adding Ticket to database");
+
+            this.logger.Log(LogLevel.Information, "Adding Ticket to database");
             this.courseManagmentRepositories.Tickets.Insert(ticket);
             this.courseManagmentRepositories.Tickets.Save();
         }

@@ -29,7 +29,7 @@ namespace CourseManagement.Console
 
             do
             {
-                messageProcessor.Process( logger );
+                messageProcessor.Process();
                 System.Console.WriteLine("Do you want to continue processing? (press N to quit)");
             } 
             while (System.Console.ReadKey().Key != ConsoleKey.N);

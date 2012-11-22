@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Rules
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -12,7 +14,9 @@
 
         public AddNewTicketToDatabaseRule(
             IActionFactory actionFactory, 
-            ICourseManagementRepositories courseManagementRepositories) : base(actionFactory)
+            ICourseManagementRepositories courseManagementRepositories,
+            ILogger logger)
+            : base(actionFactory, logger)
         {
             this.courseManagementRepositories = courseManagementRepositories;
         }

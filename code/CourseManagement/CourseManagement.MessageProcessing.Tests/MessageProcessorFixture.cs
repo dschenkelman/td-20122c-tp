@@ -96,15 +96,15 @@ namespace CourseManagement.MessageProcessing.Tests
 
             this.messageReceiver.Setup(mr => mr.Disconnect()).Verifiable();
 
-            this.ruleFactory.Setup(rf => rf.CreateRules(this.logger.Object)).Returns(new List<BaseRule>()).Verifiable();
+            this.ruleFactory.Setup(rf => rf.CreateRules()).Returns(new List<BaseRule>()).Verifiable();
 
             MessageProcessor messageProcessor = this.CreateMessageProcessor();
 
             // act
-            messageProcessor.Process( this.logger.Object );
+            messageProcessor.Process();
 
             // assert
-            this.ruleFactory.Verify(rf => rf.CreateRules(this.logger.Object), Times.Once());
+            this.ruleFactory.Verify(rf => rf.CreateRules(), Times.Once());
         }
 
         [TestMethod]
@@ -156,12 +156,12 @@ namespace CourseManagement.MessageProcessing.Tests
 
             this.messageReceiver.Setup(mr => mr.Disconnect()).Verifiable();
 
-            this.ruleFactory.Setup(rf => rf.CreateRules(this.logger.Object)).Returns(new List<BaseRule>()).Verifiable();
+            this.ruleFactory.Setup(rf => rf.CreateRules()).Returns(new List<BaseRule>()).Verifiable();
 
             MessageProcessor messageProcessor = this.CreateMessageProcessor();
 
             // act
-            messageProcessor.Process(this.logger.Object);
+            messageProcessor.Process();
 
             // assert
             this.messageReceiver.Verify(
@@ -229,12 +229,12 @@ namespace CourseManagement.MessageProcessing.Tests
 
             this.messageReceiver.Setup(mr => mr.Disconnect()).Verifiable();
 
-            this.ruleFactory.Setup(rf => rf.CreateRules(this.logger.Object)).Returns(new List<BaseRule>()).Verifiable();
+            this.ruleFactory.Setup(rf => rf.CreateRules()).Returns(new List<BaseRule>()).Verifiable();
 
             MessageProcessor messageProcessor = this.CreateMessageProcessor();
 
             // act
-            messageProcessor.Process(this.logger.Object);
+            messageProcessor.Process();
 
             // assert
             this.messageReceiver.Verify(
@@ -312,7 +312,7 @@ namespace CourseManagement.MessageProcessing.Tests
             bool rule2ProcessInvoked = true;
             bool rule3ProcessInvoked = true;
 
-            SBaseRule rule1 = new SBaseRule(mockActionFactory.Object);
+            SBaseRule rule1 = new SBaseRule(mockActionFactory.Object, this.logger.Object);
             rule1.IsMatchIMessageBoolean = (m, pm) =>
                                                {
                                                     rule1IsMatchInvoked = true;
@@ -320,7 +320,7 @@ namespace CourseManagement.MessageProcessing.Tests
                                                     return false;
                                                 };
 
-            SBaseRule rule2 = new SBaseRule(mockActionFactory.Object);
+            SBaseRule rule2 = new SBaseRule(mockActionFactory.Object, this.logger.Object);
             rule2.IsMatchIMessageBoolean = (m, pm) =>
                                                 {
                                                     rule2IsMatchInvoked = true;
@@ -328,7 +328,7 @@ namespace CourseManagement.MessageProcessing.Tests
                                                     return true;
                                                 };
 
-            SBaseRule rule3 = new SBaseRule(mockActionFactory.Object);
+            SBaseRule rule3 = new SBaseRule(mockActionFactory.Object, this.logger.Object);
             rule3.IsMatchIMessageBoolean = (m, pm) =>
                                                    {
                                                        rule3IsMatchInvoked = true;
@@ -357,13 +357,13 @@ namespace CourseManagement.MessageProcessing.Tests
             var rules = new List<BaseRule> { rule1, rule2, rule3 };
 
             this.ruleFactory
-                .Setup(rf => rf.CreateRules(this.logger.Object))
+                .Setup(rf => rf.CreateRules())
                 .Returns(rules).Verifiable();
 
             MessageProcessor messageProcessor = this.CreateMessageProcessor();
 
             // act
-            messageProcessor.Process(this.logger.Object);
+            messageProcessor.Process();
 
             // assert
             Assert.IsTrue(rule1IsMatchInvoked);
@@ -380,7 +380,8 @@ namespace CourseManagement.MessageProcessing.Tests
                 this.ruleFactory.Object,
                 this.courseManagementRepositories.Object,
                 this.configurationService.Object,
-                this.messageReceiver.Object);
+                this.messageReceiver.Object,
+                this.logger.Object);
         }
     }
 }

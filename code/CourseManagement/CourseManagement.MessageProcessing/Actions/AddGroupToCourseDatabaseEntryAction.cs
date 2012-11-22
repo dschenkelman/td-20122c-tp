@@ -1,12 +1,10 @@
-﻿using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Messages;
     using Model;
+    using Persistence.Logging;
     using Persistence.Repositories;
     using Utilities.Extensions;
 
@@ -15,18 +13,23 @@ namespace CourseManagement.MessageProcessing.Actions
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
         private readonly IGroupFileParser groupFileParser;
+        private readonly ILogger logger;
 
-        public AddGroupToCourseDatabaseEntryAction(ICourseManagementRepositories courseManagementRepositories , IGroupFileParser groupFileParser)
+        public AddGroupToCourseDatabaseEntryAction(
+            ICourseManagementRepositories courseManagementRepositories,
+            IGroupFileParser groupFileParser,
+            ILogger logger)
         {
             this.courseManagementRepositories = courseManagementRepositories;
             this.groupFileParser = groupFileParser;
+            this.logger = logger;
         }
 
         public void Initialize(ActionEntry actionEntry)
         {
         }
 
-        public void Execute(IMessage message, ILogger logger)
+        public void Execute(IMessage message)
         {
             //verify existing course
             var courseForNewGroup = this.GetCourseFromMessage(message);

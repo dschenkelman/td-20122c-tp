@@ -1,25 +1,26 @@
-﻿using CourseManagement.Persistence.Configuration;
-using CourseManagement.Persistence.Logging;
-
-namespace CourseManagement.MessageProcessing.Actions
+﻿namespace CourseManagement.MessageProcessing.Actions
 {
-    using System;
     using System.IO;
-    using System.Text.RegularExpressions;
     using Messages;
     using Model;
+    using Persistence.Configuration;
+    using Persistence.Logging;
     using Persistence.Repositories;
     using Utilities.Extensions;
 
     public class DownloadReplyAttachmentsAction : BaseTicketReplyAction
     {
         private readonly IConfigurationService configurationService;
+        private readonly ILogger logger;
         private readonly ICourseManagementRepositories courseManagementRepositories;
 
-        public DownloadReplyAttachmentsAction(ICourseManagementRepositories courseManagementRepositories,
-            IConfigurationService configurationService) : base()
+        public DownloadReplyAttachmentsAction(
+            ICourseManagementRepositories courseManagementRepositories,
+            IConfigurationService configurationService,
+            ILogger logger) : base()
         {
             this.configurationService = configurationService;
+            this.logger = logger;
             this.courseManagementRepositories = courseManagementRepositories;
         }
 
@@ -27,16 +28,16 @@ namespace CourseManagement.MessageProcessing.Actions
         {
         }
 
-        public override void Execute(IMessage message, ILogger logger)
+        public override void Execute(IMessage message)
         {
             int ticketId = this.ParseTicketId(message);
             string rootPath = this.configurationService.AttachmentsRootPath;
 
-            logger.Log(LogLevel.Information, "Obtaining Ticket");
+            this.logger.Log(LogLevel.Information, "Obtaining Ticket");
 
             Ticket ticket = this.courseManagementRepositories.Tickets.GetById(ticketId);
 
-            logger.Log(LogLevel.Information, "Downloading Attachments");
+            this.logger.Log(LogLevel.Information, "Downloading Attachments");
             foreach (var attachment in message.Attachments)
             {
                 string name = attachment.Name;

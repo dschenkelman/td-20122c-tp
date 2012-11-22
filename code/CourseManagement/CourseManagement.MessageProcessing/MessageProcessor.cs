@@ -18,20 +18,27 @@ namespace CourseManagement.MessageProcessing
         private readonly IRuleFactory ruleFactory;
         private readonly IConfigurationService configurationService;
         private readonly IMessageReceiver messageReceiver;
+        private readonly ILogger logger;
 
-        public MessageProcessor(IRuleFactory ruleFactory, ICourseManagementRepositories courseManagementRepositories, IConfigurationService configurationService, IMessageReceiver messageReceiver)
+        public MessageProcessor(
+            IRuleFactory ruleFactory,
+            ICourseManagementRepositories courseManagementRepositories,
+            IConfigurationService configurationService,
+            IMessageReceiver messageReceiver,
+            ILogger logger)
         {
             this.ruleFactory = ruleFactory;
             this.courseManagementRepositories = courseManagementRepositories;
             this.configurationService = configurationService;
             this.messageReceiver = messageReceiver;
+            this.logger = logger;
         }
 
-        public void Process(ILogger logger)
+        public void Process()
         {
-            logger.Log(LogLevel.Information,"Creating Rules");
+            this.logger.Log(LogLevel.Information, "Creating Rules");
 
-            IEnumerable<BaseRule> rules = this.ruleFactory.CreateRules( logger );
+            IEnumerable<BaseRule> rules = this.ruleFactory.CreateRules();
 
             int semester = DateTime.Now.Semester();
                 
@@ -41,10 +48,9 @@ namespace CourseManagement.MessageProcessing
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
                 c.Semester == semester).FirstOrDefault();
 
-            
             if (course == null)
             {
-                logger.Log(LogLevel.Warning, "No Course Found in Database");
+                this.logger.Log(LogLevel.Warning, "No Course Found in Database");
 
                 return;
             }
@@ -52,7 +58,7 @@ namespace CourseManagement.MessageProcessing
             Configuration configuration = course.Account.Configurations.First(
                 cfg => cfg.Protocol.Equals(this.configurationService.IncomingMessageProtocol));
 
-            logger.Log(LogLevel.Information, "Establishing connection with message server");
+            this.logger.Log(LogLevel.Information, "Establishing connection with message server");
 
             try
             {
@@ -62,10 +68,10 @@ namespace CourseManagement.MessageProcessing
                     configuration.UseSsl,
                     configuration.Account.User,
                     configuration.Account.Password);
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
-                logger.Log(LogLevel.Error,"There was an error while trying to establish a connection with de message server.");
-                logger.Log(LogLevel.Error, "\tThe exception message was: "+e.Message);
+                this.logger.Log(LogLevel.Error, "There was an error while trying to establish a connection with de message server. Exception: " + e.Message);
                 return;
             }
 
@@ -94,12 +100,12 @@ namespace CourseManagement.MessageProcessing
                         previouslyMatched = true;
                         try
                         {
-                            logger.Log(LogLevel.Information,"Message matched with Rule: "+rule.Name);
-                            rule.Process(message,logger);
-                        }catch(InvalidOperationException e)
+                            this.logger.Log(LogLevel.Information, string.Format("Message matched with Rule: {0}", rule.Name));
+                            rule.Process(message);
+                        }
+                        catch (InvalidOperationException e)
                         {
-                            logger.Log(LogLevel.Error, "An error has occured wile processing the message with the rule "+rule.Name);
-                            logger.Log(LogLevel.Error, "\tThe exception message was " + e.Message);
+                            this.logger.Log(LogLevel.Error, string.Format("An error has occured wile processing the message with the rule {0}. Exception:{1}", rule.Name, e.Message));
                         }
                     }
                 }

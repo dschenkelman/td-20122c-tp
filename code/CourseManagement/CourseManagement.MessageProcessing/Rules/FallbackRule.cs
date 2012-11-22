@@ -2,10 +2,11 @@
 {
     using Actions;
     using Messages;
+    using Persistence.Logging;
 
     public class FallbackRule : BaseRule
     {
-        public FallbackRule(IActionFactory actionFactory) : base(actionFactory)
+        public FallbackRule(IActionFactory actionFactory, ILogger logger) : base(actionFactory, logger)
         {
         }
 
