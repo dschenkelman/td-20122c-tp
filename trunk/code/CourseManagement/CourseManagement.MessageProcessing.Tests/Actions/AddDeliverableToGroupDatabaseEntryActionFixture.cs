@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -24,6 +25,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Deliverable>> deliverableRepository;
         private Mock<IRepository<DeliverableAttachment>> attachmentRepository;
         private Mock<IConfigurationService> configurationService;
+        private Mock<ILogger> logger;
+
         private string rootPath;
 
         [TestInitialize]
@@ -45,6 +48,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.courseManagementRepositories.Setup(cmr => cmr.Deliverables).Returns(this.deliverableRepository.Object);
             this.courseManagementRepositories.Setup(cmr => cmr.DeliverableAttachments).Returns(this.attachmentRepository.Object);
             this.configurationService.Setup(cmr => cmr.AttachmentsRootPath).Returns(rootPath);
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -106,7 +112,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 
             // act
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
             
             // assert
             this.studentRepository.Verify(
@@ -179,7 +185,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 
             // act
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             // validate
             this.studentRepository.Verify(
@@ -239,7 +245,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddDeliverableToGroupDatabaseEntryAction action = CreateAction();
 
             // act
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             // validate
             this.studentRepository.Verify(

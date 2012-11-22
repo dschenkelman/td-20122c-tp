@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -21,6 +22,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Course>> courseRepository;
         private Mock<IConfigurationService> configurationService;
         private Mock<IMessageSender> messageSender;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -35,6 +37,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.configurationService = this.mockRepository.Create<IConfigurationService>();
 
             this.messageSender = this.mockRepository.Create<IMessageSender>();
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -88,7 +93,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // act
             action.Initialize(actionEntry);
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             //validate
             this.messageSender.Verify(ms => ms.Connect(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once());
@@ -151,7 +156,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // act
             action.Initialize(actionEntry);
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             //validate
             this.messageSender.Verify(ms => ms.Connect(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never());
@@ -214,7 +219,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             // act
             action.Initialize(actionEntry);
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             //validate
             this.messageSender.Verify(ms => ms.Connect(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never());

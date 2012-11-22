@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -27,7 +29,7 @@
         {
         }
 
-        public void Execute(IMessage message)
+        public void Execute(IMessage message, ILogger logger)
         {
             int studentId = this.ParseStudentIdFromMessage(message);
             int subjectCode = this.ParseSubjectCodeFromMessage(message);
@@ -53,7 +55,7 @@
                     throw new InvalidOperationException("Student: " + student.Id + " " + student.Name + " is already in course.");
                 }
             }
-            
+            logger.Log(LogLevel.Information, "Adding Student to Course");
             course.Students.Add(student);
             this.courseManagmentRepositories.Courses.Save();
         }

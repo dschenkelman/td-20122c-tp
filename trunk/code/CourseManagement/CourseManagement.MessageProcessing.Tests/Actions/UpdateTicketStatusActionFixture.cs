@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -20,6 +21,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Course>> courseRepository;
         private Mock<IRepository<Ticket>> ticketRepository;
         private Mock<IConfigurationService> configurationService;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
@@ -33,6 +35,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.repositories.Setup(r => r.Courses).Returns(this.courseRepository.Object);
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -78,7 +83,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var updateTicketStatusAction = this.CreateUpdateTicketStatusAction();
 
             // act
-            updateTicketStatusAction.Execute(message.Object);
+            updateTicketStatusAction.Execute(message.Object, this.logger.Object);
 
             // assert
             Assert.AreEqual(TicketState.Pending, ticket.State);
@@ -128,7 +133,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var updateTicketStatusAction = this.CreateUpdateTicketStatusAction();
 
             // act
-            updateTicketStatusAction.Execute(message.Object);
+            updateTicketStatusAction.Execute(message.Object, this.logger.Object);
 
             // assert
             Assert.AreEqual(TicketState.Assigned, ticket.State);

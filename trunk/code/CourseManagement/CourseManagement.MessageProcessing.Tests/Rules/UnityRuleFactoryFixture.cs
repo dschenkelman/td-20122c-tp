@@ -1,4 +1,7 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Rules
+﻿using System;
+using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Tests.Rules
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -16,6 +19,7 @@
         private Mock<IRuleFinder> ruleFinder;
         private Mock<IUnityContainer> unityContainer;
         private Mock<IActionFactory> actionFactory;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -24,6 +28,9 @@
             this.ruleFinder = this.mockRepository.Create<IRuleFinder>();
             this.unityContainer = this.mockRepository.Create<IUnityContainer>();
             this.actionFactory = this.mockRepository.Create<IActionFactory>();
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -35,7 +42,7 @@
             this.ruleFinder.Setup(rf => rf.FindRules()).Returns(new List<RuleEntry>()).Verifiable();
 
             // act
-            unityRuleFactory.CreateRules();
+            unityRuleFactory.CreateRules(this.logger.Object);
 
             // assert
             this.ruleFinder.Verify(rf => rf.FindRules(), Times.Once());
@@ -83,7 +90,7 @@
             this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule3.Name)).Returns(moleBaseRule3.Instance).Verifiable();
 
             // act
-            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();
+            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules(this.logger.Object);
             
             // using to list forces the yield  of the enumerable
             var rulesList = rules.ToList();
@@ -150,7 +157,7 @@
             this.unityContainer.Setup(c => c.Resolve(typeof(BaseRule), rule3.Name)).Returns(moleBaseRule3.Instance);
 
             // act
-            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules();
+            IEnumerable<BaseRule> rules = unityRuleFactory.CreateRules(this.logger.Object);
 
             // using to list forces the yield  of the enumerable
             rules.ToList();

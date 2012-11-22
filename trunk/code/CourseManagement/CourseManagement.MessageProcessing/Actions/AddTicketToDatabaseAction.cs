@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Actions
 {
@@ -27,10 +28,10 @@ namespace CourseManagement.MessageProcessing.Actions
             this.isPrivate = !bool.Parse(actionEntry.AdditionalData["public"]);
         }
 
-        public void Execute(IMessage message)
+        public void Execute(IMessage message, ILogger logger)
         {
             Ticket ticket = this.ParseTicketFromMessage(message);
-
+            logger.Log(LogLevel.Information, "Obtaining ticket attachments");
             string rootPath = this.configurationService.AttachmentsRootPath;
             var directory = Path.Combine(rootPath, message.Subject, message.Date.ToIsoFormat());
 
@@ -43,7 +44,7 @@ namespace CourseManagement.MessageProcessing.Actions
                 TicketAttachment attachment = new TicketAttachment { FileName = messageAttachment.Name, Location = path };
                 ticket.Attachments.Add(attachment);
             }
-
+            logger.Log(LogLevel.Information, "Adding Ticket to database");
             this.courseManagmentRepositories.Tickets.Insert(ticket);
             this.courseManagmentRepositories.Tickets.Save();
         }

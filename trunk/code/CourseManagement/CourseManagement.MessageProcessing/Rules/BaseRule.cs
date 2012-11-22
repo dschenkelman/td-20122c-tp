@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Rules
 {
@@ -27,14 +28,16 @@ namespace CourseManagement.MessageProcessing.Rules
 
         public string Name { get; private set; }
 
-        public void RetrieveActions()
+        public void RetrieveActions(ILogger logger)
         {
+            logger.Log(LogLevel.Information,"Creating Actions");
             this.actions = this.actionFactory.CreateActions(this.Name);
         }
 
-        public void Process(IMessage message)
+        public void Process(IMessage message, ILogger logger)
         {
-            this.actions.ForEach(a => a.Execute(message));
+            logger.Log(LogLevel.Information,"Executing actions");
+            this.actions.ForEach(a => a.Execute(message,logger));
         }
 
         public abstract bool IsMatch(IMessage message, bool previouslyMatched);
