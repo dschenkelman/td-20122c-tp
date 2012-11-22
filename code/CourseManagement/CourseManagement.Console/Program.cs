@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.Console
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.Console
 {
     using System;
     using System.Data.Entity;
@@ -13,8 +15,6 @@
     {
         static void Main(string[] args)
         {
-            SetupDatabase();
-
             IUnityContainer container = new UnityContainer();
 
             // Initialize the container with the config file
@@ -22,9 +22,14 @@
 
             var messageProcessor = container.Resolve<MessageProcessor>();
 
+            var logger = container.Resolve<ILogger>();
+
+            logger.Log(LogLevel.Information, "Setting up database");
+            SetupDatabase();
+
             do
             {
-                messageProcessor.Process();
+                messageProcessor.Process( logger );
                 System.Console.WriteLine("Do you want to continue processing? (press N to quit)");
             } 
             while (System.Console.ReadKey().Key != ConsoleKey.N);

@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Moles;
 using System.Linq;
 using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 using CourseManagement.Utilities.Extensions;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
@@ -22,6 +23,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<ICourseManagementRepositories> repositories;
         private Mock<IRepository<Ticket>> ticketRepository;
         private Mock<IConfigurationService> configurationService;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
@@ -32,6 +34,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
 
             this.configurationService = this.mockRepository.Create<IConfigurationService>();
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -90,7 +95,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             var relateTicketReplyToTicketAction = this.CreateRelateTicketReplyToTicketAction();
 
             // act
-            relateTicketReplyToTicketAction.Execute(message.Object);
+            relateTicketReplyToTicketAction.Execute(message.Object, this.logger.Object);
 
             // assert
             Assert.IsTrue(directoryCreated);

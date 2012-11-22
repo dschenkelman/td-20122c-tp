@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Actions
 {
@@ -28,13 +29,14 @@ namespace CourseManagement.MessageProcessing.Actions
         {
         }
 
-        public void Execute(IMessage message)
+        public void Execute(IMessage message, ILogger logger)
         {
             var student = this.courseManagementRepositories
                 .Students
                 .Get(s => s.MessagingSystemId == message.From)
                 .FirstOrDefault();
-            
+
+            logger.Log(LogLevel.Information, "Obtaining Student's Group");
             Course course = this.GetCourseFromMessage(message);
             var studentGroup = student.Groups.Where(g => g.CourseId == course.Id).FirstOrDefault();
             
@@ -43,6 +45,7 @@ namespace CourseManagement.MessageProcessing.Actions
                 throw new InvalidOperationException("You can not add deliverable to inexistent student's group.");
             }
 
+            logger.Log(LogLevel.Information, "Adding Deliverable to Group");
             Deliverable deliverable = new Deliverable(message.Date);
             deliverable.GroupId = studentGroup.Id;
 

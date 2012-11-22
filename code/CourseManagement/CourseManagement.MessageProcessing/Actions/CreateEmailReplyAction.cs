@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Actions
 {
@@ -34,7 +35,7 @@ namespace CourseManagement.MessageProcessing.Actions
             this.subject = actionEntry.AdditionalData["subject"];
         }
 
-        public void Execute(IMessage message)
+        public void Execute(IMessage message, ILogger logger)
         {
             int semester = DateTime.Now.Semester();
             int subjectId = this.configurationService.MonitoredSubjectId;
@@ -48,6 +49,7 @@ namespace CourseManagement.MessageProcessing.Actions
 
             if (course != null)
             {
+                logger.Log(LogLevel.Information, "Creating Message Reply");
                 messageToSend = this.CreateMessage(message, course);
 
                 this.GetDestinationMessageSystemIds(message, course).ForEach(dmsid => messageToSend.To.Add(dmsid));
@@ -61,7 +63,7 @@ namespace CourseManagement.MessageProcessing.Actions
                 throw new InvalidOperationException(
                     "You can not send the reply message. There is not outgoing configuration.");
             }
-
+            logger.Log(LogLevel.Information, "Connecting and Sending Message");
             this.messageSender.Connect(configuration.Endpoint, configuration.Port, configuration.UseSsl, configuration.Account.User, configuration.Account.Password);
             this.messageSender.Send(messageToSend);
             this.messageSender.Disconnect();

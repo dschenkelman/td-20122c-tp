@@ -1,5 +1,6 @@
 ﻿using CourseManagement.MessageProcessing.Actions;
 using CourseManagement.Messages;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -19,6 +20,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Student>> studentRepository;
         private Mock<IRepository<Course>> courseRepository;
         private Mock<ICourseManagementRepositories> courseManagementRepositories;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -30,6 +32,10 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
 
             this.courseManagementRepositories.Setup(cmr => cmr.Students).Returns(this.studentRepository.Object);
             this.courseManagementRepositories.Setup(cmr => cmr.Courses).Returns(this.courseRepository.Object);
+
+            this.logger = this.mockRepository.Create<ILogger>();
+		    this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
+
         }
 
         [TestMethod]
@@ -60,7 +66,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 9, 5));
 
             // act
-            action.Execute(email.Object);
+            action.Execute(email.Object, this.logger.Object);
 
             // assert
             Assert.AreEqual(1, course.Students.Count);
@@ -103,7 +109,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 3, 14));
 
             // act
-            action.Execute(email.Object);
+            action.Execute(email.Object, this.logger.Object);
 
             // assert
             Assert.AreEqual(1, course.Students.Count);
@@ -142,7 +148,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             email.Setup(e => e.Date).Returns(new DateTime(CourseYear, 11, 19));
 
             // act
-            action.Execute(email.Object);
+            action.Execute(email.Object, this.logger.Object);
         }
 
         private NewStudentToCourseDatabaseEntryAction CreateNewStudentToCourseDatabaseEntryAction()

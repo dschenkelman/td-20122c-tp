@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -23,6 +24,8 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Student>> studentRepository;
         private Mock<IMessage> message;
         private Mock<IGroupFileParser> groupParser;
+
+        private Mock<ILogger> logger;
 
         private int year;
         private int wrongYear;
@@ -67,6 +70,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.groupParser = this.mockRepository.Create<IGroupFileParser>();
             
             this.message = this.mockRepository.Create<IMessage>();
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
 
             // common const values
             this.year = 2012;
@@ -122,7 +128,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
             
             // act
-            action.Execute(this.message.Object);
+            action.Execute(this.message.Object, this.logger.Object);
         }
 
         [ExpectedException(typeof(Exception))]
@@ -165,7 +171,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object);
+            action.Execute(this.message.Object, this.logger.Object);
         }
 
         [ExpectedException(typeof(Exception))]
@@ -214,7 +220,27 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object);
+            action.Execute(this.message.Object, this.logger.Object);
+
+            // assert
+            Assert.AreEqual(1, studentA.Groups.Count);
+            Assert.AreEqual(this.trueCourse.Id, studentA.Groups.ElementAt(0).CourseId);
+
+            this.message.Verify(e => e.To, Times.Once());
+
+            this.message.Verify(e => e.Date, Times.Exactly(2));
+
+            this.courseRepository.Verify(
+                cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(
+                    f => f.Compile().Invoke(this.trueCourse)
+                        && (!f.Compile().Invoke(this.falseCourseWrongYear)))),
+                        Times.Once());
+
+            this.groupParser.Verify(gp => gp.GetIdsFromMessage(this.message.Object), Times.Once());
+
+            this.studentRepository.Verify(sr => sr.GetById(It.IsAny<int>()), Times.Once());
+
+            this.studentRepository.Verify(sr => sr.Save(), Times.Once());
         }
 
         [ExpectedException(typeof(Exception))]
@@ -278,7 +304,27 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object);
+            action.Execute(this.message.Object, this.logger.Object);
+
+            // assert
+            Assert.AreEqual(1, studentA.Groups.Count);
+            Assert.AreEqual(this.trueCourse.Id, studentA.Groups.ElementAt(0).CourseId);
+
+            this.message.Verify(e => e.To, Times.Once());
+
+            this.message.Verify(e => e.Date, Times.Exactly(2));
+
+            this.courseRepository.Verify(
+                cr => cr.Get(It.Is<Expression<Func<Course, bool>>>(
+                    f => f.Compile().Invoke(this.trueCourse)
+                        && (!f.Compile().Invoke(this.falseCourseWrongYear)))),
+                        Times.Once());
+
+            this.groupParser.Verify(gp => gp.GetIdsFromMessage(this.message.Object), Times.Once());
+
+            this.studentRepository.Verify(sr => sr.GetById(It.IsAny<int>()), Times.Once());
+
+            this.studentRepository.Verify(sr => sr.Save(), Times.Once());
         }
 
         [TestMethod]
@@ -348,7 +394,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddGroupToCourseDatabaseEntryAction action = this.CreateAddGroupToCourseDatabaseEntryAction();
 
             //act
-            action.Execute(this.message.Object);
+            action.Execute(this.message.Object, this.logger.Object);
 
             // assert
             Assert.AreEqual(1, studentA.Groups.Count);

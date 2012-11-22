@@ -1,4 +1,5 @@
 ﻿using System;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Actions
 {
@@ -18,7 +19,7 @@ namespace CourseManagement.MessageProcessing.Actions
 
         public abstract void Initialize(ActionEntry actionEntry);
 
-        public abstract void Execute(IMessage message);
+        public abstract void Execute(IMessage message, ILogger logger);
 
         protected int ParseTicketId(IMessage message)
         {

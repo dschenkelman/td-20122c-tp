@@ -1,5 +1,7 @@
-﻿using CourseManagement.MessageProcessing.Rules;
+﻿using System;
+using CourseManagement.MessageProcessing.Rules;
 using CourseManagement.Messages;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Rules
 {
@@ -15,12 +17,15 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
     {
         private MockRepository mockRepository;
         private Mock<IActionFactory> actionFactory;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.actionFactory = this.mockRepository.Create<IActionFactory>();
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -52,7 +57,7 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
                 .Verifiable();
 
             // act
-            baseRule.RetrieveActions();
+            baseRule.RetrieveActions(this.logger.Object);
 
             // assert
             this.actionFactory.Verify(af => af.CreateActions(RuleName), Times.Once());
@@ -81,17 +86,17 @@ namespace CourseManagement.MessageProcessing.Tests.Rules
                 .Returns(actions.Select(a => a.Object))
                 .Verifiable();
 
-            actions.ForEach(a => a.Setup(act => act.Execute(email.Object)).Verifiable());
+            actions.ForEach(a => a.Setup(act => act.Execute(email.Object, this.logger.Object)).Verifiable());
 
             // act
-            baseRule.RetrieveActions();
+            baseRule.RetrieveActions(this.logger.Object);
 
-            actions.ForEach(a => a.Verify(act => act.Execute(email.Object), Times.Never()));
+            actions.ForEach(a => a.Verify(act => act.Execute(email.Object, this.logger.Object), Times.Never()));
 
-            baseRule.Process(email.Object);
+            baseRule.Process(email.Object, this.logger.Object);
 
             // assert
-            actions.ForEach(a => a.Verify(act => act.Execute(email.Object), Times.Once()));
+            actions.ForEach(a => a.Verify(act => act.Execute(email.Object, this.logger.Object), Times.Once()));
         }
 
         private TestableBaseRule CreateBaseRule()

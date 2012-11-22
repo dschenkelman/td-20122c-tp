@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Tests.Actions
 {
@@ -23,6 +24,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
         private Mock<IRepository<Student>> studentRepository;
         private Mock<IConfigurationService> configurationService;
         private string rootPath;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -42,6 +44,9 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             this.rootPath = "c:";
             this.configurationService = this.mockRepository.Create<IConfigurationService>();
             this.configurationService.Setup(cmr => cmr.AttachmentsRootPath).Returns(rootPath);
+
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -87,7 +92,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddTicketToDatabaseAction action = CreateAction();
 
             //act
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             //validate
             this.studentRepository.Verify(
@@ -158,7 +163,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddTicketToDatabaseAction action = CreateAction();
 
             //act
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             //validate
             this.studentRepository.Verify(
@@ -234,7 +239,7 @@ namespace CourseManagement.MessageProcessing.Tests.Actions
             AddTicketToDatabaseAction action = CreateAction();
 
             //act
-            action.Execute(message.Object);
+            action.Execute(message.Object, this.logger.Object);
 
             //validate
             this.studentRepository.Verify(

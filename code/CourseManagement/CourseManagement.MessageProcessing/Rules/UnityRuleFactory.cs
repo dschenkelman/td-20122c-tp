@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Rules
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Rules
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -15,10 +17,13 @@
             this.ruleFinder = ruleFinder;
         }
 
-        public IEnumerable<BaseRule> CreateRules()
+        public IEnumerable<BaseRule> CreateRules(ILogger logger)
         {
+            logger.Log(LogLevel.Information,"Finding Rules");
+
             IEnumerable<RuleEntry> rules = this.ruleFinder.FindRules();
 
+            logger.Log(LogLevel.Information, "Initializing Rules and Retrieving Actions");
             return rules.Select(ruleEntry =>
                 {
                     var ruleName = ruleEntry.Name;
@@ -31,7 +36,7 @@
 
                     var rule = this.container.Resolve<BaseRule>(ruleName);
                     rule.Initialize(ruleEntry);
-                    rule.RetrieveActions();
+                    rule.RetrieveActions( logger );
                     return rule;
                 });
         }

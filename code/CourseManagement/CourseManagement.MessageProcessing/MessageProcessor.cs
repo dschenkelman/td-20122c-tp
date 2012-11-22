@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing
 {
@@ -26,9 +27,11 @@ namespace CourseManagement.MessageProcessing
             this.messageReceiver = messageReceiver;
         }
 
-        public void Process()
+        public void Process(ILogger logger)
         {
-            IEnumerable<BaseRule> rules = this.ruleFactory.CreateRules();
+            logger.Log(LogLevel.Information,"Creating Rules");
+
+            IEnumerable<BaseRule> rules = this.ruleFactory.CreateRules( logger );
 
             int semester = DateTime.Now.Semester();
                 
@@ -38,25 +41,52 @@ namespace CourseManagement.MessageProcessing
                 c.Year == DateTime.Now.Year && c.SubjectId == subjectId &&
                 c.Semester == semester).FirstOrDefault();
 
-
+            
             if (course == null)
             {
+                logger.Log(LogLevel.Warning, "No Course Found in Database");
+
                 return;
             }
 
             Configuration configuration = course.Account.Configurations.First(
                 cfg => cfg.Protocol.Equals(this.configurationService.IncomingMessageProtocol));
 
-            this.messageReceiver.Connect(
-                configuration.Endpoint, 
-                configuration.Port, 
-                configuration.UseSsl,
-                configuration.Account.User,
-                configuration.Account.Password);
+            logger.Log(LogLevel.Information, "Establishing connection with message server");
 
-            foreach (IMessage message in this.messageReceiver.FetchMessages())
+            try
             {
-                bool previouslyMatched = false;
+                this.messageReceiver.Connect(
+                    configuration.Endpoint,
+                    configuration.Port,
+                    configuration.UseSsl,
+                    configuration.Account.User,
+                    configuration.Account.Password);
+            }catch(Exception e)
+            {
+                logger.Log(LogLevel.Error,"There was an error while trying to establish a connection with de message server.");
+                logger.Log(LogLevel.Error, "\tThe exception message was: "+e.Message);
+                return;
+            }
+
+
+            logger.Log(LogLevel.Information, "Fetching messages");
+
+            IEnumerable<IMessage> messagesFetched = null;
+            try
+            {
+                messagesFetched = this.messageReceiver.FetchMessages();
+            }catch(Exception e)
+            {
+                logger.Log(LogLevel.Error,"There was an error while trying to fetch the messages.");
+                logger.Log(LogLevel.Error, "\tThe exception message was: " + e.Message);
+                return;
+            }
+
+
+            foreach (IMessage message in messagesFetched)
+            {
+                var previouslyMatched = false;
                 foreach (var rule in rules)
                 {
                     if (rule.IsMatch(message, previouslyMatched))
@@ -64,10 +94,12 @@ namespace CourseManagement.MessageProcessing
                         previouslyMatched = true;
                         try
                         {
-                            rule.Process(message);
+                            logger.Log(LogLevel.Information,"Message matched with Rule: "+rule.Name);
+                            rule.Process(message,logger);
                         }catch(InvalidOperationException e)
                         {
-                            Console.WriteLine(e.Message);
+                            logger.Log(LogLevel.Error, "An error has occured wile processing the message with the rule "+rule.Name);
+                            logger.Log(LogLevel.Error, "\tThe exception message was " + e.Message);
                         }
                     }
                 }

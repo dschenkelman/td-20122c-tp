@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Tests.Actions
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Tests.Actions
 {
     using System;
     using System.Linq;
@@ -15,6 +17,7 @@
         private MockRepository mockRepository;
         private Mock<ICourseManagementRepositories> repositories;
         private Mock<IRepository<Ticket>> ticketRepository;
+        private Mock<ILogger> logger;
 
         [TestInitialize]
         public void Initialize()
@@ -23,6 +26,8 @@
             this.repositories = this.mockRepository.Create<ICourseManagementRepositories>();
             this.ticketRepository = this.mockRepository.Create<IRepository<Ticket>>();
             this.repositories.Setup(r => r.Tickets).Returns(this.ticketRepository.Object);
+            this.logger = this.mockRepository.Create<ILogger>();
+            this.logger.Setup(l => l.Log(It.IsAny<LogLevel>(), It.IsAny<String>()));
         }
 
         [TestMethod]
@@ -44,7 +49,7 @@
             var relateTicketReplyToTicketAction = this.CreateRelateTicketReplyToTicketAction();
 
             // act
-            relateTicketReplyToTicketAction.Execute(message.Object);
+            relateTicketReplyToTicketAction.Execute(message.Object, this.logger.Object);
 
             // assert
             Assert.AreEqual(1, ticket.Replies.Count);

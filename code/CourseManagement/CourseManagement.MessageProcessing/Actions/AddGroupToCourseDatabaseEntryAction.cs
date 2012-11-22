@@ -1,4 +1,6 @@
-﻿namespace CourseManagement.MessageProcessing.Actions
+﻿using CourseManagement.Persistence.Logging;
+
+namespace CourseManagement.MessageProcessing.Actions
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +26,7 @@
         {
         }
 
-        public void Execute(IMessage message)
+        public void Execute(IMessage message, ILogger logger)
         {
             //verify existing course
             var courseForNewGroup = this.GetCourseFromMessage(message);
@@ -68,6 +70,8 @@
                     }
                 });
 
+            logger.Log(LogLevel.Information, "Adding Group to Course");
+            
             // Non-existing group. Proceed to add
             foreach (var studentAddGroup in studentsInCourse)
             {

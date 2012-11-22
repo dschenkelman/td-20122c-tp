@@ -1,4 +1,5 @@
 ﻿using CourseManagement.Persistence.Configuration;
+using CourseManagement.Persistence.Logging;
 
 namespace CourseManagement.MessageProcessing.Actions
 {
@@ -24,7 +25,7 @@ namespace CourseManagement.MessageProcessing.Actions
         {
         }
 
-        public override void Execute(IMessage message)
+        public override void Execute(IMessage message, ILogger logger)
         {
             int semester = message.Date.Semester();
             int year = message.Date.Year;
@@ -37,6 +38,8 @@ namespace CourseManagement.MessageProcessing.Actions
 
             int ticketId = this.ParseTicketId(message);
             var ticket = this.courseManagementRepositories.Tickets.GetById(ticketId);
+
+            logger.Log(LogLevel.Information, "Updating Ticket Status");
 
             if (teacher != null)
             {
