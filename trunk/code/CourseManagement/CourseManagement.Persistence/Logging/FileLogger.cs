@@ -1,4 +1,5 @@
 ﻿using System;
+using CourseManagement.Utilities.Extensions;
 
 namespace CourseManagement.Persistence.Logging
 {
@@ -23,7 +24,7 @@ namespace CourseManagement.Persistence.Logging
             {
                 using (var w = File.AppendText(this.logFilePath))
                 {
-                    w.WriteLine(string.Format("{0};{1};{2}",DateTime.Now, information, message));
+                    w.WriteLine(string.Format("{0};{1};{2}", DateTime.Now.ToIsoFormat(), information, message));
                 }
             }
         }

@@ -72,6 +72,10 @@
       <Project>{499A1AB2-9498-4C75-B278-89113F43B69F}</Project>
       <Name>CourseManagement.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CourseManagement.Utilities\CourseManagement.Utilities.csproj">
+      <Project>{527DC86D-2D4E-467C-95B1-8CDEB99345D0}</Project>
+      <Name>CourseManagement.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

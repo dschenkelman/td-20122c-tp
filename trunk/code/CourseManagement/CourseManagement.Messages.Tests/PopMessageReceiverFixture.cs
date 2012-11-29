@@ -172,7 +172,7 @@ namespace CourseManagement.Messages.Tests
             email1.Subject = "Subject1";
             email1.From = new MailAddress("From1@From.com");
             email1.DeliveryDate = new DateTime(2012, 11, 4);
-            email1.DeliveredTo = new MailAddress("To@To.com");
+            email1.To.Add(new MailAddress("To@To.com"));
             var attachment11Stream = new SStream();
             email1.Attachments.Add(new Attachment(attachment11Stream, "Attachment11"));
             var attachment12Stream = new SStream();
@@ -182,7 +182,7 @@ namespace CourseManagement.Messages.Tests
             email2.Subject = "Subject2";
             email2.From = new MailAddress("From2@From.com");
             email2.DeliveryDate = new DateTime(2012, 11, 5);
-            email2.DeliveredTo = new MailAddress("To@To.com");
+            email2.To.Add(new MailAddress("To@To.com"));
             var attachment21Stream = new SStream();
             email2.Attachments.Add(new Attachment(attachment21Stream, "Attachment21"));
             var attachment22Stream = new SStream();

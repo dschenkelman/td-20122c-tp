@@ -1,5 +1,7 @@
-﻿using System.IO.Moles;
+﻿using System;
+using System.IO.Moles;
 using CourseManagement.Persistence.Logging;
+using CourseManagement.Utilities.Extensions;
 
 namespace CourseManagement.Persistence.Tests.Logging
 {
@@ -81,10 +83,12 @@ namespace CourseManagement.Persistence.Tests.Logging
 
             bool writeLineInvoked = false;
 
+            // we should probably mock DateTime.Now, but it is overkill
             MTextWriter.AllInstances.WriteLineString = (tw, lineContent) =>
                                                            {
                                                                writeLineInvoked = true;
-                                                               Assert.AreEqual("Information;Message", lineContent);
+                                                               Assert.AreEqual(
+                                                                   string.Format("{0};Information;Message", DateTime.Now.ToIsoFormat()), lineContent);
                                                            };
 
             MTextWriter.AllInstances.Dispose = tw => { };
