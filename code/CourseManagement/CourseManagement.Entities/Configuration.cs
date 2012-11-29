@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-
-namespace CourseManagement.Model
+﻿namespace CourseManagement.Model
 {
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Configuration
     {
         [Key]
@@ -16,6 +13,7 @@ namespace CourseManagement.Model
 
         public int Port { get; set; }
 
+        [DisplayName("Uses Ssl")]
         public bool UseSsl { get; set; }
 
         [ForeignKey("AccountId")]

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CourseManagement.Model.Configuration>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Endpoint)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Port)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UseSsl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.User)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Endpoint)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Port)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UseSsl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.User)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Protocol }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Protocol }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Protocol })
+        </td>
+    </tr>
+}
+
+</table>

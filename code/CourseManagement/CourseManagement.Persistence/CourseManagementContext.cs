@@ -28,5 +28,10 @@ namespace CourseManagement.Persistence
         {
             return this.Set<TEntity>();
         }
+
+        // auto-generated
+        public DbSet<Account> Accounts { get; set; }
+
+        public DbSet<Model.Configuration> Configurations { get; set; }
     }
 }

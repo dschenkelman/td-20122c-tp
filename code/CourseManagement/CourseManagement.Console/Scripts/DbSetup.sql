@@ -1,5 +1,6 @@
 DECLARE @SubjectId as INT;
 DECLARE @AccountId as INT;
+DECLARE @CourseId as INT;
 
 INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Subjects
 	VALUES ('Tecnicas de Diseño');
@@ -19,6 +20,11 @@ INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Configura
 	
 INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Courses
 	VALUES (2012, 2, @SubjectId, @AccountId, 'cmpublicdistributionlist@gmail.com');
+
+SET @CourseId = SCOPE_IDENTITY();
 	
 INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.Teachers
 	VALUES (1,'Sample Teacher','cmteacher2012@gmail.com');
+
+INSERT INTO [CourseManagement.Persistence.CourseManagementContext].dbo.TeacherCourses
+	VALUES(1, @CourseId);
