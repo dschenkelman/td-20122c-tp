@@ -31,7 +31,7 @@
 
         public void RetrieveActions()
         {
-            this.logger.Log(LogLevel.Information, "Creating Actions");
+            this.logger.Log(LogLevel.Information, "Retrieving Actions for Rule: "+this.Name);
             this.actions = this.actionFactory.CreateActions(this.Name);
         }
 
