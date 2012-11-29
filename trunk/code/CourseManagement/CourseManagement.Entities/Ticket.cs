@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,17 +20,22 @@
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Subject")]
         public string MessageSubject { get; set; }
-        
+
+        [DisplayName("Body")]
         public string MessageBody { get; set; }
 
         [Required]
+        [DisplayName("Private?")]
         public bool IsPrivate { get; set; }
 
         [Required]
+        [DisplayName("Creation Date")]
         public DateTime DateCreated { get; set; }
 
         [Required]
+        [DisplayName("Last Updated On")]
         public DateTime LastUpdated { get; set; }
 
         [Required]

@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Messages",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Messages.Tests", "CourseManagement.Messages.Tests\CourseManagement.Messages.Tests.csproj", "{6A6CEA9E-4CCD-45DF-93CF-2618E076C828}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement.Web", "CourseManagement.Web\CourseManagement.Web.csproj", "{437CBD2E-693B-44F0-873C-3E10A86434F0}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = CourseManagement.vsmdi
@@ -160,6 +162,16 @@ Global
 		{6A6CEA9E-4CCD-45DF-93CF-2618E076C828}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6A6CEA9E-4CCD-45DF-93CF-2618E076C828}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6A6CEA9E-4CCD-45DF-93CF-2618E076C828}.Release|x86.ActiveCfg = Release|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{437CBD2E-693B-44F0-873C-3E10A86434F0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 ﻿namespace CourseManagement.Model
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,8 +25,10 @@
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Range(2012, int.MaxValue)]
         public int Year { get; set; }
 
+        [Range(1, 2)]
         public int Semester { get; set; }
         
         public int SubjectId { get; set; }
@@ -42,6 +45,7 @@
 
         public int AccountId { get; set; }
 
+        [DisplayName("Public DL")]
         public string PublicDistributionList { get; set; }
     }
 }

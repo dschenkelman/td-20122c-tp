@@ -1,0 +1,64 @@
+﻿@model CourseManagement.Model.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Ticket</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MessageSubject)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MessageSubject)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MessageBody)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MessageBody)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsPrivate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsPrivate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastUpdated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AssignedTeacher.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssignedTeacher.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Creator.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Creator.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

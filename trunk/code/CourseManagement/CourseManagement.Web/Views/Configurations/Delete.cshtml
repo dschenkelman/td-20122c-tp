@@ -1,0 +1,46 @@
+﻿@model CourseManagement.Model.Configuration
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Configuration</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Endpoint)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Endpoint)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Port)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Port)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UseSsl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UseSsl)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Account.User)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Account.User)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
